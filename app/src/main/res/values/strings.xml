@@ -18,5 +18,9 @@
     <!-- Welcome page -->
     <string name="welcome_visitor">Visiteur </string>
     <string name="welcome_login"> Se connecter </string>
+    <string name="title_activity_jury">Jury</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>
