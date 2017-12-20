@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#EC3A30</color>
+    <color name="colorPrimaryDark">#E1433F</color>
+    <color name="colorAccent">#343F49</color>
+
+<!--    <color name="colorPrimaryDark">#EC3A30</color> -->
+
+    <color name="main_red_eseo">#E1433F</color>
+    <color name="main_blue_eseo">#343F49</color>
+    <color name="main_grey_eseo">#F1F1F1</color>
+
+    <color name="orange_text_eseo">#EC3A30</color>
+    <color name="blue_grey_text_eseo">#343F49</color>
+
+    <color name="background_grey_eseo">#DDDCDE</color>
+
+    <color name="background_white_eseo">#FFFFFF</color>
+    <color name="background_black_eseo">#000000</color>
+
+
+
+</resources>
