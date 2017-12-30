@@ -3,9 +3,21 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <!--<item name="itemPrimary">@item/itemPrimary</item>-->
+        <!--<item name="itemPrimaryDark">@item/itemPrimaryDark</item>-->
+        <!--<item name="itemAccent">@item/itemAccent</item>-->
+
+        <item name="main_red_eseo">#ED1C24</item>
+        <item name="main_red2_eseo">#BF0000</item>
+
+        <item name="main_blue_eseo">#19468E</item>
+        <item name="main_blue2_eseo">#193366</item>
+
+        <item name="main_dark_eseo">#3F3F3F</item>
+
+        <item name="background_white_eseo">#FFFFFF</item>
+        <item name="background_grey_eseo">#DDDDDD</item>
+        <item name="background_grey2_eseo">#BFBFBF</item>
     </style>
 
 </resources>
