@@ -1,13 +1,14 @@
-package fr.eseo.dis.hubertpa.pfe_application;
+package fr.eseo.dis.hubertpa.pfe_application.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
+
+import fr.eseo.dis.hubertpa.pfe_application.R;
+import fr.eseo.dis.hubertpa.pfe_application.activities.LoginActivity;
 
 public class WelcomeActivity extends AppCompatActivity {
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_project_tab" android:icon="@drawable/ic_search_black_24dp" android:title="@string/project_tab" />
+    <item android:id="@+id/action_jury_tab" android:icon="@drawable/ic_people_black_24dp" android:title="@string/jury_tab" />
+    <item android:id="@+id/action_mark_tab" android:icon="@drawable/ic_content_paste_black_24dp" android:title="@string/marks_tab" />
+</menu>

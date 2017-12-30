@@ -1,7 +1,4 @@
-package fr.eseo.dis.hubertpa.pfe_application.controller;
-
-import java.io.InputStream;
-import java.net.HttpURLConnection;
+package fr.eseo.dis.hubertpa.pfe_application.requestApi;
 
 /**
  * Created by paulhubert on 20/12/17.

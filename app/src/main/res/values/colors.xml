@@ -6,18 +6,15 @@
 
 <!--    <color name="colorPrimaryDark">#EC3A30</color> -->
 
-    <color name="main_red_eseo">#E1433F</color>
-    <color name="main_blue_eseo">#343F49</color>
-    <color name="main_grey_eseo">#F1F1F1</color>
+    <color name="main_red_eseo">#ED1C24</color>
+    <color name="main_red2_eseo">#BF0000</color>
 
-    <color name="orange_text_eseo">#EC3A30</color>
-    <color name="blue_grey_text_eseo">#343F49</color>
+    <color name="main_blue_eseo">#19468E</color>
+    <color name="main_blue2_eseo">#193366</color>
 
-    <color name="background_grey_eseo">#DDDCDE</color>
+    <color name="main_dark_eseo">#3F3F3F</color>
 
     <color name="background_white_eseo">#FFFFFF</color>
-    <color name="background_black_eseo">#000000</color>
-
-
-
+    <color name="background_grey_eseo">#DDDDDD</color>
+    <color name="background_grey2_eseo">#BFBFBF</color>
 </resources>

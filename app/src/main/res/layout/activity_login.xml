@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fr.eseo.dis.hubertpa.pfe_application.LoginActivity">
+    tools:context="fr.eseo.dis.hubertpa.pfe_application.activities.LoginActivity">
 
     <!-- Login progress -->
     <ProgressBar
