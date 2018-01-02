@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_white_eseo"
+    android:background="@color/grey_eseo_4"
     tools:context="fr.eseo.dis.hubertpa.pfe_application.activities.WelcomeActivity">
 
 
@@ -30,8 +31,8 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
         android:background="@drawable/not_filled_rounded_button"
-        android:text="@string/welcome_in_house"
-        android:textColor="@color/main_blue_eseo"
+        android:text="@string/welcome_in_app"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/button_visitor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -46,7 +47,7 @@
         android:background="@drawable/filled_rounded_button"
         android:elevation="0dp"
         android:text="@string/welcome_visitor"
-        android:textColor="@color/background_white_eseo"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

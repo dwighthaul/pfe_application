@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
+import fr.eseo.dis.hubertpa.pfe_application.Test;
 import fr.eseo.dis.hubertpa.pfe_application.activities.LoginActivity;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -45,7 +46,7 @@ public class WelcomeActivity extends AppCompatActivity {
 	}
 
 	public void LoginActivity() {
-		Intent intent = new Intent(this, LoginActivity.class);
+		Intent intent = new Intent(this, Test.class);
 		startActivity(intent);
 	}
 

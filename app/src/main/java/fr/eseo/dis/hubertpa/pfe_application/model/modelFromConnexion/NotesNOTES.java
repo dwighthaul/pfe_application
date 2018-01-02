@@ -11,16 +11,17 @@ import lombok.Setter;
  * Created by paulhubert on 31/12/17.
  */
 
-@RequiredArgsConstructor
+
+@AllArgsConstructor
 public class NotesNOTES {
 
-	@Getter @Setter @NonNull
+	@Getter @Setter
 	Student student;
 
-	@Getter @Setter @NonNull
+	@Getter @Setter
 	int mynote;
 
-	@Getter @Setter @NonNull
+	@Getter @Setter
 	int avgnote;
 
 }

@@ -17,8 +17,6 @@ import lombok.Setter;
  */
 
 @AllArgsConstructor
-@NoArgsConstructor
-@RequiredArgsConstructor
 public class Supervisor extends User {
 
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Jury;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,7 @@ import lombok.Setter;
  * Created by paulhubert on 31/12/17.
  */
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class JuryLIJUR {
 
 	@Getter @Setter @NonNull

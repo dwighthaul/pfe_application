@@ -11,12 +11,10 @@ import lombok.Setter;
  * Created by paulhubert on 30/12/17.
  */
 
-@AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class Confidentialities {
 
-	@Getter @Setter  @NonNull
+	@Getter @Setter
 	private int idConfid;
 
 	@Getter @Setter

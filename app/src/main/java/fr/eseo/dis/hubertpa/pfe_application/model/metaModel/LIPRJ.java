@@ -14,8 +14,6 @@ import lombok.Setter;
  * Created by paulhubert on 30/12/17.
  */
 
-@AllArgsConstructor
-@RequiredArgsConstructor
 public class LIPRJ {
 
 

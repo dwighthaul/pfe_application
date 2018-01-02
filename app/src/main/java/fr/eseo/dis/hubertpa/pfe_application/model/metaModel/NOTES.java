@@ -15,8 +15,6 @@ import lombok.Setter;
  * Created by paulhubert on 31/12/17.
  */
 
-@AllArgsConstructor
-@RequiredArgsConstructor
 public class NOTES {
 
 	@Getter @Setter @NonNull

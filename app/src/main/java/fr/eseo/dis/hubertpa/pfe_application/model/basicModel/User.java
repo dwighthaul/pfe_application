@@ -15,12 +15,10 @@ import lombok.Setter;
  */
 
 
-@AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class User {
 
-	@Getter @Setter @NonNull
+	@Getter @Setter
 	private int idUser;
 
 	@Getter @Setter @NonNull

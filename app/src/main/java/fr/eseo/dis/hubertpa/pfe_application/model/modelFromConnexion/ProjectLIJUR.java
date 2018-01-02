@@ -14,7 +14,6 @@ import lombok.Setter;
  */
 
 @AllArgsConstructor
-@RequiredArgsConstructor
 public class ProjectLIJUR {
 
 

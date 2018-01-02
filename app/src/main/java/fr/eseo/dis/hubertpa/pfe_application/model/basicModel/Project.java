@@ -14,12 +14,10 @@ import lombok.Setter;
  * Created by paulhubert on 30/12/17.
  */
 
-@AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class Project {
 
-	@Getter @Setter  @NonNull
+	@Getter @Setter
 	private int idProject;
 
 	@Getter @Setter @NonNull
@@ -28,7 +26,7 @@ public class Project {
 	@Getter @Setter
 	private String description;
 
-	@Getter @Setter  @NonNull
+	@Getter @Setter
 	private int confidentiality;
 
 

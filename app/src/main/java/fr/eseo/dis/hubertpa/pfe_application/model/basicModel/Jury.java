@@ -14,13 +14,11 @@ import lombok.Setter;
  * Created by paulhubert on 31/12/17.
  */
 
-@AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class Jury {
 
 
-	@Getter @Setter @NonNull
+	@Getter @Setter
 	private int idJury;
 
 	@Getter @Setter

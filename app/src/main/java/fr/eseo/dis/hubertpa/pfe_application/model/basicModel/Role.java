@@ -1,6 +1,7 @@
 package fr.eseo.dis.hubertpa.pfe_application.model.basicModel;
 
 import lombok.AllArgsConstructor;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -12,14 +13,9 @@ import lombok.Setter;
  */
 
 
-@AllArgsConstructor
-@NoArgsConstructor
-@RequiredArgsConstructor
 public class Role {
 
-	@Getter
-	@Setter
-	@NonNull
+	@Getter @Setter
 	private int idRole;
 
 	@Getter @Setter

@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
  */
 
 @AllArgsConstructor
-@RequiredArgsConstructor
 public class JYINF extends LIJUR{
 
 

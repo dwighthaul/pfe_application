@@ -11,16 +11,14 @@ import lombok.Setter;
  * Created by paulhubert on 31/12/17.
  */
 
-@AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class Presentation {
 
 
-	@Getter @Setter @NonNull
+	@Getter @Setter
 	private int idPresentation;
 
-	@Getter @Setter @NonNull
+	@Getter @Setter
 	private int project;
 
 	@Getter @Setter
