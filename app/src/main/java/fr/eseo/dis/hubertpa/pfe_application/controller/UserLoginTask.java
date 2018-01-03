@@ -10,36 +10,31 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 
 import fr.eseo.dis.hubertpa.pfe_application.activities.ProjectActivity;
+import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.VolleyCallback;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
 
-public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+public class UserLoginTask extends AsyncTask<Void, Void, Void> {
 
 	private final String mLogin;
 	private final String mPassword;
 	@SuppressLint("StaticFieldLeak")
 	private final AppCompatActivity mActivity;
 
-	public UserLoginTask(String email, String password, AppCompatActivity activity) {
-		mLogin = email;
+	private final VolleyCallback mVolleyCallback;
+
+	public UserLoginTask(String login, String password, AppCompatActivity activity, VolleyCallback callback) {
+		mLogin = login;
 		mPassword = password;
 		mActivity = activity;
+		mVolleyCallback = callback;
+		
 	}
 
 	@Override
-	protected Boolean doInBackground(Void... params) {
-		return WebServiceConnexion.getConnected(mLogin, mPassword, mActivity);
+	public Void doInBackground(Void... params) {
+		WebServiceConnexion.getConnected(mLogin, mPassword, mActivity, mVolleyCallback);
+		return null;
 	}
 
-	@Override
-	protected void onPostExecute(final Boolean success) {
-
-		if (success) {
-			Intent intent = new Intent(mActivity, ProjectActivity.class);
-			// Use to set the default app as this new activity and clean the stack
-			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-			mActivity.startActivity(intent);
-		}
-	}
 
 }

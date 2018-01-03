@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.controller.UserLoginTask;
+import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.VolleyCallback;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -59,7 +60,19 @@ public class WelcomeActivity extends AppCompatActivity {
 
 	public void VisitorActivity() {
 		//VisitorActivity
-		UserLoginTask mAuthTask = new UserLoginTask(WebServiceConnexion.DEFAULT_LOGIN, WebServiceConnexion.DEFAULT_PASSWORD, this);
+		UserLoginTask mAuthTask = new UserLoginTask(WebServiceConnexion.DEFAULT_LOGIN, WebServiceConnexion.DEFAULT_PASSWORD, this,  new VolleyCallback() {
+			@Override
+			public void onSuccessLogin(Boolean result) {
+				if (result) {
+					Intent intent = new Intent(WelcomeActivity.this, ProjectActivity.class);
+					// Use to set the default app as this new activity and clean the stack
+					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+					WelcomeActivity.this.startActivity(intent);
+				}
+			}
+		});
+
 		mAuthTask.execute((Void) null);
 
 	}

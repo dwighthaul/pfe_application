@@ -2,7 +2,6 @@
     <string name="app_name">Application de PFE</string>
 
 
-
     <!-- foo -->
     <string name="project_tab">Projects</string>
     <string name="jury_tab">Juries</string>
@@ -49,8 +48,10 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="title_activity_test_login">Sign in</string>
 
-
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
 
 
 </resources>

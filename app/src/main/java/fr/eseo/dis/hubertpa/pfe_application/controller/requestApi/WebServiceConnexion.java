@@ -2,6 +2,7 @@ package fr.eseo.dis.hubertpa.pfe_application.controller.requestApi;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -29,11 +30,12 @@ public abstract class WebServiceConnexion  {
 	public static final String DEFAULT_LOGIN = "jpo";
 	public static final String DEFAULT_PASSWORD = "w872o32HkYAO";
 
+	private static final String URL_PERSO_PAUL = "http://192.168.1.12/api_rest_project/android_project/?q=";
+	private static final String URL_PERSO_MORGAN = "http://192.168.1.34/api_rest_project/android_project/?q=";
 
-	private static final String URL_PERSO = "http://192.168.1.34/api_rest_project/android_project/?q=";
 	private static final String URL_ESEO = "https://192.168.4.10/www/pfe/webservice.php?q=";
 
-	public static final String URL = URL_PERSO;
+	public static final String URL = URL_PERSO_PAUL;
 
 	//Initial validation of users credentials
 	private static final String LOGON = URL + "LOGON";
@@ -122,7 +124,8 @@ public abstract class WebServiceConnexion  {
 
 
 
-	public static boolean getConnected(String userName, String password, AppCompatActivity activity) {
+	public static void getConnected(String userName, String password, AppCompatActivity activity, final VolleyCallback callback) {
+
 		final AppCompatActivity _activity = activity;
 		String url = WebServiceConnexion.getLOGON(userName, password);
 
@@ -132,13 +135,20 @@ public abstract class WebServiceConnexion  {
 			public void onResponse(String response) {
 				try {
 
+
 					JSONObject jsonObject = new JSONObject(response);
 					String result = jsonObject.getString("result");
+					Log.d("WebServiceConnexion", result);
+
 					if (result.equals("OK")) {
+						callback.onSuccessLogin(true);
+
 						LOGON logon = JsonParserAPI.parseLOGON(jsonObject);
 						String tokenValue =logon.getToken();
 						makeToster(_activity, "Connected");
 					} else {
+						callback.onSuccessLogin(false);
+
 						makeToster(_activity, "Error to connect");
 					}
 
@@ -156,8 +166,6 @@ public abstract class WebServiceConnexion  {
 
 		queue.add(stringRequest);
 
-		// Todo : Return the value from the connexion
-		return true;
 	}
 
 
