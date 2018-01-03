@@ -15,7 +15,7 @@ import fr.eseo.dis.hubertpa.pfe_application.R;
  * Created by Morgan on 30/12/2017.
  */
 
-public class MarkActivity extends AppCompatActivity{
+public class MarkActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {

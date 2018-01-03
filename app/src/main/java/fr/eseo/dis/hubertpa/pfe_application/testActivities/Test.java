@@ -44,7 +44,7 @@ public class Test extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_test);
+		setContentView(R.layout.test);
 
 		current_user_urlTextView = (TextView) findViewById(R.id.current_user_url_value);
 		current_user_authorizations_html_urlTextView = (TextView) findViewById(R.id.current_user_authorizations_html_url_value);

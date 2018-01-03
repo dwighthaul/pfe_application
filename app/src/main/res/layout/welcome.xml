@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_eseo_4"
+    android:background="@color/grey_eseo_2"
     tools:context="fr.eseo.dis.hubertpa.pfe_application.activities.WelcomeActivity">
 
 
