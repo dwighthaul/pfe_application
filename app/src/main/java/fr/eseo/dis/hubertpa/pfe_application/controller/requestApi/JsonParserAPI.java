@@ -1,4 +1,4 @@
-package fr.eseo.dis.hubertpa.pfe_application.controller.connexionAPI;
+package fr.eseo.dis.hubertpa.pfe_application.controller.requestApi;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,6 +13,7 @@ import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Project;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Student;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Supervisor;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.User;
+import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LOGON;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.NOTES;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.POSTR;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.NotesNOTES;
@@ -73,17 +74,18 @@ public class JsonParserAPI {
 		return api;
 	}
 
-	public static User parseLOGON(JSONObject jsonObject) {
-		User user = new User();
+	public static LOGON parseLOGON(JSONObject jsonObject) {
+
+		LOGON logon = new LOGON();
 
 		try {
-			user.setIdUser(jsonObject.getInt("current_user_url"));
+			logon.setToken(jsonObject.getString("token"));
 
 
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		return user;
+		return logon;
 	}
 
 

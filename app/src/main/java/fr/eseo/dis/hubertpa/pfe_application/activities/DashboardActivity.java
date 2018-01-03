@@ -1,9 +1,11 @@
-package fr.eseo.dis.hubertpa.pfe_application;
+package fr.eseo.dis.hubertpa.pfe_application.activities;
 
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+
+import fr.eseo.dis.hubertpa.pfe_application.R;
 
 public class DashboardActivity extends AppCompatActivity {
 

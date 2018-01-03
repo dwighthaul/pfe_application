@@ -1,6 +1,19 @@
-package fr.eseo.dis.hubertpa.pfe_application.requestApi;
+package fr.eseo.dis.hubertpa.pfe_application.controller.requestApi;
 
-import fr.eseo.dis.hubertpa.pfe_application.controller.StyleProject;
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LOGON;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by paulhubert on 20/12/17.
@@ -16,9 +29,11 @@ public abstract class WebServiceConnexion  {
 	public static final String DEFAULT_LOGIN = "jpo";
 	public static final String DEFAULT_PASSWORD = "w872o32HkYAO";
 
+
+	private static final String URL_PERSO = "http://192.168.1.12/api_rest_project/android_project/?q=";
 	private static final String URL_ESEO = "https://192.168.4.10/www/pfe/webservice.php?q=";
 
-	public static final String URL = URL_ESEO;
+	public static final String URL = URL_PERSO;
 
 	//Initial validation of users credentials
 	private static final String LOGON = URL + "LOGON";
@@ -106,6 +121,53 @@ public abstract class WebServiceConnexion  {
 
 
 
+
+	public static boolean getConnected(String userName, String password, AppCompatActivity activity) {
+		final AppCompatActivity _activity = activity;
+		String url = WebServiceConnexion.getLOGON(userName, password);
+
+		RequestQueue queue = Volley.newRequestQueue(activity);
+		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+			@Override
+			public void onResponse(String response) {
+				try {
+
+					JSONObject jsonObject = new JSONObject(response);
+					String result = jsonObject.getString("result");
+					if (result.equals("OK")) {
+						LOGON logon = JsonParserAPI.parseLOGON(jsonObject);
+						String tokenValue =logon.getToken();
+						makeToster(_activity, "Connected");
+					} else {
+						makeToster(_activity, "Error to connect");
+					}
+
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		}, new Response.ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				makeToster(_activity, "Error to connected");
+			}
+		});
+
+		queue.add(stringRequest);
+
+		return false;
+	}
+
+
+	private static void makeToster(AppCompatActivity activity, String message) {
+		Context context = activity.getApplicationContext();
+		CharSequence text = message;
+		int duration = Toast.LENGTH_SHORT;
+
+		Toast toast = Toast.makeText(context, text, duration);
+		toast.show();
+	}
 
 
 

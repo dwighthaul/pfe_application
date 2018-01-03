@@ -1,4 +1,4 @@
-package fr.eseo.dis.hubertpa.pfe_application.controller;
+package fr.eseo.dis.hubertpa.pfe_application.controller.requestApi;
 
 /**
  * Created by paulhubert on 30/12/17.

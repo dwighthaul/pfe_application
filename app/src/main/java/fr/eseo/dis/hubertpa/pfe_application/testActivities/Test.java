@@ -1,4 +1,4 @@
-package fr.eseo.dis.hubertpa.pfe_application;
+package fr.eseo.dis.hubertpa.pfe_application.testActivities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,8 +18,11 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import fr.eseo.dis.hubertpa.pfe_application.requestApi.WebServiceConnexion;
-import fr.eseo.dis.hubertpa.pfe_application.controller.connexionAPI.JsonParserAPI;
+import fr.eseo.dis.hubertpa.pfe_application.activities.DashboardActivity;
+import fr.eseo.dis.hubertpa.pfe_application.R;
+import fr.eseo.dis.hubertpa.pfe_application.activities.WelcomeActivity;
+import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.TestWebservice;
+import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.JsonParserAPI;
 import fr.eseo.dis.hubertpa.pfe_application.model.APIAndroid;
 import lombok.Getter;
 import lombok.Setter;
@@ -54,12 +57,12 @@ public class Test extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				Log.d("Welcome", "Visiteur");
-				gotoDashboardActivity();
+//				gotoDashboardActivity();
+				gotoWelcomeActivity();
 			}
 		});
 
-
-//		processRequest();
+		processRequest();
 	}
 
 
@@ -68,11 +71,16 @@ public class Test extends AppCompatActivity {
 		startActivity(intent);
 	}
 
+	public void gotoWelcomeActivity() {
+		Intent intent = new Intent(this, WelcomeActivity.class);
+		startActivity(intent);
+	}
+
 
 	public void processRequest() {
 
 		RequestQueue queue = Volley.newRequestQueue(this);
-		String url = WebServiceConnexion.getLOGON("", "");
+		String url = TestWebservice.URL;
 
 		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 
@@ -93,7 +101,7 @@ public class Test extends AppCompatActivity {
 
 			@Override
 			public void onErrorResponse(VolleyError error) {
-//				current_user_urlTextView.setText("That didn't work!");
+				current_user_urlTextView.setText("That didn't work!");
 			}
 		});
 // Add the request to the RequestQueue.

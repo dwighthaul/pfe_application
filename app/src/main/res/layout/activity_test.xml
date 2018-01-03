@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fr.eseo.dis.hubertpa.pfe_application.Test">
+    tools:context="fr.eseo.dis.hubertpa.pfe_application.testActivities.Test">
 
     <TextView
         android:id="@+id/current_user_url_label"

@@ -2,9 +2,8 @@ package fr.eseo.dis.hubertpa.pfe_application;
 
 import org.junit.Test;
 
-import fr.eseo.dis.hubertpa.pfe_application.requestApi.WebServiceConnexion;
-import fr.eseo.dis.hubertpa.pfe_application.controller.StyleProject;
-import fr.eseo.dis.hubertpa.pfe_application.requestApi.WebServiceConnexion;
+import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
+import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.StyleProject;
 
 import static org.junit.Assert.*;
 
