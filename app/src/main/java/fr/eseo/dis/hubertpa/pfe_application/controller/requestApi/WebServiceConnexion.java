@@ -156,7 +156,8 @@ public abstract class WebServiceConnexion  {
 
 		queue.add(stringRequest);
 
-		return false;
+		// Todo : Return the value from the connexion
+		return true;
 	}
 
 
