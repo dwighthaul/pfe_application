@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 
-import fr.eseo.dis.hubertpa.pfe_application.activities.DashboardActivity;
+import fr.eseo.dis.hubertpa.pfe_application.activities.ProjectActivity;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
 
 public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
@@ -34,7 +34,7 @@ public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 	protected void onPostExecute(final Boolean success) {
 
 		if (success) {
-			Intent intent = new Intent(mActivity, DashboardActivity.class);
+			Intent intent = new Intent(mActivity, ProjectActivity.class);
 			// Use to set the default app as this new activity and clean the stack
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

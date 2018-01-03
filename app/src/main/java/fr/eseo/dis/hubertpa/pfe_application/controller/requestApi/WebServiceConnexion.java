@@ -30,7 +30,7 @@ public abstract class WebServiceConnexion  {
 	public static final String DEFAULT_PASSWORD = "w872o32HkYAO";
 
 
-	private static final String URL_PERSO = "http://192.168.1.12/api_rest_project/android_project/?q=";
+	private static final String URL_PERSO = "http://192.168.1.34/api_rest_project/android_project/?q=";
 	private static final String URL_ESEO = "https://192.168.4.10/www/pfe/webservice.php?q=";
 
 	public static final String URL = URL_PERSO;

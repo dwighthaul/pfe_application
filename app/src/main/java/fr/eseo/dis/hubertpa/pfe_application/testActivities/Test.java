@@ -18,7 +18,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import fr.eseo.dis.hubertpa.pfe_application.activities.DashboardActivity;
 import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.activities.WelcomeActivity;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.TestWebservice;
@@ -63,12 +62,6 @@ public class Test extends AppCompatActivity {
 		});
 
 		processRequest();
-	}
-
-
-	public void gotoDashboardActivity() {
-		Intent intent = new Intent(this, DashboardActivity.class);
-		startActivity(intent);
 	}
 
 	public void gotoWelcomeActivity() {
