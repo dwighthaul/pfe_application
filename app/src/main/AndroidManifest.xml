@@ -19,21 +19,24 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.WelcomeActivity"
-            android:background="#DC143C"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".activities.ProjectActivity" />
         <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.JuryActivity" />
-        <activity android:name=".activities.MarkActivity" />
+        <activity android:name=".activities.JuryActivity"/>
+        <activity android:name=".activities.MarkActivity"/>
+
         <activity
             android:name=".testActivities.Test"
-            android:label="TestActivities.Test"></activity>
+            android:label="TestActivities.Test">
+        </activity>
     </application>
 
 </manifest>
