@@ -6,13 +6,12 @@
     <color type="color" name="blue_eseo_3">#7087AD</color>
 
     <color type="color" name="red_eseo_1">#BF0000</color>
-    <color type="color" name="red_eseo_2">#ED1C34</color>
+    <color type="color" name="red_eseo_2">#ED1C24</color>
     <color type="color" name="red_eseo_3">#F76889</color>
 
     <color type="color" name="grey_eseo_1">#3F3F3F</color>
     <color type="color" name="grey_eseo_2">#BFBFBF</color>
     <color type="color" name="grey_eseo_3">#DDDDDD</color>
-    <color type="color" name="grey_eseo_4">#FFFFFF</color>
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>

@@ -4,13 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fr.eseo.dis.hubertpa.pfe_application.ListProject">
+    tools:context="fr.eseo.dis.hubertpa.pfe_application.activities.ProjectActivity">
 
     <Switch
         android:id="@+id/markSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="false"/>
+
+    <Spinner
+        android:id="@+id/juries_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
 
     <RelativeLayout
         android:id="@+id/activity_main"
@@ -25,10 +30,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/grey_eseo_4"
-        app:itemIconTint="@color/grey_eseo_3"
-        app:itemTextColor="@color/grey_eseo_2"
+        android:background="@color/white"
+        app:itemIconTint="@color/grey_eseo_1"
+        app:itemTextColor="@color/grey_eseo_1"
         app:menu="@menu/bottom_navigation_items"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="82dp"
+            android:text="List Project" />
 
     </RelativeLayout>
 

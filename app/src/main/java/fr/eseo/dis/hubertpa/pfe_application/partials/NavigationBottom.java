@@ -18,7 +18,7 @@ public class NavigationBottom {
             switch (item.getItemId()){
 
                 case R.id.action_project_tab:
-                    //Action quand onglet 1 sélectionné
+                    //
                     break;
                 case R.id.action_jury_tab:
                     //Action quand onglet 2 sélectionné
