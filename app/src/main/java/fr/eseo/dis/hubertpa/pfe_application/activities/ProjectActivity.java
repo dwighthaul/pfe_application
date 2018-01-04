@@ -26,6 +26,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.controller.adapters.ProjectAdapter;
 import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.VolleyCallbackListProject;
@@ -45,8 +48,16 @@ import lombok.Setter;
 
 public class ProjectActivity extends AppCompatActivity {
 
+
+	// The object contains a list of all the projects available
 	@Getter @Setter
 	LIPRJ liproj;
+
+	// The following list is use to be a buffer, the list to be display.
+	// This list can be modified if the user filter the result, ask to only display the favorits one
+	@Getter @Setter
+	List<ProjectLIPRJ> projectListBuffer;
+
 
 	RecyclerView recycler;
 
@@ -66,6 +77,7 @@ public class ProjectActivity extends AppCompatActivity {
 	    BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 	    liproj = new LIPRJ();
 
+	    projectListBuffer = new ArrayList<ProjectLIPRJ>();
 
 	    NEW_CARD_COUNTER = 0;
 	    recycler = (RecyclerView) findViewById(R.id.card_list_project);
@@ -99,9 +111,9 @@ public class ProjectActivity extends AppCompatActivity {
     }
 
 	public void clickItem(ProjectLIPRJ projectLIJUR) {
-//		Intent intent = new Intent(this, ProjectDetail.class);
-//		intent.putExtra("selected_film", film);
-//		startActivity(intent);
+		Intent intent = new Intent(this, DetailProjectActivity.class);
+		intent.putExtra("selected_project", projectLIJUR);
+		startActivity(intent);
 	}
 
 
@@ -120,6 +132,9 @@ public class ProjectActivity extends AppCompatActivity {
 					if (result.equals("OK")) {
 						LIPRJ liprj = JsonParserAPI.parseLIPRJ(jsonObject);
 						ProjectActivity.this.liproj = liprj;
+
+						ProjectActivity.this.setProjectListBuffer(liprj.getProjectList());
+
 						callback.onSuccess(liprj);
 					} else {
 						callback.onError(jsonObject.getString("error"));

@@ -43,8 +43,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
 	public void onBindViewHolder(ProjectViewHolder holder, final int position) {
 		Log.d("ProjectViewHolder","onBindViewHolder()");
 
-		final ProjectLIPRJ film = activity.getLiproj().getProjectList().get(position);
-		final ProjectLIPRJ projectLIPRJ = activity.getLiproj().getProjectList().get(position);
+		final ProjectLIPRJ projectLIPRJ = activity.getProjectListBuffer().get(position);
 		holder.projectId.setText(String.format("%d", projectLIPRJ.getProject().getIdProject()));
 		holder.projectTitre.setText(projectLIPRJ.getProject().getTitle());
 		holder.projectDecription.setText(projectLIPRJ.getProject().getDescription());
@@ -56,8 +55,8 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
 		holder.view.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.d("FilmographyAdapter","Item 'clicked'");
-				activity.clickItem(film);
+				Log.d("ProjectAdapter","Item 'clicked'");
+				activity.clickItem(projectLIPRJ);
 			}
 		});
 
@@ -68,7 +67,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
 	@Override
 	public int getItemCount() {
 		Log.d("ProjectAdapter","getItemCount()");
-		return activity.getLiproj().getProjectList().size();
+		return activity.getProjectListBuffer().size();
 	}
 
 	class ProjectViewHolder extends RecyclerView.ViewHolder {
@@ -95,21 +94,21 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
 
 		public void onBindViewHolder(ProjectViewHolder holder, final int position) {
 			Log.d("ProjectAdapter", "onBindViewHolder()");
-//			final ProjectLIPRJ projectLIPRJ = activity.getLiproj().getProjectList().get(position);
-//			holder.projectId.setText(String.format("%d", projectLIPRJ.getProject().getIdProject()));
-//			holder.projectTitre.setText(projectLIPRJ.getProject().getTitle());
-//			holder.projectDecription.setText(projectLIPRJ.getProject().getDescription());
-//			holder.projectPoster.setText(String.format("%s", projectLIPRJ.isPoster()));
-//			holder.projectConfidentialiy.setText(projectLIPRJ.getProject().getConfidentiality());
-//			holder.projectSuperviseur.setText(String.format("%s%s", projectLIPRJ.getSupervisor().getSurname(), projectLIPRJ.getSupervisor().getForename()));
-//
-//			holder.view.setOnClickListener(new View.OnClickListener() {
-//				@Override
-//				public void onClick(View v) {
-//					Log.d("FilmographyAdapter", "Item 'clicked'");
-//					activity.clickItem(projectLIPRJ);
-//				}
-//			});
+			final ProjectLIPRJ projectLIPRJ = activity.getProjectListBuffer().get(position);
+			holder.projectId.setText(String.format("%d", projectLIPRJ.getProject().getIdProject()));
+			holder.projectTitre.setText(projectLIPRJ.getProject().getTitle());
+			holder.projectDecription.setText(projectLIPRJ.getProject().getDescription());
+			holder.projectPoster.setText(String.format("%s", projectLIPRJ.isPoster()));
+			holder.projectConfidentialiy.setText(projectLIPRJ.getProject().getConfidentiality());
+			holder.projectSuperviseur.setText(String.format("%s %s", projectLIPRJ.getSupervisor().getSurname(), projectLIPRJ.getSupervisor().getForename()));
+
+			holder.view.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Log.d("FilmographyAdapter", "Item 'clicked'");
+					activity.clickItem(projectLIPRJ);
+				}
+			});
 		}
 
 		public ProjectViewHolder(View view) {

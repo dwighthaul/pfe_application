@@ -33,7 +33,8 @@
         <activity android:name=".activities.MarkActivity" />
         <activity
             android:name=".testActivities.Test"
-            android:label="TestActivities.Test"></activity>
+            android:label="TestActivities.Test" />
+        <activity android:name=".activities.DetailProjectActivity"></activity>
     </application>
 
 </manifest>
