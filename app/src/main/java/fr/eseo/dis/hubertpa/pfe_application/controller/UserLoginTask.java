@@ -10,7 +10,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 
 import fr.eseo.dis.hubertpa.pfe_application.activities.ProjectActivity;
-import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.VolleyCallback;
+import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.VolleyCallbackLOGON;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
 
 public class UserLoginTask extends AsyncTask<Void, Void, Void> {
@@ -20,9 +20,9 @@ public class UserLoginTask extends AsyncTask<Void, Void, Void> {
 	@SuppressLint("StaticFieldLeak")
 	private final AppCompatActivity mActivity;
 
-	private final VolleyCallback mVolleyCallback;
+	private final VolleyCallbackLOGON mVolleyCallback;
 
-	public UserLoginTask(String login, String password, AppCompatActivity activity, VolleyCallback callback) {
+	public UserLoginTask(String login, String password, AppCompatActivity activity, VolleyCallbackLOGON callback) {
 		mLogin = login;
 		mPassword = password;
 		mActivity = activity;

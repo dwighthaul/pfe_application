@@ -35,7 +35,8 @@ import java.util.List;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.controller.UserLoginTask;
-import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.VolleyCallback;
+import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.VolleyCallbackListProject;
+import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.VolleyCallbackLOGON;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -191,9 +192,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 			// Show a progress spinner, and kick off a background task to
 			// perform the user login attempt.
 			showProgress(true);
-			mAuthTask = new UserLoginTask(login, password, this, new VolleyCallback() {
+			mAuthTask = new UserLoginTask(login, password, this, new VolleyCallbackLOGON() {
 				@Override
-				public void onSuccessLogin(Boolean result) {
+				public void onSuccess(Boolean result) {
 
 					if (result) {
 						Log.d("LoginActivity", "Click");

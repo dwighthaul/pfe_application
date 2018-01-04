@@ -1,33 +1,44 @@
 package fr.eseo.dis.hubertpa.pfe_application.partials;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
+import fr.eseo.dis.hubertpa.pfe_application.activities.JuryActivity;
+import fr.eseo.dis.hubertpa.pfe_application.activities.MarkActivity;
+import fr.eseo.dis.hubertpa.pfe_application.activities.ProjectActivity;
 
 /**
  * Created by Morgan on 30/12/2017.
  */
 
-public class NavigationBottom {
-    /*findViewById(R.id.bottom_navigation).setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+public class NavigationBottom implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-            switch (item.getItemId()){
+	AppCompatActivity activity;
+	public NavigationBottom(AppCompatActivity _activity) {
+		this.activity = _activity;
 
-                case R.id.action_project_tab:
-                    //
-                    break;
-                case R.id.action_jury_tab:
-                    //Action quand onglet 2 sélectionné
-                    break;
+	}
 
-                default:
-                    //Action quand onglet 3 sélectionné
+	@Override
+	public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.action_project_tab:
 
-                    break;
-            }
-        });*/
+				return true;
+			case R.id.action_jury_tab:
+				Intent intent1 = new Intent(activity, JuryActivity.class);
+				activity.startActivity(intent1);
+				return true;
+			case R.id.action_mark_tab:
+				Intent intent2 = new Intent(activity, MarkActivity.class);
+				activity.startActivity(intent2);
+				return true;
+		}
+		return false;
+	}
+
 }

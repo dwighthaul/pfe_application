@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.controller.UserLoginTask;
-import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.VolleyCallback;
+import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.VolleyCallbackLOGON;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -60,9 +60,9 @@ public class WelcomeActivity extends AppCompatActivity {
 
 	public void VisitorActivity() {
 		//VisitorActivity
-		UserLoginTask mAuthTask = new UserLoginTask(WebServiceConnexion.DEFAULT_LOGIN, WebServiceConnexion.DEFAULT_PASSWORD, this,  new VolleyCallback() {
+		UserLoginTask mAuthTask = new UserLoginTask(WebServiceConnexion.DEFAULT_LOGIN, WebServiceConnexion.DEFAULT_PASSWORD, this,  new VolleyCallbackLOGON() {
 			@Override
-			public void onSuccessLogin(Boolean result) {
+			public void onSuccess(Boolean result) {
 				if (result) {
 					Intent intent = new Intent(WelcomeActivity.this, ProjectActivity.class);
 					// Use to set the default app as this new activity and clean the stack

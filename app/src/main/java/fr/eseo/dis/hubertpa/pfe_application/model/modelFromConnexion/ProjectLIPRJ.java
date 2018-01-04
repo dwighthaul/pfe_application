@@ -28,13 +28,13 @@ public class ProjectLIPRJ {
 	boolean poster;
 
 	@Getter @Setter @NonNull
-	Supervisor supervisor;
+	User supervisor;
 
 	@Getter @Setter @NonNull
-	List<Student> listStudents;
+	List<User> listStudents;
 
 	ProjectLIPRJ () {
-		listStudents = new ArrayList<Student>();
+		listStudents = new ArrayList<User>();
 	}
 
 

@@ -54,4 +54,9 @@
     <string name="prompt_email">Email</string>
 
 
+    <!-- Projects Cards -->
+    <string name="project_cards_supervisor_label">Superviseur :</string>
+    <string name="confidentialitytextViewLabel">Confidentialité : </string>
+
+
 </resources>

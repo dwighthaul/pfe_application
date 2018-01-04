@@ -20,4 +20,7 @@ import lombok.Setter;
 public class Supervisor extends User {
 
 
+	public Supervisor(String s, String s1, String s2, String s3) {
+		super(s, s1, s2, s3);
+	}
 }

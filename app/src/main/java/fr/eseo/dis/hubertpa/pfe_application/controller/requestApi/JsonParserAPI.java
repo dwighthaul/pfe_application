@@ -1,5 +1,7 @@
 package fr.eseo.dis.hubertpa.pfe_application.controller.requestApi;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -96,21 +98,22 @@ public class JsonParserAPI {
 
 			for (int i = 0; i < listProjectJson.length(); i++) {
 
+				Log.d("TEST", "" + i);
 				JSONObject jsonObjectProject = listProjectJson.getJSONObject(i);
 				Project project = Project.fromJson(jsonObjectProject);
 
 				JSONObject supervisorJson = jsonObjectProject.getJSONObject("supervisor");
-				Supervisor supervisor = (Supervisor) Supervisor.fromJson(supervisorJson);
+				User supervisor = User.fromJson(supervisorJson);
 
 				boolean poster = jsonObjectProject.getBoolean("poster");
 
 				JSONArray studentsJsonArray = jsonObjectProject.getJSONArray("students");
-				List<Student> listStudents = new ArrayList<Student>();
+				List<User> listStudents = new ArrayList<User>();
 
 				for (int j = 0; j < studentsJsonArray.length(); j++) {
 					JSONObject studentJson = studentsJsonArray.getJSONObject(j);
 
-					Student student = (Student) Student.fromJson(studentJson);
+					User student = User.fromJson(studentJson);
 
 					listStudents.add(student);
 				}

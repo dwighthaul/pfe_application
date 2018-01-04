@@ -124,7 +124,7 @@ public abstract class WebServiceConnexion  {
 
 
 
-	public static void getConnected(String userName, String password, AppCompatActivity activity, final VolleyCallback callback) {
+	public static void getConnected(String userName, String password, AppCompatActivity activity, final VolleyCallbackLOGON callback) {
 
 		final AppCompatActivity _activity = activity;
 		String url = WebServiceConnexion.getLOGON(userName, password);
@@ -141,13 +141,13 @@ public abstract class WebServiceConnexion  {
 					Log.d("WebServiceConnexion", result);
 
 					if (result.equals("OK")) {
-						callback.onSuccessLogin(true);
+						callback.onSuccess(true);
 
 						LOGON logon = JsonParserAPI.parseLOGON(jsonObject);
 						String tokenValue =logon.getToken();
 						makeToster(_activity, "Connected");
 					} else {
-						callback.onSuccessLogin(false);
+						callback.onSuccess(false);
 
 						makeToster(_activity, "Error to connect");
 					}

@@ -14,8 +14,9 @@ import lombok.Setter;
  * Created by paulhubert on 30/12/17.
  */
 
-
+@AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 public class User {
 
 	@Getter @Setter
@@ -30,24 +31,23 @@ public class User {
 	@Getter @Setter @NonNull
 	private String password;
 
-	@Getter @Setter
+	@Getter @Setter @NonNull
 	private String forename;
 
-	@Getter @Setter
+	@Getter @Setter @NonNull
 	private String surname;
 
 
 	public static User fromJson(JSONObject jsonObject) throws JSONException {
 		User user = new User();
 
-		if (jsonObject.getString("userId") != null)
-			user.setIdUser(jsonObject.getInt("userId"));
-
-		if (jsonObject.getString("forename") != null)
+		if (jsonObject.getString("forename") != null) {
 			user.setForename(jsonObject.getString("forename"));
+		}
 
-		if (jsonObject.getString("surname") != null)
+		if (jsonObject.getString("surname") != null) {
 			user.setSurname(jsonObject.getString("surname"));
+		}
 
 		return user;
 	}
