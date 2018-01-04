@@ -50,7 +50,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
 		holder.projectConfidentialiy.setText(String.format("%d", projectLIPRJ.getProject().getConfidentiality()));
 		holder.projectPoster.setText((projectLIPRJ.isPoster()) ? "Poster disponible" : "Poster non Disponible");
 
-		holder.projectSuperviseur.setText(String.format("%s%s", projectLIPRJ.getSupervisor().getSurname(), projectLIPRJ.getSupervisor().getForename()));
+		holder.projectSuperviseur.setText(String.format("%s %s", projectLIPRJ.getSupervisor().getForename(), projectLIPRJ.getSupervisor().getSurname()));
 
 		holder.view.setOnClickListener(new View.OnClickListener() {
 			@Override

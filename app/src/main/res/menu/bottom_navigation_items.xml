@@ -14,4 +14,8 @@
         android:id="@+id/action_mark_tab"
         android:icon="@drawable/ic_content_paste_black_24dp"
         android:title="@string/marks_tab" />
+    <item
+        android:id="@+id/action_settings_tab"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/settings_tab" />
 </menu>

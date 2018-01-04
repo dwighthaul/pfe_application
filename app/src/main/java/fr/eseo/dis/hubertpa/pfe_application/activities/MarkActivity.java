@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
+import fr.eseo.dis.hubertpa.pfe_application.partials.NavigationBottom;
 
 /**
  * Created by Morgan on 30/12/2017.
@@ -17,28 +18,7 @@ import fr.eseo.dis.hubertpa.pfe_application.R;
 
 public class MarkActivity extends AppCompatActivity {
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.action_project_tab:
-                    Intent intent1 = new Intent(MarkActivity.this, ProjectActivity.class);
-                    startActivity(intent1);
-                    return true;
-                case R.id.action_jury_tab:
-                    Intent intent2 = new Intent(MarkActivity.this, JuryActivity.class);
-                    startActivity(intent2);
-                    return true;
-                case R.id.action_mark_tab:
-
-                    return true;
-            }
-            return false;
-        }
-
-    };
+	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new NavigationBottom(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

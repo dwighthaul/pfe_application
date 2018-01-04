@@ -57,6 +57,8 @@
     <!-- Projects Cards -->
     <string name="project_cards_supervisor_label">Superviseur :</string>
     <string name="confidentialitytextViewLabel">Confidentialité : </string>
+    <string name="title_activity_main_bottom">MainBottomActivity</string>
+    <string name="settings_tab">Settings</string>
 
 
 </resources>

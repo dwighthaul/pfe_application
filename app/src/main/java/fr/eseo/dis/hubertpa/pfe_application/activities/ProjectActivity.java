@@ -74,7 +74,13 @@ public class ProjectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 	    setContentView(R.layout.list_projects);
+
+
 	    BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+	    navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+	    navigation.getMenu().getItem(0).setChecked(true);
+
 	    liproj = new LIPRJ();
 
 	    projectListBuffer = new ArrayList<ProjectLIPRJ>();

@@ -208,6 +208,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 						focusView.requestFocus();
 
 						showProgress(false);
+						mAuthTask = null;
 
 
 					}

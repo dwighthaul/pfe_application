@@ -28,6 +28,7 @@ import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConn
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Jury;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIPRJ;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LOGON;
+import fr.eseo.dis.hubertpa.pfe_application.partials.NavigationBottom;
 
 /**
  * Created by Morgan on 30/12/2017.
@@ -38,28 +39,7 @@ public class JuryActivity  extends AppCompatActivity {
 	LIPRJ liproj;
 
 
-	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-			= new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-		@Override
-		public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-			switch (item.getItemId()) {
-				case R.id.action_project_tab:
-					Intent intent1 = new Intent(JuryActivity.this, ProjectActivity.class);
-					startActivity(intent1);
-					return true;
-				case R.id.action_jury_tab:
-
-					return true;
-				case R.id.action_mark_tab:
-					Intent intent2 = new Intent(JuryActivity.this, MarkActivity.class);
-					startActivity(intent2);
-					return true;
-			}
-			return false;
-		}
-
-	};
+	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new NavigationBottom(this);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
