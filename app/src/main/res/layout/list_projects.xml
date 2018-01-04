@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -32,29 +33,63 @@
                     android:layout_height="40dp"
                     android:orientation="horizontal">
 
-                    <Switch
-                        android:id="@+id/markSwitch"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:checked="false" />
+                        android:layout_weight="1">
 
-                    <TextView
-                        android:id="@+id/textViewFavoriteLabel"
+                        <Switch
+                            android:id="@+id/markSwitch"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:checked="false"
+                            tools:layout_editor_absoluteX="69dp" />
+
+                        <TextView
+                            android:id="@+id/textViewFavoriteLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="1"
+                            android:text="Favoris"
+                            app:layout_constraintStart_toEndOf="@+id/markSwitch"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="RtlCompat" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_weight="0.60"
-                        android:text="Favoris"
-                        app:layout_constraintStart_toEndOf="@+id/markSwitch"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_weight="0.9">
+
+                        <Switch
+                            android:id="@+id/markSwitchMines"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:checked="false"
+                            tools:layout_editor_absoluteX="165dp" />
+
+                        <TextView
+                            android:id="@+id/textViewMesProjectsLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="0.5"
+                            android:text="Mes projects"
+                            app:layout_constraintStart_toEndOf="@+id/markSwitch"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="RtlCompat" />
+                    </LinearLayout>
 
                     <Spinner
                         android:id="@+id/juries_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.70" />
+                        android:layout_weight="1" />
                 </LinearLayout>
 
                 <SearchView
