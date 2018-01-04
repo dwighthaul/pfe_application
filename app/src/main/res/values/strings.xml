@@ -3,9 +3,9 @@
 
 
     <!-- foo -->
-    <string name="project_tab">Projects</string>
+    <string name="project_tab">Projets</string>
     <string name="jury_tab">Juries</string>
-    <string name="marks_tab">Marks</string>
+    <string name="marks_tab">Notes</string>
 
 
     <!-- Welcome page -->
