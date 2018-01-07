@@ -3,7 +3,9 @@ package fr.eseo.dis.hubertpa.pfe_application.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -37,6 +39,7 @@ import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.controller.UserLoginTask;
 import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.VolleyCallbackListProject;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.VolleyCallbackLOGON;
+import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -50,11 +53,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 	 */
 	private static final int REQUEST_READ_CONTACTS = 0;
 
-	/**
-	 * Keep track of the login task to ensure we can cancel it if requested.
-	 */
-	private UserLoginTask mAuthTask = null;
-
 	// UI references.
 	private AutoCompleteTextView mLoginView;
 	private EditText mPasswordView;
@@ -62,8 +60,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 	private View mLoginFormView;
 	View focusView = null;
 
-	private String tokenValue;
-
+	VolleyCallbackLOGON response;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -72,6 +69,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 		mLoginView = (AutoCompleteTextView) findViewById(R.id.login);
 		populateAutoComplete();
+
+		// Need to be removed
 		mLoginView.setText("hubertpa");
 
 		mPasswordView = (EditText) findViewById(R.id.password);
@@ -97,6 +96,32 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 		mLoginFormView = findViewById(R.id.login_form);
 		mProgressView = findViewById(R.id.login_progress);
+
+
+
+		response = new VolleyCallbackLOGON() {
+			@Override
+			public void onSuccess() {
+
+
+
+				Log.d("LoginActivity", "Click");
+				Intent intent = new Intent(LoginActivity.this, ProjectActivity.class);
+				// Use to set the default app as this new activity and clean the stack
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+				LoginActivity.this.startActivity(intent);
+			}
+
+			@Override
+			public void onError() {
+				focusView = mLoginView;
+				focusView.requestFocus();
+
+				showProgress(false);
+
+			}
+		};
 	}
 
 	private void populateAutoComplete() {
@@ -149,17 +174,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 	 * errors are presented and no actual login attempt is made.
 	 */
 	private void attemptLogin() {
-		if (mAuthTask != null) {
-			return;
-		}
 
 		// Reset errors.
 		mLoginView.setError(null);
 		mPasswordView.setError(null);
 
 		// Store values at the time of the login attempt.
-		String login = mLoginView.getText().toString();
-		String password = mPasswordView.getText().toString();
+		final String login = mLoginView.getText().toString();
+		final String password = mPasswordView.getText().toString();
 
 		boolean cancel = false;
 //		focusView = null;
@@ -184,41 +206,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 		}
 
-		if (cancel) {
-			// There was an error; don't attempt login and focus the first
-			// form field with an error.
-//			focusView.requestFocus();
-		} else {
+		if (!cancel) {
 			// Show a progress spinner, and kick off a background task to
 			// perform the user login attempt.
 			showProgress(true);
-			mAuthTask = new UserLoginTask(login, password, this, new VolleyCallbackLOGON() {
-				@Override
-				public void onSuccess(Boolean result) {
-
-					if (result) {
-						Log.d("LoginActivity", "Click");
-						Intent intent = new Intent(LoginActivity.this, ProjectActivity.class);
-						// Use to set the default app as this new activity and clean the stack
-						intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-						LoginActivity.this.startActivity(intent);
-					} else {
-						focusView = mLoginView;
-						focusView.requestFocus();
-
-						showProgress(false);
-						mAuthTask = null;
-
-
-					}
-					// Reset the task to make it available for a new call
-					mAuthTask = null;
-				}
-			});
-
-
-			mAuthTask.execute((Void) null);
+			WebServiceConnexion.getConnected(login, password, this, response);
 		}
 	}
 
@@ -240,7 +232,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 		// On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
 		// for very easy animations. If available, use these APIs to fade-in
 		// the progress spinner.
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
 			int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
 			mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
@@ -260,12 +251,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 					mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
 				}
 			});
-		} else {
-			// The ViewPropertyAnimator APIs are not available, so simply show
-			// and hide the relevant UI components.
-			mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-			mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-		}
 	}
 
 	@Override

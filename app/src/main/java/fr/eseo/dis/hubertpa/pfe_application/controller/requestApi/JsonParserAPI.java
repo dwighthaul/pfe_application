@@ -98,7 +98,6 @@ public class JsonParserAPI {
 
 			for (int i = 0; i < listProjectJson.length(); i++) {
 
-				Log.d("TEST", "" + i);
 				JSONObject jsonObjectProject = listProjectJson.getJSONObject(i);
 				Project project = Project.fromJson(jsonObjectProject);
 

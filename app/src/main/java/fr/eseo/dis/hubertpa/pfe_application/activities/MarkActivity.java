@@ -18,7 +18,7 @@ import fr.eseo.dis.hubertpa.pfe_application.partials.NavigationBottom;
 
 public class MarkActivity extends AppCompatActivity {
 
-	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new NavigationBottom(this);
+	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new NavigationBottom(this, NavigationBottom.PAGES.MARKS);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,6 +1,7 @@
 package fr.eseo.dis.hubertpa.pfe_application.controller.requestApi;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
@@ -11,10 +12,20 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import fr.eseo.dis.hubertpa.pfe_application.R;
+import fr.eseo.dis.hubertpa.pfe_application.activities.ProjectActivity;
+import fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LOGON;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings.saveFilenameShared;
+import static fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings.sharedLogin;
+import static fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings.sharedLoginDefault;
+import static fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings.sharedToken;
+import static fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings.sharedTokenDefault;
 
 /**
  * Created by paulhubert on 20/12/17.
@@ -71,8 +82,8 @@ public abstract class WebServiceConnexion  {
 	private static final String PORTE = URL + "PORTE";
 
 
-	public static String getLOGON(String username, String password) {
-		return LOGON + "&user=" + username + "&pass=" + password;
+	public static String getLOGON(String login, String password) {
+		return LOGON + "&user=" + login + "&pass=" + password;
 	}
 
 	public static String getLIPRJ(String username, String token) {
@@ -124,10 +135,16 @@ public abstract class WebServiceConnexion  {
 
 
 
-	public static void getConnected(String userName, String password, AppCompatActivity activity, final VolleyCallbackLOGON callback) {
+	public static void getConnected(final String login, final String password, AppCompatActivity activity, final VolleyCallbackLOGON callback) {
 
 		final AppCompatActivity _activity = activity;
-		String url = WebServiceConnexion.getLOGON(userName, password);
+		final String _login = login;
+		final String _password = password;
+
+		// Get the URL to log into the server
+		String url = WebServiceConnexion.getLOGON(login, password);
+
+		Log.d("WebServiceConnexion", url);
 
 		RequestQueue queue = Volley.newRequestQueue(activity);
 		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -135,21 +152,25 @@ public abstract class WebServiceConnexion  {
 			public void onResponse(String response) {
 				try {
 
-
 					JSONObject jsonObject = new JSONObject(response);
 					String result = jsonObject.getString("result");
-					Log.d("WebServiceConnexion", result);
 
 					if (result.equals("OK")) {
-						callback.onSuccess(true);
-
 						LOGON logon = JsonParserAPI.parseLOGON(jsonObject);
 						String tokenValue =logon.getToken();
-						makeToster(_activity, "Connected");
-					} else {
-						callback.onSuccess(false);
 
+//						Use this line to reset the default login and password
+//						saveDataValue(_activity, BasicSettings.sharedPasswordDefault, BasicSettings.sharedPasswordDefault);
+						saveDataValue(_activity, _login, _password, tokenValue);
+
+						makeToster(_activity, "Connected");
+
+						callback.onSuccess();
+
+					} else {
 						makeToster(_activity, "Error to connect");
+						callback.onError();
+
 					}
 
 				} catch (JSONException e) {
@@ -179,5 +200,46 @@ public abstract class WebServiceConnexion  {
 	}
 
 
+	private static void saveDataValue (AppCompatActivity activity, String login, String password, String tokenValue) {
+		// We need an Editor object to make preference changes.
+		// All objects are from android.context.Context
+		SharedPreferences settings = activity.getSharedPreferences(BasicSettings.saveFilenameShared, activity.MODE_PRIVATE);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putString(BasicSettings.sharedLogin, login);
+		editor.putString(BasicSettings.sharedPassword, password);
+		editor.putString(BasicSettings.sharedToken, tokenValue);
 
+		editor.apply();
+	}
+
+	public static void resetDataValue (AppCompatActivity activity) {
+		SharedPreferences settings = activity.getSharedPreferences(BasicSettings.saveFilenameShared, activity.MODE_PRIVATE);
+		SharedPreferences.Editor editor = settings.edit();
+
+		// Reset the values as the default ones.
+		editor.putString(BasicSettings.sharedLogin, BasicSettings.sharedLoginDefault);
+		editor.putString(BasicSettings.sharedPassword, BasicSettings.sharedPasswordDefault);
+		editor.putString(BasicSettings.sharedToken, BasicSettings.sharedTokenDefault);
+
+		editor.apply();
+	}
+
+	public static String getToken(AppCompatActivity activity) {
+		SharedPreferences prefs = activity.getSharedPreferences(BasicSettings.saveFilenameShared, activity.MODE_PRIVATE);
+
+		// Récuperation du token
+		String tokenValue = prefs.getString(sharedToken, sharedTokenDefault);
+
+		return tokenValue;
+	}
+
+
+	public static String getLogin(AppCompatActivity activity) {
+		SharedPreferences prefs = activity.getSharedPreferences(BasicSettings.saveFilenameShared, activity.MODE_PRIVATE);
+
+		// Récuperation de l'identifiant
+		String loginValue = prefs.getString(sharedLogin, sharedLogin);
+
+		return loginValue;
+	}
 }

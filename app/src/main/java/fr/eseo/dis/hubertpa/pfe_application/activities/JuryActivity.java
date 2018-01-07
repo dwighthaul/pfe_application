@@ -39,7 +39,7 @@ public class JuryActivity  extends AppCompatActivity {
 	LIPRJ liproj;
 
 
-	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new NavigationBottom(this);
+	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new NavigationBottom(this, NavigationBottom.PAGES.JURIES);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

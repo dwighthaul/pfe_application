@@ -5,6 +5,8 @@ package fr.eseo.dis.hubertpa.pfe_application.controller.requestApi;
  */
 
 public interface VolleyCallbackLOGON {
-	void onSuccess(Boolean result);
+	void onSuccess();
+	void onError();
+
 }
 

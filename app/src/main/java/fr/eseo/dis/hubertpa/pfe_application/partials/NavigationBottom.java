@@ -19,9 +19,20 @@ import fr.eseo.dis.hubertpa.pfe_application.activities.SettingsActivity;
 
 public class NavigationBottom implements BottomNavigationView.OnNavigationItemSelectedListener {
 
+	// Filter if the button clicked is not the same as the one already show
+	public enum PAGES {
+		PROJECTS,
+		JURIES,
+		MARKS,
+		SETTINGS
+	}
+
+
 	AppCompatActivity activity;
-	public NavigationBottom(AppCompatActivity _activity) {
+	PAGES pageActivity;
+	public NavigationBottom(AppCompatActivity _activity, PAGES page) {
 		this.activity = _activity;
+		pageActivity = page;
 
 	}
 
@@ -30,20 +41,28 @@ public class NavigationBottom implements BottomNavigationView.OnNavigationItemSe
 		Log.d("NavigationBottom", "onNavigationItemSelected");
 		switch (item.getItemId()) {
 			case R.id.action_project_tab:
-				Intent intent = new Intent(activity, ProjectActivity.class);
-				activity.startActivity(intent);
+				if(pageActivity != PAGES.PROJECTS) {
+					Intent intent = new Intent(activity, ProjectActivity.class);
+					activity.startActivity(intent);
+				}
 				return true;
 			case R.id.action_jury_tab:
-				Intent intent1 = new Intent(activity, JuryActivity.class);
-				activity.startActivity(intent1);
+				if(pageActivity != PAGES.JURIES) {
+					Intent intent1 = new Intent(activity, JuryActivity.class);
+					activity.startActivity(intent1);
+				}
 				return true;
 			case R.id.action_mark_tab:
-				Intent intent2 = new Intent(activity, MarkActivity.class);
-				activity.startActivity(intent2);
+				if(pageActivity != PAGES.MARKS) {
+					Intent intent2 = new Intent(activity, MarkActivity.class);
+					activity.startActivity(intent2);
+				}
 				return true;
 			case R.id.action_settings_tab:
-				Intent intent3 = new Intent(activity, SettingsActivity.class);
-				activity.startActivity(intent3);
+				if(pageActivity != PAGES.SETTINGS) {
+					Intent intent3 = new Intent(activity, SettingsActivity.class);
+					activity.startActivity(intent3);
+				}
 				return true;
 		}
 		return false;

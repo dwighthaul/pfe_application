@@ -4,8 +4,10 @@ package fr.eseo.dis.hubertpa.pfe_application.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -58,6 +61,7 @@ public class ProjectActivity extends AppCompatActivity {
 	@Getter @Setter
 	List<ProjectLIPRJ> projectListBuffer;
 
+	boolean stoppingBuffering = false;
 
 	RecyclerView recycler;
 
@@ -67,14 +71,19 @@ public class ProjectActivity extends AppCompatActivity {
 
 	private ProjectAdapter projectAdapter;
 
-	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new NavigationBottom(this);
+	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new NavigationBottom(this, NavigationBottom.PAGES.PROJECTS);
 
-    @Override
+	VolleyCallbackListProject callback;
+
+	SwipeRefreshLayout mySwipeRefreshLayout;
+
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 	    setContentView(R.layout.list_projects);
 
+		mySwipeRefreshLayout = findViewById(R.id.swip_to_refresh);
 
 	    BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 	    navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -86,34 +95,70 @@ public class ProjectActivity extends AppCompatActivity {
 	    projectListBuffer = new ArrayList<ProjectLIPRJ>();
 
 	    NEW_CARD_COUNTER = 0;
-	    recycler = (RecyclerView) findViewById(R.id.card_list_project);
-	    recycler.setHasFixedSize(true);
-	    LinearLayoutManager llm = new LinearLayoutManager(this);
-	    llm.setOrientation(LinearLayoutManager.VERTICAL);
-	    recycler.setLayoutManager(llm);
+
+	    setRecycler();
+
+		setCallback();
+
+		setActionOnRefrech();
+
+	    processGetProjects();
+
+    }
 
 
-	    VolleyCallbackListProject volleyCallback = new VolleyCallbackListProject() {
+	/**
+	 * If the user swipe down, this listener is trigger.
+	 * The action is to ask to recive the list of the projects
+	 */
+	private void setActionOnRefrech() {
+		mySwipeRefreshLayout.setOnRefreshListener(
+				new SwipeRefreshLayout.OnRefreshListener() {
+					@Override
+					public void onRefresh() {
+						processGetProjects();
+					}
+				}
+		);
+	}
+
+	/**
+	 * Set the recycler. Basic setter
+	 */
+	private void setRecycler() {
+		recycler = (RecyclerView) findViewById(R.id.card_list_project);
+		recycler.setHasFixedSize(true);
+		LinearLayoutManager llm = new LinearLayoutManager(this);
+		llm.setOrientation(LinearLayoutManager.VERTICAL);
+		recycler.setLayoutManager(llm);
+	}
+
+
+	/**
+	 * The class and the two functions called when the Volley get a response
+	 */
+	public void setCallback() {
+	    this.callback =  new VolleyCallbackListProject() {
 		    @Override
 		    public void onSuccess(LIPRJ liprj) {
-				Log.d("ProjectActivity", String.valueOf(liprj.getProjectList().size()));
+			    Toast.makeText(ProjectActivity.this, "List of all the projects", Toast.LENGTH_LONG).show();
+
+			    // Set the list of projects used to create the view
+			    ProjectActivity.this.setProjectListBuffer(liprj.getProjectList());
+
 			    ProjectActivity.this.setLiproj(liprj);
 
+				// send the list to the projectAdapter and set the project adapter to the recycler
 			    projectAdapter = new ProjectAdapter(ProjectActivity.this);
 			    recycler.setAdapter(projectAdapter);
-
 		    }
 
 		    @Override
 		    public void onError(String errorMessage) {
-			    Toast.makeText(ProjectActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
 
+			    Toast.makeText(ProjectActivity.this, errorMessage, Toast.LENGTH_LONG).show();
 		    }
 	    };
-
-	    processGetProjects(volleyCallback);
-
-
     }
 
 	public void clickItem(ProjectLIPRJ projectLIJUR) {
@@ -123,28 +168,46 @@ public class ProjectActivity extends AppCompatActivity {
 	}
 
 
+	/**
+	 * Call the server using Volley.
+	 * If the result is good:
+	 * The JsonParserAPI.parseLIPRJ function parse the response given by the server, then it call the onSuccess
+	 * If not the activity display an eror with the error message via a toaster.
+	 *
+	 */
+	private void processGetProjects() {
+		mySwipeRefreshLayout.setRefreshing(true);
 
-	private void processGetProjects(final VolleyCallbackListProject callback) {
-		String url = WebServiceConnexion.getLIPRJ("hubertpa", "123456789");
+		// Dont care about this, it's just to display an error if the user
+		// wait more than 10 sec. Never tested, should work.
+		stoppingBuffering = true;
+		stopBuffering();
+
+		// Get the token from the saved data
+		String token = WebServiceConnexion.getToken(this);
+		String login = WebServiceConnexion.getLogin(this);
+
+		// Get the good url with the good variables
+		String url = WebServiceConnexion.getLIPRJ(login, token);
 
 		RequestQueue queue = Volley.newRequestQueue(this);
 		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+
 			@Override
 			public void onResponse(String response) {
+				stoppingBuffering = false;
 				try {
-
 					JSONObject jsonObject = new JSONObject(response);
 					String result = jsonObject.getString("result");
+
 					if (result.equals("OK")) {
 						LIPRJ liprj = JsonParserAPI.parseLIPRJ(jsonObject);
-						ProjectActivity.this.liproj = liprj;
-
-						ProjectActivity.this.setProjectListBuffer(liprj.getProjectList());
-
 						callback.onSuccess(liprj);
 					} else {
-						callback.onError(jsonObject.getString("error"));
+						String error = jsonObject.getString("error");
+						callback.onError(jsonObject.getString(error));
 					}
+					mySwipeRefreshLayout.setRefreshing(false);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -156,5 +219,22 @@ public class ProjectActivity extends AppCompatActivity {
 		});
 		queue.add(stringRequest);
 	}
+
+
+	// After 10 sec, the activity hind the annoying spining stuff and display an error
+	public void stopBuffering() {
+		final Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				if (stoppingBuffering) {
+					Toast.makeText(ProjectActivity.this, "Connexion error", Toast.LENGTH_SHORT).show();
+					mySwipeRefreshLayout.setRefreshing(false);
+				}
+			}
+		}, 10000);
+
+	}
+
 
 }
