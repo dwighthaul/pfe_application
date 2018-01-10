@@ -42,6 +42,7 @@ import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Project;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIPRJ;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIJUR;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIPRJ;
+import fr.eseo.dis.hubertpa.pfe_application.partials.BottomNavigationViewHelper;
 import fr.eseo.dis.hubertpa.pfe_application.partials.NavigationBottom;
 import lombok.Getter;
 import lombok.Setter;
@@ -87,6 +88,7 @@ public class ProjectActivity extends AppCompatActivity {
 		mySwipeRefreshLayout = findViewById(R.id.swip_to_refresh);
 
 	    BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+		BottomNavigationViewHelper.disableShiftMode(navigation);
 	    navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 	    navigation.getMenu().getItem(0).setChecked(true);

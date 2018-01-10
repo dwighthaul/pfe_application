@@ -1,17 +1,12 @@
 package fr.eseo.dis.hubertpa.pfe_application.activities;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -32,11 +27,9 @@ import fr.eseo.dis.hubertpa.pfe_application.controller.adapters.JuryAdapter;
 import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.VolleyCallbackListJury;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.JsonParserAPI;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
-import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Jury;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIJUR;
-import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIPRJ;
-import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LOGON;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.JuryLIJUR;
+import fr.eseo.dis.hubertpa.pfe_application.partials.BottomNavigationViewHelper;
 import fr.eseo.dis.hubertpa.pfe_application.partials.NavigationBottom;
 import lombok.Getter;
 import lombok.Setter;
@@ -74,6 +67,7 @@ public class JuryActivity  extends AppCompatActivity {
 		setContentView(R.layout.list_juries);
 
 		BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+		BottomNavigationViewHelper.disableShiftMode(navigation);
 		navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 		navigation.getMenu().getItem(1).setChecked(true);

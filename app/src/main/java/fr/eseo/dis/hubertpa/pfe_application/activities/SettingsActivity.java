@@ -13,6 +13,7 @@ import android.widget.TextView;
 import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
 import fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings;
+import fr.eseo.dis.hubertpa.pfe_application.partials.BottomNavigationViewHelper;
 import fr.eseo.dis.hubertpa.pfe_application.partials.NavigationBottom;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -27,6 +28,7 @@ public class SettingsActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_settings);
 
 		BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+		BottomNavigationViewHelper.disableShiftMode(navigation);
 		navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 		navigation.getMenu().getItem(3).setChecked(true);
