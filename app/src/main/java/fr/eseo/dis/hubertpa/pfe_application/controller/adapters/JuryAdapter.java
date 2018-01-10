@@ -5,14 +5,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.activities.JuryActivity;
+import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListUser;
+import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Project;
+import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.User;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.JuryLIJUR;
+import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIJUR;
 
 /**
  * Created by Morgan on 05/01/2018.
@@ -38,10 +44,21 @@ public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder
         Log.d("JuryViewHolder","onBindViewHolder()");
 
         final JuryLIJUR juryLIJUR = activity.getJuryListBuffer().get(position);
-	    Log.d("TEST", "Size : " + activity.getJuryListBuffer().size());
-        Log.d("DATE", "" + juryLIJUR.getJury().getIdJury());
+	    Log.d("ICI MEME", "List juries : " + activity.getJuryListBuffer());
         holder.juryId.setText("" + juryLIJUR.getJury().getIdJury());
         holder.juryDate.setText(juryLIJUR.getJury().getDate());
+
+        List<ProjectLIJUR> listProjects = juryLIJUR.getListProject();
+        Log.d("TEST", "" + listProjects.size());
+
+        HashMap<Integer, String> listProjectsMap = new HashMap<Integer, String>();
+        for (ProjectLIJUR project : listProjects) {
+            String fullName = project.getProject().getTitle();
+            listProjectsMap.put(project.getProject().getIdProject(), fullName);
+        }
+
+        AdaptorListProjectJury adapter = new AdaptorListProjectJury(this, listProjectsMap);
+        holder.listProjectJury.setAdapter(adapter);
 
         /*holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +85,7 @@ public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder
 
         private final TextView juryId;
         private final TextView juryDate;
+        private final ListView listProjectJury;
 
         public JuryViewHolder(View viewi) {
             super(viewi);
@@ -76,6 +94,7 @@ public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder
 
             juryId = (TextView) view.findViewById(R.id.idtextView);
             juryDate = (TextView) view.findViewById(R.id.datetextView);
+            listProjectJury = (ListView) view.findViewById(R.id.list_projects_by_jury);
 
         }
     }

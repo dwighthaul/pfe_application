@@ -27,6 +27,16 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
 
+                <TextView
+                    android:id="@+id/datetextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:text=""
+                    android:textSize="16sp"
+                    tools:ignore="InefficientWeight" />
+
             </LinearLayout>
 
         </LinearLayout>
@@ -36,16 +46,10 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/datetextView"
+            <ListView
+                android:id="@+id/list_projects_by_jury"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="2dp"
-                android:text=""
-                android:textSize="16sp"
-                tools:ignore="InefficientWeight" />
-
+                android:layout_height="match_parent" />
         </LinearLayout>
 
     </LinearLayout>

@@ -111,8 +111,12 @@ public class JuryActivity  extends AppCompatActivity {
 				JuryActivity.this.setJuryListBuffer(lijur.getListJuries());
 				JuryActivity.this.setLijur(lijur);
 
-				juryAdapter = new JuryAdapter(JuryActivity.this);
-				recycler.setAdapter(juryAdapter);
+				for(int i=0; i < lijur.getListJuries().size(); i++){
+					juryAdapter = new JuryAdapter(JuryActivity.this);
+					JuryLIJUR juryLIJUR = lijur.getListJuries().get(i);
+					recycler.setAdapter(juryAdapter);
+				}
+
 
 			}
 
