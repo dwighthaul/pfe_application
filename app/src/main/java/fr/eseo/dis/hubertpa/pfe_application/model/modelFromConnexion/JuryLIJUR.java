@@ -19,7 +19,6 @@ import lombok.Setter;
  * Created by paulhubert on 31/12/17.
  */
 
-@AllArgsConstructor
 @RequiredArgsConstructor
 public class JuryLIJUR {
 
@@ -32,7 +31,7 @@ public class JuryLIJUR {
 	@Getter @Setter @NonNull
 	List<ProjectLIJUR> listProject;
 
-	JuryLIJUR() {
+	public JuryLIJUR() {
 		listProject = new ArrayList<ProjectLIJUR>();
 	}
 

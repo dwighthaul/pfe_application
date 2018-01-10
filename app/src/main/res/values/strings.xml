@@ -59,6 +59,7 @@
     <string name="confidentialitytextViewLabel">Confidentialité : </string>
     <string name="title_activity_main_bottom">MainBottomActivity</string>
     <string name="settings_tab">Settings</string>
+    <string name="title_activity_rate_student">RateStudentActivity</string>
 
 
 </resources>

@@ -72,4 +72,13 @@
         app:layout_constraintTop_toBottomOf="@+id/authorizations_url_label"
         android:layout_marginLeft="32dp" />
 
+    <TextView
+        android:id="@+id/token_value"
+        android:layout_width="410dp"
+        android:layout_height="88dp"
+        android:text="TextView"
+        app:layout_constraintTop_toBottomOf="@+id/authorizations_url_label"
+        tools:layout_editor_absoluteX="0dp"
+        tools:ignore="MissingConstraints" />
+
 </android.support.constraint.ConstraintLayout>

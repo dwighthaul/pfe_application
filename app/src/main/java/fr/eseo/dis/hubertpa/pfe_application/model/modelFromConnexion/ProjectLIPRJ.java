@@ -2,10 +2,15 @@ package fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
+import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListUser;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Project;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Student;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Supervisor;
@@ -34,10 +39,14 @@ public class ProjectLIPRJ implements Parcelable{
 	User supervisor;
 
 	@Getter @Setter @NonNull
-	List<User> listStudents;
+	ListUser listStudents;
+
+//	@Getter @Setter
+//	List<String> listStudentsName;
 
 	ProjectLIPRJ () {
-		listStudents = new ArrayList<User>();
+		listStudents = new ListUser();
+//		listStudentsName = new ArrayList<String>();
 	}
 
 
@@ -51,9 +60,11 @@ public class ProjectLIPRJ implements Parcelable{
 		this.project.setConfidentiality(in.readInt());
 
 		this.supervisor = new User();
-
 		this.supervisor.setForename(in.readString());
 		this.supervisor.setSurname(in.readString());
+
+		this.listStudents = new ListUser();
+		in.readList(this.listStudents, ListUser.class.getClassLoader());
 
 
 	}
@@ -76,13 +87,19 @@ public class ProjectLIPRJ implements Parcelable{
 	}
 
 	@Override
-	public void writeToParcel(Parcel parcel, int i) {
-		parcel.writeInt(this.project.getIdProject());
-		parcel.writeString(this.project.getTitle());
-		parcel.writeString(this.project.getDescription());
-//		parcel.writeString(String.valueOf(this.isPoster()));
-		parcel.writeInt(this.project.getConfidentiality());
-		parcel.writeString(this.supervisor.getForename());
-		parcel.writeString(this.supervisor.getSurname());
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(this.project.getIdProject());
+		dest.writeString(this.project.getTitle());
+		dest.writeString(this.project.getDescription());
+
+		dest.writeInt(this.project.getConfidentiality());
+
+		dest.writeString(this.supervisor.getForename());
+		dest.writeString(this.supervisor.getSurname());
+
+		dest.writeList(this.getListStudents());
 	}
+
+
+
 }

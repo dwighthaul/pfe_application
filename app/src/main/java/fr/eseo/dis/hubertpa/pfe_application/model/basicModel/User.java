@@ -1,5 +1,9 @@
 package fr.eseo.dis.hubertpa.pfe_application.model.basicModel;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,7 +21,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class User {
+public class User implements Parcelable {
 
 	@Getter @Setter
 	private int idUser;
@@ -38,14 +42,36 @@ public class User {
 	private String surname;
 
 
+	protected User(Parcel in) {
+		idUser = in.readInt();
+		forename = in.readString();
+		surname = in.readString();
+	}
+
+	public static final Creator<User> CREATOR = new Creator<User>() {
+		@Override
+		public User createFromParcel(Parcel in) {
+			return new User(in);
+		}
+
+		@Override
+		public User[] newArray(int size) {
+			return new User[size];
+		}
+	};
+
 	public static User fromJson(JSONObject jsonObject) throws JSONException {
 		User user = new User();
 
-		if (jsonObject.getString("forename") != null) {
+		if(jsonObject.has("userId")) {
+			user.setIdUser(jsonObject.getInt("userId"));
+		}
+
+		if (jsonObject.has("forename")) {
 			user.setForename(jsonObject.getString("forename"));
 		}
 
-		if (jsonObject.getString("surname") != null) {
+		if (jsonObject.has("surname")) {
 			user.setSurname(jsonObject.getString("surname"));
 		}
 
@@ -53,4 +79,15 @@ public class User {
 	}
 
 
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel parcel, int i) {
+		parcel.writeInt(this.idUser);
+		parcel.writeString(this.getForename());
+		parcel.writeString(this.getSurname());
+	}
 }

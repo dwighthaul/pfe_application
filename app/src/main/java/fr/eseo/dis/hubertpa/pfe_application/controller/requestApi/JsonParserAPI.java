@@ -11,6 +11,7 @@ import java.util.List;
 
 import fr.eseo.dis.hubertpa.pfe_application.model.APIAndroid;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Jury;
+import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListUser;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Project;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Student;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Supervisor;
@@ -107,7 +108,9 @@ public class JsonParserAPI {
 				boolean poster = jsonObjectProject.getBoolean("poster");
 
 				JSONArray studentsJsonArray = jsonObjectProject.getJSONArray("students");
-				List<User> listStudents = new ArrayList<User>();
+				ListUser listStudents = new ListUser();
+//				List<String> listNameStudents = new ArrayList<String>();
+
 
 				for (int j = 0; j < studentsJsonArray.length(); j++) {
 					JSONObject studentJson = studentsJsonArray.getJSONObject(j);
@@ -115,9 +118,13 @@ public class JsonParserAPI {
 					User student = User.fromJson(studentJson);
 
 					listStudents.add(student);
+
+//					listNameStudents.add(student.getForename() + " " + student.getSurname());
 				}
 
 				ProjectLIPRJ projectLIPRJ = new ProjectLIPRJ(project, poster, supervisor, listStudents);
+//				ProjectLIPRJ projectLIPRJ = new ProjectLIPRJ(project, poster, supervisor, listStudents, listNameStudents);
+
 				lirpj.getProjectList().add(projectLIPRJ);
 			}
 		} catch (JSONException e) {
@@ -149,6 +156,8 @@ public class JsonParserAPI {
 
 				List<ProjectLIJUR> listProject = new ArrayList<ProjectLIJUR>();
 
+				JuryLIJUR juryLIJUR = new JuryLIJUR();
+
 				for (int j = 0; j < projectsJson.length(); j++) {
 
 					JSONObject projectJson = projectsJson.getJSONObject(j);
@@ -162,9 +171,9 @@ public class JsonParserAPI {
 					ProjectLIJUR projectLIJUR = new ProjectLIJUR(project, poster, supervisor);
 					listProject.add(projectLIJUR);
 
+					juryLIJUR = new JuryLIJUR(jury, supervisor,listProject);
 				}
 
-				JuryLIJUR juryLIJUR = new JuryLIJUR(jury, listProject);
 				lirpj.getListJuries().add(juryLIJUR);
 			}
 		} catch (JSONException e) {

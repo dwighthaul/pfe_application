@@ -46,7 +46,14 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
 		final ProjectLIPRJ projectLIPRJ = activity.getProjectListBuffer().get(position);
 		holder.projectId.setText(String.format("%d", projectLIPRJ.getProject().getIdProject()));
 		holder.projectTitre.setText(projectLIPRJ.getProject().getTitle());
-		holder.projectDecription.setText(projectLIPRJ.getProject().getDescription());
+
+		String desc = "";
+		int limit = 75;
+		if(projectLIPRJ.getProject().getDescription().length() > limit) {
+			desc = projectLIPRJ.getProject().getDescription().substring(0, limit);
+		}
+
+		holder.projectDecription.setText(desc);
 		holder.projectConfidentialiy.setText(String.format("%d", projectLIPRJ.getProject().getConfidentiality()));
 		holder.projectPoster.setText((projectLIPRJ.isPoster()) ? "Poster disponible" : "Poster non Disponible");
 
@@ -81,41 +88,10 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
 		private final TextView projectSuperviseur;
 		private final TextView projectConfidentialiy;
 
-		public ProjectViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-			Log.d("ProjectAdapter","onCreateViewHolder()");
-			View projectView = LayoutInflater.from(parent.getContext())
-					.inflate(R.layout.project_cards, parent, false);
-
-			CardView projectCardView = (CardView)projectView;
-
-			projectCardView.setCardElevation(3*ProjectActivity.NEW_CARD_COUNTER++);
-			return new ProjectViewHolder(projectView);
-		}
-
-		public void onBindViewHolder(ProjectViewHolder holder, final int position) {
-			Log.d("ProjectAdapter", "onBindViewHolder()");
-			final ProjectLIPRJ projectLIPRJ = activity.getProjectListBuffer().get(position);
-			holder.projectId.setText(String.format("%d", projectLIPRJ.getProject().getIdProject()));
-			holder.projectTitre.setText(projectLIPRJ.getProject().getTitle());
-			holder.projectDecription.setText(projectLIPRJ.getProject().getDescription());
-			holder.projectPoster.setText(String.format("%s", projectLIPRJ.isPoster()));
-			holder.projectConfidentialiy.setText(projectLIPRJ.getProject().getConfidentiality());
-			holder.projectSuperviseur.setText(String.format("%s %s", projectLIPRJ.getSupervisor().getSurname(), projectLIPRJ.getSupervisor().getForename()));
-
-			holder.view.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Log.d("FilmographyAdapter", "Item 'clicked'");
-					activity.clickItem(projectLIPRJ);
-				}
-			});
-		}
-
 		public ProjectViewHolder(View view) {
 			super(view);
 			Log.d("ProjectViewHolder","ProjetViewHolder()");
 			this.view = view;
-
 
 			projectId = (TextView) view.findViewById(R.id.idtextView);
 			projectTitre = (TextView) view.findViewById(R.id.titletextView);

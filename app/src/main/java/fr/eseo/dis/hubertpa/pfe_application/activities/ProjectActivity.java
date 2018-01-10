@@ -23,6 +23,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -189,8 +190,8 @@ public class ProjectActivity extends AppCompatActivity {
 
 		// Get the good url with the good variables
 		String url = WebServiceConnexion.getLIPRJ(login, token);
+		RequestQueue queue = Volley.newRequestQueue(this, new HurlStack(null, WebServiceConnexion.newSslSocketFactory(this)));
 
-		RequestQueue queue = Volley.newRequestQueue(this);
 		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 
 			@Override

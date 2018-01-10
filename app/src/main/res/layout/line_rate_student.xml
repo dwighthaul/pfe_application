@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fr.eseo.dis.hubertpa.pfe_application.activities.DetailProjectActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:gravity="center_vertical"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <TextView
+            android:id="@+id/StudentName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="[StudentName]" />
+
+        <TextView
+            android:id="@+id/StudentID"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.40"
+            android:text="[StudentID]" />
+
+        <ImageButton
+            android:id="@+id/rateStudent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_content_paste_black_24dp" />
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

@@ -14,8 +14,8 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+
 import fr.eseo.dis.hubertpa.pfe_application.R;
-import fr.eseo.dis.hubertpa.pfe_application.activities.ProjectActivity;
 import fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LOGON;
 
@@ -33,9 +33,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
 
-import static fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings.saveFilenameShared;
 import static fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings.sharedLogin;
-import static fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings.sharedLoginDefault;
 import static fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings.sharedToken;
 import static fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings.sharedTokenDefault;
 
@@ -58,7 +56,7 @@ public abstract class WebServiceConnexion  {
 
 	private static final String URL_ESEO = "https://192.168.4.10/www/pfe/webservice.php?q=";
 
-	public static final String URL = URL_PERSO_PAUL;
+	public static final String URL = URL_ESEO;
 
 	//Initial validation of users credentials
 	private static final String LOGON = URL + "LOGON";
