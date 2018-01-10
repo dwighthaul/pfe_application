@@ -42,6 +42,7 @@ import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.VolleyCall
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.JsonParserAPI;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.StyleProject;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
+import fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Project;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIPRJ;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIJUR;
@@ -168,11 +169,6 @@ public class ProjectActivity extends AppCompatActivity {
 	    };
     }
 
-	public void clickItem(ProjectLIPRJ projectLIJUR) {
-		Intent intent = new Intent(this, DetailProjectActivity.class);
-		intent.putExtra("selected_project", projectLIJUR);
-		startActivity(intent);
-	}
 
 
 	/**
@@ -195,6 +191,7 @@ public class ProjectActivity extends AppCompatActivity {
 		final String _login = WebServiceConnexion.getLogin(this);
 
 		// Get the good url with the good variables
+
 		String url = WebServiceConnexion.getLIPRJ(_login, _token);
 		RequestQueue queue = Volley.newRequestQueue(this, new HurlStack(null, WebServiceConnexion.newSslSocketFactory(this)));
 
@@ -209,14 +206,6 @@ public class ProjectActivity extends AppCompatActivity {
 
 					if (result.equals("OK")) {
 						LIPRJ liprj = JsonParserAPI.parseLIPRJ(jsonObject);
-						for(int i = 0; i < liprj.getProjectList().size(); i++) {
-							//return POSTR + "&proj="  + idProject + "&style=" + style + addUsernameAndToken(username, token);
-							int idProject = liprj.getProjectList().get(i).getProject().getIdProject();
-
-							String urlPoster = WebServiceConnexion.getPOSTR(_login, _token, idProject, StyleProject.FULL);
-							liprj.getProjectList().get(i).setPosterPath(urlPoster);
-						}
-
 						callback.onSuccess(liprj);
 					} else {
 						String error = jsonObject.getString("error");
@@ -251,6 +240,23 @@ public class ProjectActivity extends AppCompatActivity {
 
 	}
 
+	public String selectRequest(){
+		String login = WebServiceConnexion.getLogin(this);
+		String token = WebServiceConnexion.getToken(this);
+		int role = WebServiceConnexion.getRole(this);
+
+		String url = "";
+		if(role == BasicSettings.Roles.VISITOR.getRoleId()) {
+			url = WebServiceConnexion.getPORTE(login, token, "1");
+		} else if(role == BasicSettings.Roles.STUDENT.getRoleId()) {
+			url = WebServiceConnexion.getLIPRJ(login, token);
+		} else if (role == BasicSettings.Roles.TEACHER.getRoleId()) {
+			url = WebServiceConnexion.getLIPRJ(login, token);
+
+		}
+		return url;
+	}
+
 	public void setSwitchListeners() {
 		//Get widgets reference from XML layout
 		Switch sButton = (Switch) findViewById(R.id.markSwitchMines);
@@ -271,5 +277,23 @@ public class ProjectActivity extends AppCompatActivity {
 		});
 	}
 
+	public void clickItem(ProjectLIPRJ projectLIPRJ) {
+		Intent intent = new Intent(this, DetailProjectActivity.class);
+		intent.putExtra("selected_project", projectLIPRJ);
+		startActivity(intent);
+	}
 
+	public void takeNotes(ProjectLIPRJ projectLIPRJ) {
+		Intent intent = new Intent(this, TakeNotesProjectActivity.class);
+		Log.d("TEST", projectLIPRJ.getProject().getTitle());
+		intent.putExtra("nameProject", projectLIPRJ.getProject().getTitle());
+		intent.putExtra("idProject", projectLIPRJ.getProject().getIdProject());
+		intent.putExtra("selected_project", projectLIPRJ);
+		startActivity(intent);
+	}
+
+	public void seePoster(ProjectLIPRJ projectLIPRJ) {
+		Intent intent = new Intent(this, DislayPosterActivity.class);
+		startActivity(intent);
+	}
 }

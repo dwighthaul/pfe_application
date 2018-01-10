@@ -52,12 +52,12 @@ public abstract class WebServiceConnexion  {
 	public static final String DEFAULT_LOGIN = "jpo";
 	public static final String DEFAULT_PASSWORD = "w872o32HkYAO";
 
-	private static final String URL_PERSO_PAUL = "http://192.168.1.12/api_rest_project/android_project/?q=";
+	private static final String URL_PERSO_PAUL = "http://10.188.89.49/api_rest_project/android_project/?q=";
 	private static final String URL_PERSO_MORGAN = "http://192.168.1.34/api_rest_project/android_project/?q=";
 
 	private static final String URL_ESEO = "https://192.168.4.10/www/pfe/webservice.php?q=";
 
-	public static final String URL = URL_ESEO;
+	public static final String URL = URL_PERSO_PAUL;
 
 	//Initial validation of users credentials
 	private static final String LOGON = URL + "LOGON";
@@ -194,7 +194,6 @@ public abstract class WebServiceConnexion  {
 						makeToster(_activity, "Connected");
 
 						callback.onSuccess();
-
 					} else {
 						makeToster(_activity, "Error to connect");
 						callback.onError();

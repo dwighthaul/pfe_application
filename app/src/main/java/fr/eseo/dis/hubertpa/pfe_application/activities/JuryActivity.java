@@ -152,8 +152,8 @@ public class JuryActivity  extends AppCompatActivity {
 
 						callback.onSuccess(lijur);
 					} else {
-						Log.d("JuryActivity","error()");
-						callback.onError(jsonObject.getString("error"));
+						String error = jsonObject.getString("error");
+						callback.onError(jsonObject.getString(error));
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();

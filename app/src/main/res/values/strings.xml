@@ -60,6 +60,8 @@
     <string name="title_activity_main_bottom">MainBottomActivity</string>
     <string name="settings_tab">Settings</string>
     <string name="title_activity_rate_student">RateStudentActivity</string>
+    <string name="title_activity_dislay_poster">DislayPosterActivity</string>
+    <string name="title_activity_take_notes_project">TakeNotesProjectActivity</string>
 
 
 </resources>

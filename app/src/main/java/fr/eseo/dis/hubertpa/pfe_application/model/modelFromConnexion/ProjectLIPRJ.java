@@ -26,9 +26,6 @@ public class ProjectLIPRJ implements Parcelable{
 	@Getter @Setter
 	boolean poster;
 
-	@Getter @Setter
-	String posterPath;
-
 	@Getter @Setter @NonNull
 	User supervisor;
 

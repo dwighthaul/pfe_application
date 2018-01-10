@@ -22,9 +22,9 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".activities.ProjectActivity" />
         <activity android:name=".activities.LoginActivity" />
@@ -32,13 +32,17 @@
         <activity android:name=".activities.MarkActivity" />
         <activity
             android:name=".testActivities.Test"
-            android:label="TestActivities.Test" >
-        </activity>
+            android:label="TestActivities.Test" />
         <activity android:name=".activities.DetailProjectActivity" />
         <activity android:name=".MainBottomActivity" />
-        <activity android:name=".activities.SettingsActivity"/>
+        <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.RateStudentActivity" />
-
+        <activity
+            android:name=".activities.DislayPosterActivity"
+            android:label="@string/title_activity_dislay_poster" />
+        <activity
+            android:name=".activities.TakeNotesProjectActivity"
+            android:label="@string/title_activity_take_notes_project"></activity>
     </application>
 
 </manifest>

@@ -120,7 +120,7 @@ public class JsonParserAPI {
 //					listNameStudents.add(student.getForename() + " " + student.getSurname());
 				}
 
-				ProjectLIPRJ projectLIPRJ = new ProjectLIPRJ(project, poster, "", supervisor, listStudents);
+				ProjectLIPRJ projectLIPRJ = new ProjectLIPRJ(project, poster, supervisor, listStudents);
 //				ProjectLIPRJ projectLIPRJ = new ProjectLIPRJ(project, poster, supervisor, listStudents, listNameStudents);
 
 				lirpj.getProjectList().add(projectLIPRJ);
@@ -192,7 +192,13 @@ public class JsonParserAPI {
 	}
 
 
-	// TODO : Update to match the result
+	/**
+	 * 	Useless nothing to parse since it send a bitmap of the actual image
+	 * 	There is nothing to parse
+	 * 	Return null.
+	 *
+	 */
+	@Deprecated
 	public static POSTR parsePOSTR(JSONObject jsonObject) {
 		return null;
 

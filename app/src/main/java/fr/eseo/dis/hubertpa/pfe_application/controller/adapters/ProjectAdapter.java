@@ -8,7 +8,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,10 +84,12 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
 		holder.projectPoster.setText((projectLIPRJ.isPoster()) ? "Poster disponible" : "Poster non Disponible");
 
 
-
 		if (projectLIPRJ.isPoster()) {
-			VolleyCallbackPOSTR callback = getCallback();
-			setImage(activity, projectLIPRJ, callback);
+			holder.projectPoster.setLayoutParams(new TableLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1f));
+			holder.buttonDisplayPoster.setLayoutParams(new TableLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 0));
+		} else {
+			holder.projectPoster.setLayoutParams(new TableLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 0));
+			holder.buttonDisplayPoster.setLayoutParams(new TableLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1f));
 		}
 
 		holder.projectSuperviseur.setText(String.format("%s %s", projectLIPRJ.getSupervisor().getForename(), projectLIPRJ.getSupervisor().getSurname()));
@@ -94,6 +99,23 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
 			public void onClick(View v) {
 				Log.d("ProjectAdapter","Item 'clicked'");
 				activity.clickItem(projectLIPRJ);
+			}
+		});
+
+
+		holder.buttonDisplayPoster.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Log.d("ProjectAdapter","Item 'clicked'");
+				activity.seePoster(projectLIPRJ);
+			}
+		});
+
+		holder.takeNoteButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Log.d("ProjectAdapter","Item 'clicked'");
+				activity.takeNotes(projectLIPRJ);
 			}
 		});
 
@@ -115,9 +137,10 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
 		private final TextView projectTitre;
 		private final TextView projectDecription;
 		private final TextView projectPoster;
-		private final ImageView projectPosterView;
 		private final TextView projectSuperviseur;
 		private final TextView projectConfidentialiy;
+		private final Button buttonDisplayPoster;
+		private final Button takeNoteButton;
 
 		public ProjectViewHolder(View view) {
 			super(view);
@@ -128,70 +151,14 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
 			projectTitre = (TextView) view.findViewById(R.id.titletextView);
 			projectDecription = (TextView) view.findViewById(R.id.descriptiontextView);
 			projectPoster = (TextView) view.findViewById(R.id.postertextView);
-			projectPosterView = (ImageView) view.findViewById(R.id.posterViewProject);
 			projectSuperviseur = (TextView) view.findViewById(R.id.supervisortextViewValue);
 			projectConfidentialiy = (TextView) view.findViewById(R.id.confidentialitytextViewValue);
 
+			buttonDisplayPoster = (Button) view.findViewById(R.id.buttonDisplayPoster);
+			takeNoteButton = (Button) view.findViewById(R.id.takeNoteButton);
 		}
 	}
 
-	private void setImage(AppCompatActivity activity, ProjectLIPRJ projectLIPRJ, VolleyCallbackPOSTR callbackPOSTR){
-
-		// Get the token from the saved data
-		final String _token = WebServiceConnexion.getToken(activity);
-		final String _login = WebServiceConnexion.getLogin(activity);
-		final VolleyCallbackPOSTR _callbackPOSTR = callbackPOSTR;
-		AppCompatActivity _activity = activity;
-
-		// Get the good url with the good variables
-		String url = WebServiceConnexion.getPOSTR(_login, _token, projectLIPRJ.getProject().getIdProject(), StyleProject.FULL);
-		RequestQueue queue = Volley.newRequestQueue(activity, new HurlStack(null, WebServiceConnexion.newSslSocketFactory(_activity)));
-//
-//		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<Bitmap>() {
-//
-//			@Override
-//			public void onResponse(Bitmap response) {
-//
-//			}
-//
-//		}, new Response.ErrorListener() {
-//
-//			@Override
-//			public void onErrorResponse(VolleyError error) {
-//			}
-//		});
-
-//		queue.add(stringRequest);
-	}
-
-	public VolleyCallbackPOSTR getCallback() {
-
-
-		VolleyCallbackPOSTR callback =  new VolleyCallbackPOSTR() {
-
-			@Override
-			public void onSuccess(ProjectLIPRJ project, Bitmap bitmap) {
-				String urlString = project.getPosterPath();
-				Log.d("POSTERPATH", project.getPosterPath());
-				URL url;
-				try {
-					url = new URL(urlString);
-					Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-//					holder.projectPosterView.setImageBitmap(bmp);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-
-
-			}
-
-			@Override
-			public void onError(String errorMessage) {
-			}
-		};
-
-		return callback;
-	}
 
 
 

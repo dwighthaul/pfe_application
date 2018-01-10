@@ -10,7 +10,7 @@ import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIPR
  */
 
 public interface VolleyCallbackPOSTR {
-	void onSuccess(ProjectLIPRJ project, Bitmap bitmap);
+	void onSuccess(Bitmap bitmap);
 
 	void onError(String errorMessage);
 

@@ -1,10 +1,33 @@
 package fr.eseo.dis.hubertpa.pfe_application.model;
 
+import lombok.Getter;
+
 /**
  * Created by paulhubert on 06/01/18.
  */
 
 public abstract class BasicSettings {
+
+
+	public enum Roles {
+		VISITOR("Visitor", 1),
+		STUDENT("Student", 2),
+		TEACHER("Teacher", 3),
+		;
+
+		@Getter
+		int roleId;
+
+		@Getter
+		String roleName;
+
+		Roles(String role, int i) {
+			roleName = role;
+			roleId = i;
+		}
+
+
+	}
 
 
 

@@ -36,13 +36,9 @@ public class SettingsActivity extends AppCompatActivity {
 		TextView loginTextView = (TextView) findViewById(R.id.textViewLogin);
 		TextView passwordTextView = (TextView) findViewById(R.id.textViewPassword);
 
-		SharedPreferences settings = getSharedPreferences(BasicSettings.saveFilenameShared, 0);
-		String login = settings.getString(BasicSettings.sharedLogin, "Default");
-		String password = settings.getString(BasicSettings.sharedPassword, "Default");
+		String login = WebServiceConnexion.getLogin(this);
 
 		loginTextView.setText(login);
-		passwordTextView.setText(password);
-
 
 		disconnect = (Button) findViewById(R.id.button_disconnect);
 
@@ -52,8 +48,6 @@ public class SettingsActivity extends AppCompatActivity {
 			public void onClick(View view) {
 				Log.d("SettingsActivity", "disconnect");
 				disconnectFromTheApp();
-
-
 			}
 		});
 
