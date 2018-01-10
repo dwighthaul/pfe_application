@@ -10,6 +10,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -20,6 +21,17 @@ import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LOGON;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.security.KeyStore;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManagerFactory;
 
 import static fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings.saveFilenameShared;
 import static fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings.sharedLogin;
@@ -42,11 +54,11 @@ public abstract class WebServiceConnexion  {
 	public static final String DEFAULT_PASSWORD = "w872o32HkYAO";
 
 	private static final String URL_PERSO_PAUL = "http://192.168.1.12/api_rest_project/android_project/?q=";
-	private static final String URL_PERSO_MORGAN = "http://172.20.10.2/api_rest_project/android_project/?q=";
+	private static final String URL_PERSO_MORGAN = "http://192.168.1.34/api_rest_project/android_project/?q=";
 
 	private static final String URL_ESEO = "https://192.168.4.10/www/pfe/webservice.php?q=";
 
-	public static final String URL = URL_PERSO_MORGAN;
+	public static final String URL = URL_PERSO_PAUL;
 
 	//Initial validation of users credentials
 	private static final String LOGON = URL + "LOGON";
@@ -146,7 +158,8 @@ public abstract class WebServiceConnexion  {
 
 		Log.d("WebServiceConnexion", url);
 
-		RequestQueue queue = Volley.newRequestQueue(activity);
+		RequestQueue queue = Volley.newRequestQueue(activity, new HurlStack(null, WebServiceConnexion.newSslSocketFactory(activity)));
+
 		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 			@Override
 			public void onResponse(String response) {
@@ -159,8 +172,6 @@ public abstract class WebServiceConnexion  {
 						LOGON logon = JsonParserAPI.parseLOGON(jsonObject);
 						String tokenValue =logon.getToken();
 
-//						Use this line to reset the default login and password
-//						saveDataValue(_activity, BasicSettings.sharedPasswordDefault, BasicSettings.sharedPasswordDefault);
 						saveDataValue(_activity, _login, _password, tokenValue);
 
 						makeToster(_activity, "Connected");
@@ -190,7 +201,7 @@ public abstract class WebServiceConnexion  {
 	}
 
 
-	private static void makeToster(AppCompatActivity activity, String message) {
+	public static void makeToster(AppCompatActivity activity, String message) {
 		Context context = activity.getApplicationContext();
 		CharSequence text = message;
 		int duration = Toast.LENGTH_SHORT;
@@ -242,4 +253,47 @@ public abstract class WebServiceConnexion  {
 
 		return loginValue;
 	}
+
+
+
+	public static SSLSocketFactory newSslSocketFactory(AppCompatActivity activity) {
+		try {
+			CertificateFactory cf = CertificateFactory.getInstance("x.509");
+			InputStream caInput = new BufferedInputStream(activity.getResources().openRawResource(R.raw.root));
+			//this.getResources().getIdentifier("chain","raw",this.getPackageName())));
+
+			Certificate ca;
+			try{
+
+				ca = cf.generateCertificate(caInput);
+				Log.d("TESTTEST","ca="+((X509Certificate)ca).getSubjectDN());
+			}finally{
+				caInput.close();
+			}
+			// Get an instance of the Bouncy Castle KeyStore format
+			String keyStoreType = KeyStore.getDefaultType();
+			KeyStore keyStore = KeyStore.getInstance(keyStoreType);
+			// Get the raw resource, which contains the keystore with
+			// your trusted certificates (root and any intermediate certs)
+			InputStream in = activity.getApplicationContext().getResources().openRawResource(R.raw.root); //.bks file in raw folder
+			keyStore.load(null,null);
+			keyStore.setCertificateEntry("ca",ca);
+
+			String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+			TrustManagerFactory tmf = TrustManagerFactory.getInstance(tmfAlgorithm);
+			tmf.init(keyStore);
+
+			SSLContext context = SSLContext.getInstance("TLS");
+			context.init(null, tmf.getTrustManagers(), null);
+
+			SSLSocketFactory sf = context.getSocketFactory();
+			return sf;
+
+		} catch (Exception e) {
+			Log.d("SSL Exception",e.getMessage());
+			throw new AssertionError(e);
+		}
+	}
+
+
 }
