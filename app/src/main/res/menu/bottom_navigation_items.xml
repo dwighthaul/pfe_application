@@ -16,6 +16,6 @@
         android:title="@string/marks_tab" />
     <item
         android:id="@+id/action_settings_tab"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/settings_tab" />
 </menu>
