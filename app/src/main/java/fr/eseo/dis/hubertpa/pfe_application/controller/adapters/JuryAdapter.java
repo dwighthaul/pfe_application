@@ -1,7 +1,5 @@
 package fr.eseo.dis.hubertpa.pfe_application.controller.adapters;
 
-import android.app.Activity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,9 +12,6 @@ import java.util.List;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.activities.JuryActivity;
-import fr.eseo.dis.hubertpa.pfe_application.activities.JuryActivity;
-import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIPRJ;
-import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.JuryLIJUR;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.JuryLIJUR;
 
 /**
