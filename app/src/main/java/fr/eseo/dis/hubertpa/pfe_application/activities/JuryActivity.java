@@ -29,7 +29,6 @@ import java.util.List;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.controller.adapters.JuryAdapter;
-import fr.eseo.dis.hubertpa.pfe_application.controller.adapters.ProjectAdapter;
 import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.VolleyCallbackListJury;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.JsonParserAPI;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
@@ -38,7 +37,6 @@ import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIJUR;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIPRJ;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LOGON;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.JuryLIJUR;
-import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIPRJ;
 import fr.eseo.dis.hubertpa.pfe_application.partials.NavigationBottom;
 import lombok.Getter;
 import lombok.Setter;
@@ -49,7 +47,7 @@ import lombok.Setter;
 
 public class JuryActivity  extends AppCompatActivity {
 
-	// The object contains a list of all the projects available
+	// The object contains a list of all the juries
 	@Getter @Setter
 	LIJUR lijur;
 
@@ -111,7 +109,11 @@ public class JuryActivity  extends AppCompatActivity {
 		this.callback =  new VolleyCallbackListJury() {
 			@Override
 			public void onSuccess(LIJUR lijur) {
-				Log.d("JuryActivity", String.valueOf(lijur.getListJuries().size()));
+				//Log.d("JuryActivity", String.valueOf(lijur.getListJuries().size()));
+				Log.d("JuryActivity","setCallback()");
+
+				// Set the list of juries
+				JuryActivity.this.setJuryListBuffer(lijur.getListJuries());
 				JuryActivity.this.setLijur(lijur);
 
 				juryAdapter = new JuryAdapter(JuryActivity.this);
@@ -144,6 +146,7 @@ public class JuryActivity  extends AppCompatActivity {
 					JSONObject jsonObject = new JSONObject(response);
 					String result = jsonObject.getString("result");
 					if (result.equals("OK")) {
+
 						LIJUR lijur = JsonParserAPI.parseLIJUR(jsonObject);
 						JuryActivity.this.lijur = lijur;
 
@@ -151,6 +154,7 @@ public class JuryActivity  extends AppCompatActivity {
 
 						callback.onSuccess(lijur);
 					} else {
+						Log.d("JuryActivity","error()");
 						callback.onError(jsonObject.getString("error"));
 					}
 				} catch (JSONException e) {

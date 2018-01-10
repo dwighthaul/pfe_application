@@ -37,7 +37,7 @@ public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder
     public JuryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View juryView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.jury_cards, parent, false);
-        //Log.d("FilmographyAdaper","onCreateViewHolder()");
+        Log.d("FilmographyAdaper","onCreateViewHolder()");
         return new JuryViewHolder(juryView);
     }
 
@@ -47,7 +47,6 @@ public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder
 
         final JuryLIJUR juryLIJUR = activity.getJuryListBuffer().get(position);
         holder.juryId.setText(String.format("%d", juryLIJUR.getJury().getIdJury()));
-        holder.juryDecription.setText(juryLIJUR.getJury().getDescription());
         holder.juryDate.setText(String.format("%d", juryLIJUR.getJury().getDate()));
 
         /*holder.view.setOnClickListener(new View.OnClickListener() {
@@ -73,43 +72,14 @@ public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder
         private final View view;
 
         private final TextView juryId;
-        private final TextView juryDecription;
         private final TextView juryDate;
 
-        public JuryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            Log.d("JuryAdapter","onCreateViewHolder()");
-            View juryView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.jury_cards, parent, false);
-
-            CardView juryCardView = (CardView)juryView;
-
-            juryCardView.setCardElevation(3*JuryActivity.NEW_CARD_COUNTER++);
-            return new JuryViewHolder(juryView);
-        }
-
-        public void onBindViewHolder(JuryViewHolder holder, final int position) {
-            Log.d("JuryAdapter", "onBindViewHolder()");
-            /*final JuryLIPRJ juryLIPRJ = activity.getJuryListBuffer().get(position);
-            holder.juryId.setText(String.format("%d", juryLIPRJ.getJury().getIdJury()));
-            holder.juryDecription.setText(juryLIPRJ.getJury().getTitle());
-            holder.juryDate.setText(juryLIPRJ.getJury().getDescription());
-
-            holder.view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d("FilmographyAdapter", "Item 'clicked'");
-                    activity.clickItem(juryLIJUR);
-                }
-            });*/
-        }
-
-        public JuryViewHolder(View view) {
-            super(view);
+        public JuryViewHolder(View viewi) {
+            super(viewi);
             Log.d("JuryViewHolder","JuryViewHolder()");
-            this.view = view;
+            this.view = viewi;
 
             juryId = (TextView) view.findViewById(R.id.idtextView);
-            juryDecription = (TextView) view.findViewById(R.id.descriptiontextView);
             juryDate = (TextView) view.findViewById(R.id.datetextView);
 
         }
