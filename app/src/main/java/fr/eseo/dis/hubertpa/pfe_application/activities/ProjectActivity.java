@@ -294,6 +294,7 @@ public class ProjectActivity extends AppCompatActivity {
 
 	public void seePoster(ProjectLIPRJ projectLIPRJ) {
 		Intent intent = new Intent(this, DislayPosterActivity.class);
+		intent.putExtra("selected_project", projectLIPRJ);
 		startActivity(intent);
 	}
 }

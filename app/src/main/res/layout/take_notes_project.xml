@@ -14,31 +14,50 @@
         tools:layout_editor_absoluteY="8dp"
         tools:ignore="MissingConstraints">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/titleProject"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="[titleProject]" />
+                android:text="[titleProject]"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                tools:layout_editor_absoluteY="723dp" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/saveButton"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Sauvegarder" />
-        </LinearLayout>
+                android:layout_margin="20dp"
+                android:text="Sauvegarder"
+                android:background="@drawable/border_rounded_blue_eseo"
+                tools:layout_editor_absoluteY="723dp" />
+        </android.support.constraint.ConstraintLayout>
 
-        <EditText
-            android:id="@+id/contentEditText"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:inputType="textMultiLine" />
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/contentEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp"
+                android:padding="20dp"
+                android:background="@drawable/border_rounded_red_eseo"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                tools:layout_editor_absoluteX="20dp"
+                tools:layout_editor_absoluteY="704dp" />
+        </android.support.constraint.ConstraintLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
