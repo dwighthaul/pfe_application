@@ -28,14 +28,15 @@ import java.security.KeyStore;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
 
-import static fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings.sharedLogin;
-import static fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings.sharedToken;
-import static fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings.sharedTokenDefault;
+import static fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings.*;
 
 /**
  * Created by paulhubert on 20/12/17.
@@ -142,6 +143,26 @@ public abstract class WebServiceConnexion  {
 		return "&user=" + username + "&token=" + token;
 	}
 
+	//Array list username - Role 3
+	public static List<String> getAllTeachers(){
+		String[] allTeachers = { "alberpat", "aubinseb", "beaudoli", "brunmat", "campoli", "chavijer", "chhelfab", "clavrmic", "constcam", "delatjer", "gutownic", "hammosli", "iliasjon", "poirasam", "rousssop", "schandan", "woodwric" };
+		List<String> listTeachers = new ArrayList<String>();
+
+		listTeachers.addAll( Arrays.asList(allTeachers) );
+
+		return listTeachers;
+	}
+
+	//Array list username - Role 2
+	public static  List<String> getAllStudents(){
+		String[] allStudents = { "vallovic", "dorsojos", "jouautho", "crevarom", "charrana", "chevrthi", "billyarn", "robicant", "reynafla", "kadeltim", "lejeuluc", "demayale", "hamonrom", "dublethi", "assogels", "berlagui", "besnaval", "chauvnat", "arakajul", "fouinnat", "cavribas", "battetim", "genrikon", "zouabyou", "derreben", "ogerthi", "marchnat", "munozkev", "lafitmax", "billalou", "denecadr", "marqup", "denysflo", "potenaga", "doubej", "garnoart", "roussséb", "gorinant", "l", "poirival", "fortilou", "louvepie", "chailmat", "dasiln", "tourtjul", "​degouclé", "antonkév", "buchsarn", "boisnjoh", "geslilau", "giraucla", "dubrekév", "salimrém", "cappeenz", "douzorap", "derouadr", "​dekerjér", "szymacla", "thibafra", "pineaadr", "fontaval", "awadaram", "naimcél", "guyottho", "lavaladr", "macaunoé", "voiravic", "chabicon", "lacraflo", "marrerém", "martigui", "zambelou", "doljul", "couetdav", "lebrucéc", "boutachl", "faralhél", "humeacha", "buffyjul", "brechvic", "lefevque", "picquadr", "francmar", "odiergui", "gervamat", "bourgluc", "barthpau", "lemaimat", "carpeagn", "lambetim", "croccemm", "detarlio" };
+		List<String> listStudents = new ArrayList<String>();
+
+		listStudents.addAll(Arrays.asList(allStudents));
+		return listStudents;
+	}
+
+
 
 
 
@@ -216,6 +237,14 @@ public abstract class WebServiceConnexion  {
 		editor.putString(BasicSettings.sharedPassword, password);
 		editor.putString(BasicSettings.sharedToken, tokenValue);
 
+		if(getAllTeachers().contains(login)){
+			editor.putInt(BasicSettings.sharedRole, 3);
+		} else if(getAllStudents().contains(login)) {
+			editor.putInt(BasicSettings.sharedRole,2);
+		} else {
+			editor.putInt(BasicSettings.sharedRole,1);
+		}
+
 		editor.apply();
 	}
 
@@ -244,6 +273,15 @@ public abstract class WebServiceConnexion  {
 		String loginValue = prefs.getString(sharedLogin, sharedLogin);
 
 		return loginValue;
+	}
+
+	public static int getRole(AppCompatActivity activity){
+		SharedPreferences prefs = activity.getSharedPreferences(BasicSettings.saveFilenameShared, activity.MODE_PRIVATE);
+
+		// Récuperation de l'identifiant
+		int roleValue = prefs.getInt(sharedRole, sharedRoleDefault);
+
+		return roleValue;
 	}
 
 

@@ -12,8 +12,11 @@ public abstract class BasicSettings {
 	public final static String sharedLogin = "StringUserLogin";
 	public final static String sharedPassword = "StringUserPassword";
 	public final static String sharedToken = "StringUserToken";
+	public final static String sharedRole = "intUserRole";
+
 
 	public final static String sharedLoginDefault = "default";
 	public final static String sharedPasswordDefault = "default";
 	public final static String sharedTokenDefault = "0";
+	public final static int sharedRoleDefault = 1;
 }

@@ -16,7 +16,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -247,6 +249,26 @@ public class ProjectActivity extends AppCompatActivity {
 			}
 		}, 10000);
 
+	}
+
+	public void setSwitchListeners() {
+		//Get widgets reference from XML layout
+		Switch sButton = (Switch) findViewById(R.id.markSwitchMines);
+
+		//Set a CheckedChange Listener for Switch Button
+		sButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+			@Override
+			public void onCheckedChanged(CompoundButton cb, boolean on){
+				if(on)
+				{
+					//Do something when Switch button is on/checked
+				}
+				else
+				{
+					//Do something when Switch is off/unchecked
+				}
+			}
+		});
 	}
 
 
