@@ -1,5 +1,7 @@
 package fr.eseo.dis.hubertpa.pfe_application.model.basicModel;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,12 +33,15 @@ public class Jury {
 	public static Jury fromJson(JSONObject jsonObject) throws JSONException {
 		Jury jury = new Jury();
 
-		jury.setIdJury(jsonObject.getInt("idJury"));
 
-		if (jsonObject.getString("date") != null)
+		if (jsonObject.has("idJury"))
+			jury.setIdJury(jsonObject.getInt("idJury"));
+
+		if (jsonObject.has("date"))
 			jury.setDate(jsonObject.getString("date"));
 
-		if (jsonObject.getString("description") != null)
+
+		if (jsonObject.has("description"))
 			jury.setDescription(jsonObject.getString("description"));
 
 		return jury;

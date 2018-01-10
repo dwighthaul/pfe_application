@@ -30,6 +30,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,7 @@ import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.controller.adapters.ProjectAdapter;
 import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.VolleyCallbackListProject;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.JsonParserAPI;
+import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.StyleProject;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Project;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIPRJ;
@@ -89,7 +91,7 @@ public class ProjectActivity extends AppCompatActivity {
 	    BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 	    navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-	    navigation.getMenu().getItem(0).setChecked(true);
+//	    navigation.getMenu().getItem(0).setChecked(true);
 
 	    liproj = new LIPRJ();
 
@@ -185,11 +187,11 @@ public class ProjectActivity extends AppCompatActivity {
 		stopBuffering();
 
 		// Get the token from the saved data
-		String token = WebServiceConnexion.getToken(this);
-		String login = WebServiceConnexion.getLogin(this);
+		final String _token = WebServiceConnexion.getToken(this);
+		final String _login = WebServiceConnexion.getLogin(this);
 
 		// Get the good url with the good variables
-		String url = WebServiceConnexion.getLIPRJ(login, token);
+		String url = WebServiceConnexion.getLIPRJ(_login, _token);
 		RequestQueue queue = Volley.newRequestQueue(this, new HurlStack(null, WebServiceConnexion.newSslSocketFactory(this)));
 
 		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -203,6 +205,14 @@ public class ProjectActivity extends AppCompatActivity {
 
 					if (result.equals("OK")) {
 						LIPRJ liprj = JsonParserAPI.parseLIPRJ(jsonObject);
+						for(int i = 0; i < liprj.getProjectList().size(); i++) {
+							//return POSTR + "&proj="  + idProject + "&style=" + style + addUsernameAndToken(username, token);
+							int idProject = liprj.getProjectList().get(i).getProject().getIdProject();
+
+							String urlPoster = WebServiceConnexion.getPOSTR(_login, _token, idProject, StyleProject.FULL);
+							liprj.getProjectList().get(i).setPosterPath(urlPoster);
+						}
+
 						callback.onSuccess(liprj);
 					} else {
 						String error = jsonObject.getString("error");

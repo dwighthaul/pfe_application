@@ -14,7 +14,6 @@ import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Jury;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListUser;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Project;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Student;
-import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Supervisor;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.User;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LOGON;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.NOTES;
@@ -104,7 +103,6 @@ public class JsonParserAPI {
 
 				JSONObject supervisorJson = jsonObjectProject.getJSONObject("supervisor");
 				User supervisor = User.fromJson(supervisorJson);
-
 				boolean poster = jsonObjectProject.getBoolean("poster");
 
 				JSONArray studentsJsonArray = jsonObjectProject.getJSONArray("students");
@@ -122,7 +120,7 @@ public class JsonParserAPI {
 //					listNameStudents.add(student.getForename() + " " + student.getSurname());
 				}
 
-				ProjectLIPRJ projectLIPRJ = new ProjectLIPRJ(project, poster, supervisor, listStudents);
+				ProjectLIPRJ projectLIPRJ = new ProjectLIPRJ(project, poster, "", supervisor, listStudents);
 //				ProjectLIPRJ projectLIPRJ = new ProjectLIPRJ(project, poster, supervisor, listStudents, listNameStudents);
 
 				lirpj.getProjectList().add(projectLIPRJ);
@@ -139,11 +137,11 @@ public class JsonParserAPI {
 
 
 	public static LIJUR parseLIJUR(JSONObject jsonObject) {
-		LIJUR lirpj = new LIJUR();
+		Log.d("TESTLIJUR", "1");
+		LIJUR lijur = new LIJUR();
 		try {
 			JSONArray listJuryJson = jsonObject.getJSONArray("juries");
 			List<JuryLIJUR> listJury = new ArrayList<JuryLIJUR>();
-
 
 			for (int i = 0; i < listJuryJson.length(); i++) {
 
@@ -152,11 +150,10 @@ public class JsonParserAPI {
 				Jury jury = Jury.fromJson(jsonObjectJury);
 
 				JSONObject infoJson = jsonObjectJury.getJSONObject("info");
+
 				JSONArray projectsJson = infoJson.getJSONArray("projects");
 
 				List<ProjectLIJUR> listProject = new ArrayList<ProjectLIJUR>();
-
-				JuryLIJUR juryLIJUR = new JuryLIJUR();
 
 				for (int j = 0; j < projectsJson.length(); j++) {
 
@@ -166,20 +163,23 @@ public class JsonParserAPI {
 					boolean poster = projectJson.getBoolean("poster");
 
 					JSONObject supervisorJson = projectJson.getJSONObject("supervisor");
-					Supervisor supervisor = (Supervisor) Supervisor.fromJson(supervisorJson);
+					User supervisor = (User) User.fromJson(supervisorJson);
 
 					ProjectLIJUR projectLIJUR = new ProjectLIJUR(project, poster, supervisor);
 					listProject.add(projectLIJUR);
 
-					juryLIJUR = new JuryLIJUR(jury, supervisor,listProject);
 				}
 
-				lirpj.getListJuries().add(juryLIJUR);
+				JuryLIJUR juryLIJUR = new JuryLIJUR(jury, listProject);
+				lijur.getListJuries().add(juryLIJUR);
+
 			}
+
+
 		} catch (JSONException e) {
-			e.printStackTrace();
+
 		}
-		return lirpj;
+		return lijur;
 	}
 
 	public static MYJUR parseMYJUR(JSONObject jsonObject) {

@@ -34,10 +34,18 @@ public class Project {
 	public static Project fromJson(JSONObject jsonObject) throws JSONException {
 		Project project = new Project();
 
-		project.setIdProject(jsonObject.getInt("projectId"));
+		if(jsonObject.has("projectId"))
+			project.setIdProject(jsonObject.getInt("projectId"));
+
+		if(jsonObject.has("title"))
 		project.setTitle(jsonObject.getString("title"));
-		project.setDescription(jsonObject.getString("descrip"));
-		project.setConfidentiality(jsonObject.getInt("confid"));
+
+		if(jsonObject.has("descrip"))
+			project.setDescription(jsonObject.getString("descrip"));
+
+		if(jsonObject.has("confid"))
+			project.setConfidentiality(jsonObject.getInt("confid"));
+
 		return project;
 
 	}

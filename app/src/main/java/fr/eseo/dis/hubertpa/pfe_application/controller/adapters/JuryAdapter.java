@@ -26,18 +26,15 @@ import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.JuryLIJUR;
 public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder> {
 
     private JuryActivity activity;
-    private List<Integer> positionsExpanded;
 
     public JuryAdapter(JuryActivity juryActivity) {
         this.activity = juryActivity;
-        positionsExpanded = new ArrayList<Integer>();
     }
 
     @Override
     public JuryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View juryView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.jury_cards, parent, false);
-        Log.d("FilmographyAdaper","onCreateViewHolder()");
         return new JuryViewHolder(juryView);
     }
 
@@ -46,8 +43,10 @@ public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder
         Log.d("JuryViewHolder","onBindViewHolder()");
 
         final JuryLIJUR juryLIJUR = activity.getJuryListBuffer().get(position);
-        holder.juryId.setText(String.format("%d", juryLIJUR.getJury().getIdJury()));
-        holder.juryDate.setText(String.format("%d", juryLIJUR.getJury().getDate()));
+	    Log.d("TEST", "Size : " + activity.getJuryListBuffer().size());
+        Log.d("DATE", "" + juryLIJUR.getJury().getIdJury());
+        holder.juryId.setText("" + juryLIJUR.getJury().getIdJury());
+        holder.juryDate.setText(juryLIJUR.getJury().getDate());
 
         /*holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +55,7 @@ public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder
                 activity.clickItem(juryLIJUR);
             }
         });*/
+
 
 
     }

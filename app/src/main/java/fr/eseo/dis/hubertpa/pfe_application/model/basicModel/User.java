@@ -41,7 +41,6 @@ public class User implements Parcelable {
 	@Getter @Setter @NonNull
 	private String surname;
 
-
 	protected User(Parcel in) {
 		idUser = in.readInt();
 		forename = in.readString();

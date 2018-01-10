@@ -2,18 +2,9 @@ package fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListUser;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Project;
-import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Student;
-import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Supervisor;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,8 +16,8 @@ import lombok.Setter;
  * Created by paulhubert on 30/12/17.
  */
 
-@AllArgsConstructor
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class ProjectLIPRJ implements Parcelable{
 
 	@Getter @Setter @NonNull
@@ -34,6 +25,9 @@ public class ProjectLIPRJ implements Parcelable{
 
 	@Getter @Setter
 	boolean poster;
+
+	@Getter @Setter
+	String posterPath;
 
 	@Getter @Setter @NonNull
 	User supervisor;

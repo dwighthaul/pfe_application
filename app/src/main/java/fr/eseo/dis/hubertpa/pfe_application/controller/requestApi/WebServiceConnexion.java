@@ -154,8 +154,6 @@ public abstract class WebServiceConnexion  {
 		// Get the URL to log into the server
 		String url = WebServiceConnexion.getLOGON(login, password);
 
-		Log.d("WebServiceConnexion", url);
-
 		RequestQueue queue = Volley.newRequestQueue(activity, new HurlStack(null, WebServiceConnexion.newSslSocketFactory(activity)));
 
 		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -235,11 +233,7 @@ public abstract class WebServiceConnexion  {
 
 	public static String getToken(AppCompatActivity activity) {
 		SharedPreferences prefs = activity.getSharedPreferences(BasicSettings.saveFilenameShared, activity.MODE_PRIVATE);
-
-		// Récuperation du token
-		String tokenValue = prefs.getString(sharedToken, sharedTokenDefault);
-
-		return tokenValue;
+		return prefs.getString(sharedToken, sharedTokenDefault);
 	}
 
 
@@ -258,22 +252,16 @@ public abstract class WebServiceConnexion  {
 		try {
 			CertificateFactory cf = CertificateFactory.getInstance("x.509");
 			InputStream caInput = new BufferedInputStream(activity.getResources().openRawResource(R.raw.root));
-			//this.getResources().getIdentifier("chain","raw",this.getPackageName())));
 
 			Certificate ca;
 			try{
-
 				ca = cf.generateCertificate(caInput);
-				Log.d("TESTTEST","ca="+((X509Certificate)ca).getSubjectDN());
 			}finally{
 				caInput.close();
 			}
 			// Get an instance of the Bouncy Castle KeyStore format
 			String keyStoreType = KeyStore.getDefaultType();
 			KeyStore keyStore = KeyStore.getInstance(keyStoreType);
-			// Get the raw resource, which contains the keystore with
-			// your trusted certificates (root and any intermediate certs)
-			InputStream in = activity.getApplicationContext().getResources().openRawResource(R.raw.root); //.bks file in raw folder
 			keyStore.load(null,null);
 			keyStore.setCertificateEntry("ca",ca);
 

@@ -18,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -130,6 +131,7 @@ public class JuryActivity  extends AppCompatActivity {
 	}
 
 	private void processGetJuries() {
+
 		// Get the token from the saved data
 		String token = WebServiceConnexion.getToken(this);
 		String login = WebServiceConnexion.getLogin(this);
@@ -137,7 +139,7 @@ public class JuryActivity  extends AppCompatActivity {
 		// Get the good url with the good variables
 		String url = WebServiceConnexion.getLIJUR(login, token);
 
-		RequestQueue queue = Volley.newRequestQueue(this);
+		RequestQueue queue = Volley.newRequestQueue(this, new HurlStack(null, WebServiceConnexion.newSslSocketFactory(this)));
 		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 			@Override
 			public void onResponse(String response) {
@@ -145,12 +147,10 @@ public class JuryActivity  extends AppCompatActivity {
 
 					JSONObject jsonObject = new JSONObject(response);
 					String result = jsonObject.getString("result");
+
 					if (result.equals("OK")) {
 
 						LIJUR lijur = JsonParserAPI.parseLIJUR(jsonObject);
-						JuryActivity.this.lijur = lijur;
-
-						JuryActivity.this.setJuryListBuffer(lijur.getListJuries());
 
 						callback.onSuccess(lijur);
 					} else {

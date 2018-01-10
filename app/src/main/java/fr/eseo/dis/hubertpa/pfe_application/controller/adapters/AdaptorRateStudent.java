@@ -3,7 +3,6 @@ package fr.eseo.dis.hubertpa.pfe_application.controller.adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,60 +19,34 @@ import java.util.Map;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.activities.DetailProjectActivity;
-import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIPRJ;
 
 /**
  * Created by paulhubert on 08/01/18.
  */
 
-public class AdaptorRateStudent extends RecyclerView.Adapter<AdaptorRateStudent.RateStudentViewHolder> {
+public class AdaptorRateStudent extends BaseAdapter {
 
 	private final ArrayList _listStudents;
-	private List<Integer> positionsExpanded;
 
-	DetailProjectActivity activity;
+	DetailProjectActivity _activity;
 
-	public AdaptorRateStudent(AppCompatActivity activity, HashMap<Integer, String> listStudents) {
+	public AdaptorRateStudent(DetailProjectActivity activity, HashMap<Integer, String> listStudents) {
 		_listStudents = new ArrayList();
 		_listStudents.addAll(listStudents.entrySet());
-		positionsExpanded = new ArrayList<Integer>();
+
+		_activity = activity;
 
 	}
 
 
 	@Override
-	public int getItemCount() {
+	public int getCount() {
 		return _listStudents.size();
 	}
 
+	@Override
 	public Map.Entry<Integer, String> getItem(int position) {
 		return (Map.Entry) _listStudents.get(position);
-	}
-
-
-	@Override
-	public RateStudentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		View rateStudentView = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.line_rate_student, parent, false);
-		return new RateStudentViewHolder(rateStudentView);
-	}
-
-	@Override
-	public void onBindViewHolder(RateStudentViewHolder holder, int position) {
-
-		final Map.Entry<Integer, String> student = getItem(position);
-
-		holder.idStudent.setText(String.format("%d", student.getKey()));
-		holder.nameStudent.setText(student.getValue());
-
-		holder.view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Log.d("ProjectAdapter","Item 'clicked'");
-				activity.goToRatePage(student);
-			}
-		});
-
 	}
 
 
@@ -82,7 +55,7 @@ public class AdaptorRateStudent extends RecyclerView.Adapter<AdaptorRateStudent.
 		return 0;
 	}
 
-
+	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		final View result;
 
@@ -105,7 +78,7 @@ public class AdaptorRateStudent extends RecyclerView.Adapter<AdaptorRateStudent.
 				final Map.Entry<Integer, String> student = item;
 				Log.d("Test","Go to rate" + student.getValue());
 				// student.getKey(), student.getValue()
-				activity.goToRate();
+				_activity.goToRatePage(item);
 			}
 		});
 
@@ -114,23 +87,4 @@ public class AdaptorRateStudent extends RecyclerView.Adapter<AdaptorRateStudent.
 		return result;
 	}
 
-	public class RateStudentViewHolder extends RecyclerView.ViewHolder {
-
-		private final View view;
-
-		TextView nameStudent;
-		TextView idStudent;
-		ImageButton rateStudent;
-
-		public RateStudentViewHolder(View itemView) {
-			super(itemView);
-
-			this.view = itemView;
-			nameStudent = view.findViewById(R.id.StudentName);
-			idStudent = (TextView) view.findViewById(R.id.StudentID);
-			rateStudent = (ImageButton) view.findViewById(R.id.rateStudent);
-		}
-
-
-	}
 }

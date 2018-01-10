@@ -1,9 +1,12 @@
 package fr.eseo.dis.hubertpa.pfe_application.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -21,7 +24,7 @@ public class DetailProjectActivity extends AppCompatActivity {
 	private TextView titleView;
 	private TextView descView;
 	private TextView supeView;
-	private RecyclerView studListView;
+	private ListView studListView;
 	private TextView posterView;
 
 	ProjectLIPRJ projectLIPRJ;
@@ -38,9 +41,10 @@ public class DetailProjectActivity extends AppCompatActivity {
 
 		idView = (TextView) findViewById(R.id.textViewiD);
 		titleView = (TextView) findViewById(R.id.textViewTitle);
-		descView = (TextView) findViewById(R.id.textViewDescription);
+		descView = (TextView) findViewById(R.id.textViewDescriptionLabel);
+		descView.setMovementMethod(new ScrollingMovementMethod());
 		supeView = (TextView) findViewById(R.id.textViewSupervisorValue);
-		studListView  = (RecyclerView) findViewById(R.id.textViewStudentValue);
+		studListView  = (ListView) findViewById(R.id.textViewStudentValue);
 		posterView = (TextView) findViewById(R.id.TextViewPoster);
 
 		loadElements();
@@ -59,10 +63,10 @@ public class DetailProjectActivity extends AppCompatActivity {
 		supeView.setText(supervisor);
 
 		ListUser listStudents = projectLIPRJ.getListStudents();
+		Log.d("TEST", "" + listStudents.size());
 
 		HashMap<Integer, String> listStudentsMap = new HashMap<Integer, String>();
 		for (User student : listStudents) {
-			Log.d("TEST", "" + student.getIdUser());
 			String fullName = student.getForename() + " " + student.getSurname();
 			listStudentsMap.put(student.getIdUser(), fullName);
 		}
@@ -82,10 +86,11 @@ public class DetailProjectActivity extends AppCompatActivity {
 
 	public void goToRatePage(Map.Entry<Integer, String> student) {
 		Log.d("Test", student.getValue());
-//		Intent intent = new Intent(this, RateStudentActivity.class);
-//		intent.putExtra("studentId", studentInfos.getKey());
-//		intent.putExtra("studentName", studentInfos.getValue());
-//		this.startActivity(intent);
+
+		Intent intent = new Intent(DetailProjectActivity.this, RateStudentActivity.class);
+		intent.putExtra("studentId", student.getKey());
+		intent.putExtra("studentName", student.getValue());
+		DetailProjectActivity.this.startActivity(intent);
 	}
 
 

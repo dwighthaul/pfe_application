@@ -35,10 +35,11 @@
             android:label="TestActivities.Test" >
         </activity>
         <activity android:name=".activities.DetailProjectActivity" />
-        <activity
-            android:name=".MainBottomActivity"
-            android:label="@string/title_activity_main_bottom" />
-        <activity android:name=".activities.SettingsActivity"></activity>
+        <activity android:name=".MainBottomActivity" />
+        <activity android:name=".activities.SettingsActivity"/>
+        <activity android:name=".activities.RateStudentActivity" />
+
     </application>
+
 
 </manifest>
