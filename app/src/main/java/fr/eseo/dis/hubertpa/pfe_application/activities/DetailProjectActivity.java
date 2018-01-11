@@ -2,13 +2,16 @@ package fr.eseo.dis.hubertpa.pfe_application.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -52,6 +55,25 @@ public class DetailProjectActivity extends AppCompatActivity {
 		posterView = findViewById(R.id.TextViewPoster);
 
 		loadElements();
+
+		dealWithLayoutIssues();
+
+	}
+
+	private void dealWithLayoutIssues() {
+
+		ListAdapter myListAdapter = studListView.getAdapter();
+
+		int totalHeight = 0;
+		for (int size = 0; size < myListAdapter.getCount(); size++) {
+			View listItem = myListAdapter.getView(size, null, studListView);
+			listItem.measure(0, 0);
+			totalHeight += listItem.getMeasuredHeight();
+		}
+
+		ViewGroup.LayoutParams params = studListView.getLayoutParams();
+		params.height = totalHeight + (studListView.getDividerHeight() * (studListView.getCount() - 1));
+		studListView.setLayoutParams(params);
 	}
 
 
@@ -90,6 +112,17 @@ public class DetailProjectActivity extends AppCompatActivity {
 		AdaptorRateStudent adapter = new AdaptorRateStudent(this, listStudentsMap);
 		studListView.setAdapter(adapter);
 
+		loadPoster();
+	}
+
+	public void loadPoster() {
+		if(projectLIPRJ.isPoster()) {
+			posterView.setVisibility(View.GONE);
+		} else {
+			ConstraintLayout constraintLayout = findViewById(R.id.containerImage);
+			constraintLayout.setVisibility(View.GONE);
+		}
+		// TODO
 	}
 
 	public void goToRatePage(Map.Entry<Integer, String> student) {

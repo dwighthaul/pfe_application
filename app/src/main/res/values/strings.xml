@@ -70,7 +70,7 @@
     <string name="textviewdescription">[textViewDescription]</string>
     <string name="supervisor">Supervisor :</string>
     <string name="textviewsupervisorvalue">[textViewSupervisorValue]</string>
-    <string name="liste_d_tudiants">Liste d\'étudiants :</string>
+    <string name="liste_d_etudiants">Liste d\'étudiants :</string>
     <string name="jury_le">Jury le :</string>
     <string name="ajouter_une_alarme_pour_ce_jury">Ajouter une alarme pour ce jury</string>
     <string name="liste_des_juries">Liste des juries :</string>

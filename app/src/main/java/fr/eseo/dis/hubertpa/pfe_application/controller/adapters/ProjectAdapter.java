@@ -50,11 +50,9 @@ import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIPR
 public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectViewHolder> {
 
 	private ProjectActivity activity;
-	private List<Integer> positionsExpanded;
 
 	public ProjectAdapter(ProjectActivity projectActivity) {
 		this.activity = projectActivity;
-		positionsExpanded = new ArrayList<Integer>();
 	}
 
 	@Override
@@ -147,15 +145,15 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
 			Log.d("ProjectViewHolder","ProjetViewHolder()");
 			this.view = view;
 
-			projectId = (TextView) view.findViewById(R.id.idtextView);
-			projectTitre = (TextView) view.findViewById(R.id.titletextView);
-			projectDecription = (TextView) view.findViewById(R.id.descriptiontextView);
-			projectPoster = (TextView) view.findViewById(R.id.postertextView);
-			projectSuperviseur = (TextView) view.findViewById(R.id.supervisortextViewValue);
-			projectConfidentialiy = (TextView) view.findViewById(R.id.confidentialitytextViewValue);
+			projectId = view.findViewById(R.id.idtextView);
+			projectTitre = view.findViewById(R.id.titletextView);
+			projectDecription = view.findViewById(R.id.descriptiontextView);
+			projectPoster = view.findViewById(R.id.postertextView);
+			projectSuperviseur = view.findViewById(R.id.supervisortextViewValue);
+			projectConfidentialiy = view.findViewById(R.id.confidentialitytextViewValue);
 
-			buttonDisplayPoster = (Button) view.findViewById(R.id.buttonDisplayPoster);
-			takeNoteButton = (Button) view.findViewById(R.id.takeNoteButton);
+			buttonDisplayPoster = view.findViewById(R.id.buttonDisplayPoster);
+			takeNoteButton = view.findViewById(R.id.takeNoteButton);
 		}
 	}
 

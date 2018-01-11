@@ -2,7 +2,9 @@ package fr.eseo.dis.hubertpa.pfe_application.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -48,6 +50,8 @@ public class JuryActivity  extends AppCompatActivity {
 
 	public static int NEW_CARD_COUNTER;
 
+	boolean stoppingBuffering = false;
+
 	private JuryAdapter juryAdapter;
 
 	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new NavigationBottom(this, NavigationBottom.PAGES.JURIES);
@@ -56,10 +60,15 @@ public class JuryActivity  extends AppCompatActivity {
 
 	RecyclerView recycler;
 
+	SwipeRefreshLayout mySwipeRefreshLayout;
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_juries);
+
+		mySwipeRefreshLayout = findViewById(R.id.swip_to_refresh);
 
 		BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
 		BottomNavigationViewHelper.disableShiftMode(navigation);
@@ -77,9 +86,9 @@ public class JuryActivity  extends AppCompatActivity {
 
 		setCallback();
 
-//		processGetJuries();
+		setActionOnRefrech();
 
-		processGetJuriesFake();
+		processGetJuries();
 	}
 
 
@@ -140,10 +149,14 @@ public class JuryActivity  extends AppCompatActivity {
 	}
 
 	private void processGetJuries() {
+		mySwipeRefreshLayout.setRefreshing(true);
 
 		// Get the token from the saved data
 		String token = WebServiceConnexion.getToken(this);
 		String login = WebServiceConnexion.getLogin(this);
+
+		stoppingBuffering = true;
+		stopBuffering();
 
 		// Get the good url with the good variables
 		String url = WebServiceConnexion.getLIJUR(login, token);
@@ -152,6 +165,7 @@ public class JuryActivity  extends AppCompatActivity {
 		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 			@Override
 			public void onResponse(String response) {
+				stoppingBuffering = false;
 				try {
 
 					JSONObject jsonObject = new JSONObject(response);
@@ -166,6 +180,7 @@ public class JuryActivity  extends AppCompatActivity {
 						String error = jsonObject.getString("error");
 						callback.onError(jsonObject.getString(error));
 					}
+					mySwipeRefreshLayout.setRefreshing(false);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -177,6 +192,37 @@ public class JuryActivity  extends AppCompatActivity {
 		});
 		queue.add(stringRequest);
 	}
+
+	// After 10 sec, the activity hind the annoying spining stuff and display an error
+	public void stopBuffering() {
+		final Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				if (stoppingBuffering) {
+					Toast.makeText(JuryActivity.this, "Connexion error", Toast.LENGTH_SHORT).show();
+					mySwipeRefreshLayout.setRefreshing(false);
+				}
+			}
+		}, 10000);
+
+	}
+
+	/**
+	 * If the user swipe down, this listener is trigger.
+	 * The action is to ask to recive the list of the projects
+	 */
+	private void setActionOnRefrech() {
+		mySwipeRefreshLayout.setOnRefreshListener(
+				new SwipeRefreshLayout.OnRefreshListener() {
+					@Override
+					public void onRefresh() {
+						processGetJuries();
+					}
+				}
+		);
+	}
+
 
 	public void clickItem(JuryLIJUR juryLIJUR) {
 		Intent intent = new Intent(this, DetailJuryActivity.class);

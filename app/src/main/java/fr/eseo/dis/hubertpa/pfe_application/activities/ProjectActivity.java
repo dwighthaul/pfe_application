@@ -10,7 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.ListAdapter;
+import android.widget.SearchView;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -34,6 +37,7 @@ import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.VolleyCall
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.JsonParserAPI;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
 import fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings;
+import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Project;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIPRJ;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIPRJ;
 import fr.eseo.dis.hubertpa.pfe_application.partials.BottomNavigationViewHelper;
@@ -67,6 +71,8 @@ public class ProjectActivity extends AppCompatActivity {
 
 	SwipeRefreshLayout mySwipeRefreshLayout;
 
+	SearchView findProjectSearchView;
+
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,8 +80,8 @@ public class ProjectActivity extends AppCompatActivity {
 	    setContentView(R.layout.activity_list_projects);
 
 		mySwipeRefreshLayout = findViewById(R.id.swip_to_refresh);
-
-	    BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
+		findProjectSearchView = findViewById(R.id.findProjectSearchView);
+		BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
 		BottomNavigationViewHelper.disableShiftMode(navigation);
 	    navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -93,10 +99,51 @@ public class ProjectActivity extends AppCompatActivity {
 
 		setActionOnRefrech();
 
-//	    processGetProjects();
+		setActionOnResearch();
 
-	    processGetProjectsFake();
+		processGetProjects();
+
     }
+
+	private void setActionOnResearch() {
+
+		findProjectSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+
+				LIPRJ liproj = ProjectActivity.this.getLiproj();
+				List<ProjectLIPRJ> liprjsToSend = new ArrayList<>();
+				if (query.length() != 0) {
+
+					for (ProjectLIPRJ projectLIPRJ: liproj.getProjectList()) {
+						if(projectLIPRJ.getProject().getTitle().toLowerCase().contains(query.toLowerCase())) {
+							liprjsToSend.add(projectLIPRJ);
+						}
+					}
+					callback.onSuccess(liprjsToSend);
+				} else {
+					callback.onSuccess(liproj.getProjectList());
+				}
+				return true;
+			}
+
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				callback.onSuccess(liproj.getProjectList());
+
+				return false;
+			}
+
+		});
+
+		findProjectSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
+			@Override
+			public boolean onClose() {
+				callback.onSuccess(liproj.getProjectList());
+				return false;
+			}
+		});
+	}
 
 	private void processGetProjectsFake() {
 		String jsonObjectString = "{\"result\": \"OK\",\"api\": \"LIPRJ\",\"projects\": [{\"projectId\": 0,\"title\": \"Gestion main-libre tablette android\",\"descrip\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed placerat justo. Nunc a nulla pulvinar, pellentesque elit sed, interdum tellus. Nullam scelerisque tortor vel diam sagittis feugiat. Nullam tincidunt lectus nibh, et vestibulum arcu vehicula eu. Nullam ut elit interdum, vestibulum augue at, rutrum diam. Donec convallis, libero a ultricies congue, sem odio malesuada tortor, vitae vestibulum turpis tortor a augue. Donec sit amet pharetra magna. Vestibulum venenatis ligula a urna sodales cursus. Morbi hendrerit est vitae porttitor interdum. Sed lectus urna, blandit et lacinia non, porttitor nec sem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas ut fringilla justo. Integer accumsan vehicula pretium. Vestibulum non nisi et nulla lobortis fermentum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam urna sapien, maximus tempus orci ut, porta scelerisque nunc. Nunc dictum ultrices luctus. Aenean id tellus nec magna iaculis consequat. Donec sollicitudin tincidunt mauris. Mauris ut odio nulla. Etiam leo tellus, cursus cursus efficitur quis, sagittis quis turpis. Aenean et feugiat metus. Quisque leo neque, dictum sed ullamcorper non, varius sit amet eros. In ornare magna a mauris luctus, vel rutrum mauris mattis. Donec lacinia, urna quis condimentum pharetra, nisi nisl porta orci, non dapibus mi sem id eros. Donec iaculis rutrum tellus et vulputate. Phasellus eget luctus elit. Aliquam maximus tincidunt augue, vel lobortis mauris dignissim eget. Vivamus vestibulum pretium magna, vel ultricies augue elementum in. In vel hendrerit lacus. Aenean nec libero dictum, finibus libero sed, commodo dolor. Suspendisse magna dui, scelerisque quis sapien ut, vestibulum lacinia augue. Suspendisse a efficitur enim. In ullamcorper massa quis convallis imperdiet. In posuere ligula leo, hendrerit condimentum ligula iaculis eu. Vestibulum nisl lectus, porttitor vel rutrum et, scelerisque at dui. Phasellus a purus at nisi auctor laoreet et eu est. Aenean posuere.\",\"supervisor\": {\"forename\": \"Patrick\",\"surname\": \"ALBERS\"},\"poster\": true,\"confid\": 0,\"students\": [{\"userId\": 17,\"forename\": \"Victor\",\"surname\": \"VALLOIS\"},{\"userId\": 18,\"forename\": \"Josselin\",\"surname\": \"DORSO\"},{\"userId\": 19,\"forename\": \"Thomas\",\"surname\": \"JOUAULT\"}]},{\"projectId\": 1,\"title\": \"Reconnaissance langue des signes\",\"descrip\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed placerat justo. Nunc a nulla pulvinar, pellentesque elit sed, interdum tellus. Nullam scelerisque tortor vel diam sagittis feugiat. Nullam tincidunt lectus nibh, et vestibulum arcu vehicula eu. Nullam ut elit interdum, vestibulum augue at, rutrum diam. Donec convallis, libero a ultricies congue, sem odio malesuada tortor, vitae vestibulum turpis tortor a augue. Donec sit amet pharetra magna. Vestibulum venenatis ligula a urna sodales cursus. Morbi hendrerit est vitae porttitor interdum. Sed lectus urna, blandit et lacinia non, porttitor nec sem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas ut fringilla justo. Integer accumsan vehicula pretium. Vestibulum non nisi et nulla lobortis fermentum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam urna sapien, maximus tempus orci ut, porta scelerisque nunc. Nunc dictum ultrices luctus. Aenean id tellus nec magna iaculis consequat. Donec sollicitudin tincidunt mauris. Mauris ut odio nulla. Etiam leo tellus, cursus cursus efficitur quis, sagittis quis turpis. Aenean et feugiat metus. Quisque leo neque, dictum sed ullamcorper non, varius sit amet eros. In ornare magna a mauris luctus, vel rutrum mauris mattis. Donec lacinia, urna quis condimentum pharetra, nisi nisl porta orci, non dapibus mi sem id eros. Donec iaculis rutrum tellus et vulputate. Phasellus eget luctus elit. Aliquam maximus tincidunt augue, vel lobortis mauris dignissim eget. Vivamus vestibulum pretium magna, vel ultricies augue elementum in. In vel hendrerit lacus. Aenean nec libero dictum, finibus libero sed, commodo dolor. Suspendisse magna dui, scelerisque quis sapien ut, vestibulum lacinia augue. Suspendisse a efficitur enim. In ullamcorper massa quis convallis imperdiet. In posuere ligula leo, hendrerit condimentum ligula iaculis eu. Vestibulum nisl lectus, porttitor vel rutrum et, scelerisque at dui. Phasellus a purus at nisi auctor laoreet et eu est. Aenean posuere.\",\"supervisor\": {\"forename\": \"Patrick\",\"surname\": \"ALBERS\"},\"poster\": true,\"confid\": 0,\"students\": [{\"userId\": 20,\"forename\": \"Romain\",\"surname\": \"CREVAN\"},{\"userId\": 21,\"forename\": \"Anatole\",\"surname\": \"CHARRON\"},{\"userId\": 22,\"forename\": \"Thibaud\",\"surname\": \"CHEVRIER\"}]},{\"projectId\": 2,\"title\": \"Greenygrass\",\"descrip\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed placerat justo. Nunc a nulla pulvinar, pellentesque elit sed, interdum tellus. Nullam scelerisque tortor vel diam sagittis feugiat. Nullam tincidunt lectus nibh, et vestibulum arcu vehicula eu. Nullam ut elit interdum, vestibulum augue at, rutrum diam. Donec convallis, libero a ultricies congue, sem odio malesuada tortor, vitae vestibulum turpis tortor a augue. Donec sit amet pharetra magna. Vestibulum venenatis ligula a urna sodales cursus. Morbi hendrerit est vitae porttitor interdum. Sed lectus urna, blandit et lacinia non, porttitor nec sem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas ut fringilla justo. Integer accumsan vehicula pretium. Vestibulum non nisi et nulla lobortis fermentum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam urna sapien, maximus tempus orci ut, porta scelerisque nunc. Nunc dictum ultrices luctus. Aenean id tellus nec magna iaculis consequat. Donec sollicitudin tincidunt mauris. Mauris ut odio nulla. Etiam leo tellus, cursus cursus efficitur quis, sagittis quis turpis. Aenean et feugiat metus. Quisque leo neque, dictum sed ullamcorper non, varius sit amet eros. In ornare magna a mauris luctus, vel rutrum mauris mattis. Donec lacinia, urna quis condimentum pharetra, nisi nisl porta orci, non dapibus mi sem id eros. Donec iaculis rutrum tellus et vulputate. Phasellus eget luctus elit. Aliquam maximus tincidunt augue, vel lobortis mauris dignissim eget. Vivamus vestibulum pretium magna, vel ultricies augue elementum in. In vel hendrerit lacus. Aenean nec libero dictum, finibus libero sed, commodo dolor. Suspendisse magna dui, scelerisque quis sapien ut, vestibulum lacinia augue. Suspendisse a efficitur enim. In ullamcorper massa quis convallis imperdiet. In posuere ligula leo, hendrerit condimentum ligula iaculis eu. Vestibulum nisl lectus, porttitor vel rutrum et, scelerisque at dui. Phasellus a purus at nisi auctor laoreet et eu est. Aenean posuere.\",\"supervisor\": {\"forename\": \"Sebastien\",\"surname\": \"AUBIN\"},\"poster\": true,\"confid\": 0,\"students\": [{\"userId\": 23,\"forename\": \"Arnaud\",\"surname\": \"BILLY\"},{\"userId\": 24,\"forename\": \"Antoine\",\"surname\": \"ROBIC\"},{\"userId\": 25,\"forename\": \"Flavien\",\"surname\": \"REYNAUD\"},{\"userId\": 26,\"forename\": \"Timé\",\"surname\": \"KADEL\"},{\"userId\": 27,\"forename\": \"Lucas\",\"surname\": \"LEJEUNE\"}]},{\"projectId\": 3,\"title\": \"OPAL - Sécu des réseaux et dev. outils win\",\"descrip\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed placerat justo. Nunc a nulla pulvinar, pellentesque elit sed, interdum tellus. Nullam scelerisque tortor vel diam sagittis feugiat. Nullam tincidunt lectus nibh, et vestibulum arcu vehicula eu. Nullam ut elit interdum, vestibulum augue at, rutrum diam. Donec convallis, libero a ultricies congue, sem odio malesuada tortor, vitae vestibulum turpis tortor a augue. Donec sit amet pharetra magna. Vestibulum venenatis ligula a urna sodales cursus. Morbi hendrerit est vitae porttitor interdum. Sed lectus urna, blandit et lacinia non, porttitor nec sem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas ut fringilla justo. Integer accumsan vehicula pretium. Vestibulum non nisi et nulla lobortis fermentum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam urna sapien, maximus tempus orci ut, porta scelerisque nunc. Nunc dictum ultrices luctus. Aenean id tellus nec magna iaculis consequat. Donec sollicitudin tincidunt mauris. Mauris ut odio nulla. Etiam leo tellus, cursus cursus efficitur quis, sagittis quis turpis. Aenean et feugiat metus. Quisque leo neque, dictum sed ullamcorper non, varius sit amet eros. In ornare magna a mauris luctus, vel rutrum mauris mattis. Donec lacinia, urna quis condimentum pharetra, nisi nisl porta orci, non dapibus mi sem id eros. Donec iaculis rutrum tellus et vulputate. Phasellus eget luctus elit. Aliquam maximus tincidunt augue, vel lobortis mauris dignissim eget. Vivamus vestibulum pretium magna, vel ultricies augue elementum in. In vel hendrerit lacus. Aenean nec libero dictum, finibus libero sed, commodo dolor. Suspendisse magna dui, scelerisque quis sapien ut, vestibulum lacinia augue. Suspendisse a efficitur enim. In ullamcorper massa quis convallis imperdiet. In posuere ligula leo, hendrerit condimentum ligula iaculis eu. Vestibulum nisl lectus, porttitor vel rutrum et, scelerisque at dui. Phasellus a purus at nisi auctor laoreet et eu est. Aenean posuere.\",\"supervisor\": {\"forename\": \"Olivier\",\"surname\": \"BEAUDOUX\"},\"poster\": true,\"confid\": 0,\"students\": [{\"userId\": 28,\"forename\": \"Alexis\",\"surname\": \"DEMAY\"},{\"userId\": 29,\"forename\": \"Romain\",\"surname\": \"HAMON\"},{\"userId\": 30,\"forename\": \"Thibaud\",\"surname\": \"DUBLE\"}]}]}\";	}";
@@ -106,9 +153,9 @@ public class ProjectActivity extends AppCompatActivity {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		LIPRJ liprj = JsonParserAPI.parseLIPRJ(jsonObject);
+		liproj = JsonParserAPI.parseLIPRJ(jsonObject);
 
-		callback.onSuccess(liprj);
+		callback.onSuccess(liproj.getProjectList());
 	}
 
 
@@ -145,13 +192,10 @@ public class ProjectActivity extends AppCompatActivity {
 	public void setCallback() {
 	    this.callback =  new VolleyCallbackListProject() {
 		    @Override
-		    public void onSuccess(LIPRJ liprj) {
-			    Toast.makeText(ProjectActivity.this, "List of all the projects", Toast.LENGTH_LONG).show();
+		    public void onSuccess(List<ProjectLIPRJ>  liprjs) {
 
 			    // Set the list of projects used to create the view
-			    ProjectActivity.this.setProjectListBuffer(liprj.getProjectList());
-
-			    ProjectActivity.this.setLiproj(liprj);
+			    ProjectActivity.this.setProjectListBuffer(liprjs);
 
 				// send the list to the projectAdapter and set the project adapter to the recycler
 			    projectAdapter = new ProjectAdapter(ProjectActivity.this);
@@ -160,7 +204,6 @@ public class ProjectActivity extends AppCompatActivity {
 
 		    @Override
 		    public void onError(String errorMessage) {
-
 			    Toast.makeText(ProjectActivity.this, errorMessage, Toast.LENGTH_LONG).show();
 		    }
 	    };
@@ -203,7 +246,10 @@ public class ProjectActivity extends AppCompatActivity {
 
 					if (result.equals("OK")) {
 						LIPRJ liprj = JsonParserAPI.parseLIPRJ(jsonObject);
-						callback.onSuccess(liprj);
+						ProjectActivity.this.setLiproj(liprj);
+						Toast.makeText(ProjectActivity.this, "List of all the projects", Toast.LENGTH_LONG).show();
+
+						callback.onSuccess(liprj.getProjectList());
 					} else {
 						String error = jsonObject.getString("error");
 						callback.onError(jsonObject.getString(error));

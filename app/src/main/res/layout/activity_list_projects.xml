@@ -93,6 +93,7 @@
                 </LinearLayout>
 
                 <SearchView
+                    android:id="@+id/findProjectSearchView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.10"
