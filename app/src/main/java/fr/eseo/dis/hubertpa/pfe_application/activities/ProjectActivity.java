@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -42,10 +41,6 @@ import fr.eseo.dis.hubertpa.pfe_application.partials.NavigationBottom;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * Created by Morgan on 30/12/2017.
- */
-
 public class ProjectActivity extends AppCompatActivity {
 
 
@@ -61,8 +56,6 @@ public class ProjectActivity extends AppCompatActivity {
 	boolean stoppingBuffering = false;
 
 	RecyclerView recycler;
-
-	CardView listView;
 
 	public static int NEW_CARD_COUNTER;
 
@@ -82,7 +75,7 @@ public class ProjectActivity extends AppCompatActivity {
 
 		mySwipeRefreshLayout = findViewById(R.id.swip_to_refresh);
 
-	    BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+	    BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
 		BottomNavigationViewHelper.disableShiftMode(navigation);
 	    navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -90,7 +83,7 @@ public class ProjectActivity extends AppCompatActivity {
 
 	    liproj = new LIPRJ();
 
-	    projectListBuffer = new ArrayList<ProjectLIPRJ>();
+	    projectListBuffer = new ArrayList<>();
 
 	    NEW_CARD_COUNTER = 0;
 
@@ -138,7 +131,7 @@ public class ProjectActivity extends AppCompatActivity {
 	 * Set the recycler. Basic setter
 	 */
 	private void setRecycler() {
-		recycler = (RecyclerView) findViewById(R.id.card_list_project);
+		recycler = findViewById(R.id.card_list_project);
 		recycler.setHasFixedSize(true);
 		LinearLayoutManager llm = new LinearLayoutManager(this);
 		llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -263,7 +256,7 @@ public class ProjectActivity extends AppCompatActivity {
 
 	public void setSwitchListeners() {
 		//Get widgets reference from XML layout
-		Switch sButton = (Switch) findViewById(R.id.markSwitchMines);
+		Switch sButton = findViewById(R.id.markSwitchMines);
 
 		//Set a CheckedChange Listener for Switch Button
 		sButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){

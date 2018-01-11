@@ -64,4 +64,19 @@
     <string name="title_activity_take_notes_project">TakeNotesProjectActivity</string>
 
 
+    <!--activity_detail_project-->
+    <string name="afficher_le_poster">Afficher le poster</string>
+    <string name="description">Description</string>
+    <string name="textviewdescription">[textViewDescription]</string>
+    <string name="supervisor">Supervisor :</string>
+    <string name="textviewsupervisorvalue">[textViewSupervisorValue]</string>
+    <string name="liste_d_tudiants">Liste d\'étudiants :</string>
+    <string name="jury_le">Jury le :</string>
+    <string name="ajouter_une_alarme_pour_ce_jury">Ajouter une alarme pour ce jury</string>
+    <string name="liste_des_juries">Liste des juries :</string>
+    <string name="liste_des_projects">Liste des projects :</string>
+
+    <!--activity_detail_project_from_jury-->
+
+
 </resources>

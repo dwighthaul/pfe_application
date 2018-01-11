@@ -1,5 +1,6 @@
 package fr.eseo.dis.hubertpa.pfe_application.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,18 +39,17 @@ public class DetailProjectActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_detail_project);
 
 		Bundle data = getIntent().getExtras();
+		assert data != null;
 		projectLIPRJ = (ProjectLIPRJ) data.getParcelable("selected_project");
 
-//		Log.d("DetailProjectActivity", "" + );
-
-		idView = (TextView) findViewById(R.id.textViewiD);
-		titleView = (TextView) findViewById(R.id.textViewTitle);
-		displayPoster = (Button) findViewById(R.id.displayPoster);
-		descView = (TextView) findViewById(R.id.textViewDescriptionValue);
+		idView = findViewById(R.id.textViewiD);
+		titleView = findViewById(R.id.textViewTitle);
+		displayPoster = findViewById(R.id.displayPoster);
+		descView = findViewById(R.id.textViewDescriptionValue);
 		descView.setMovementMethod(new ScrollingMovementMethod());
-		supeView = (TextView) findViewById(R.id.textViewSupervisorValue);
-		studListView  = (ListView) findViewById(R.id.textViewStudentValue);
-		posterView = (TextView) findViewById(R.id.TextViewPoster);
+		supeView = findViewById(R.id.textViewSupervisorValue);
+		studListView  = findViewById(R.id.textViewStudentValue);
+		posterView = findViewById(R.id.TextViewPoster);
 
 		loadElements();
 	}

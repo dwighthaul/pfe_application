@@ -19,7 +19,9 @@
         android:layout_height="122dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        app:srcCompat="@drawable/eseo_groupe" />
+        app:srcCompat="@drawable/eseo_groupe"
+        android:contentDescription="Image de l'ESEO"
+        tools:ignore="HardcodedText" />
 
 
     <ProgressBar

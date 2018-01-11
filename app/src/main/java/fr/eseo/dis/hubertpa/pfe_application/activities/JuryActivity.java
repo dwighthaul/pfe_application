@@ -35,10 +35,6 @@ import fr.eseo.dis.hubertpa.pfe_application.partials.NavigationBottom;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * Created by Morgan on 30/12/2017.
- */
-
 public class JuryActivity  extends AppCompatActivity {
 
 	// The object contains a list of all the juries
@@ -49,8 +45,6 @@ public class JuryActivity  extends AppCompatActivity {
 	// This list can be modified if the user filter the result, ask to only display the favorits one
 	@Getter @Setter
 	List<JuryLIJUR> juryListBuffer;
-
-	CardView listView;
 
 	public static int NEW_CARD_COUNTER;
 
@@ -67,7 +61,7 @@ public class JuryActivity  extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_juries);
 
-		BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+		BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
 		BottomNavigationViewHelper.disableShiftMode(navigation);
 		navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -108,7 +102,7 @@ public class JuryActivity  extends AppCompatActivity {
 	 * Set the recycler. Basic setter
 	 */
 	private void setRecycler() {
-		recycler = (RecyclerView) findViewById(R.id.card_list_juries);
+		recycler = findViewById(R.id.card_list_juries);
 		recycler.setHasFixedSize(true);
 		LinearLayoutManager llm = new LinearLayoutManager(this);
 		llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -130,7 +124,6 @@ public class JuryActivity  extends AppCompatActivity {
 				JuryActivity.this.setLijur(lijur);
 
 				for(int i=0; i < lijur.getListJuries().size(); i++){
-					JuryLIJUR juryLIJUR = lijur.getListJuries().get(i);
 					juryAdapter = new JuryAdapter(JuryActivity.this);
 
 					recycler.setAdapter(juryAdapter);

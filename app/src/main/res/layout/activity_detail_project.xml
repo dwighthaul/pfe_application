@@ -23,7 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="[textViewiD]" />
+                android:text="[textViewiD]"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textViewTitle"
@@ -31,7 +32,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.4"
                 android:text="[textViewTitle]"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
 
@@ -47,7 +49,7 @@
                 android:layout_margin="2dp"
                 android:background="@drawable/border_rounded_red_eseo"
                 android:padding="2dp"
-                android:text="Afficher le poster" />
+                android:text="@string/afficher_le_poster" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
                 android:layout_marginBottom="0dp"
-                android:text="Description"
+                android:text="@string/description"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="0dp" />
 
@@ -76,10 +78,9 @@
                     android:id="@+id/textViewDescriptionValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:elegantTextHeight="true"
                     android:padding="8dp"
                     android:paddingTop="0dp"
-                    android:text="[textViewDescription]"
+                    android:text="@string/textviewdescription"
                     tools:layout_editor_absoluteX="0dp"
                     tools:layout_editor_absoluteY="0dp">
 
@@ -102,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
                 android:layout_weight="1"
-                android:text="Supervisor : "
+                android:text="@string/supervisor"
                 tools:text="Supervisor : " />
 
             <TextView
@@ -111,7 +112,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="7dp"
                 android:layout_weight="1"
-                android:text="[textViewSupervisorValue]" />
+                android:text="@string/textviewsupervisorvalue" />
         </LinearLayout>
 
         <LinearLayout
@@ -123,7 +124,7 @@
                 android:id="@+id/textViewStudentLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Liste d'étudiants : " />
+                android:text="@string/liste_d_tudiants" />
 
             <!--<android.support.v7.widget.RecyclerView-->
             <ListView
@@ -140,10 +141,11 @@
 
             <TextView
                 android:id="@+id/TextViewPoster"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="[TextViewPoster]" />
+                android:text="[TextViewPoster]"
+                tools:ignore="HardcodedText,InefficientWeight" />
 
         </LinearLayout>
 

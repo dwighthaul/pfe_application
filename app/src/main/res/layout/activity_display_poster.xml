@@ -17,7 +17,9 @@
                 android:id="@+id/posterImageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/eseo_groupe" />
+                android:src="@drawable/eseo_groupe"
+                android:contentDescription="Image du projet"
+                tools:ignore="HardcodedText" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

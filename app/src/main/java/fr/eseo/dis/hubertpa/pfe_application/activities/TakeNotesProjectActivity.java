@@ -27,6 +27,7 @@ public class TakeNotesProjectActivity extends AppCompatActivity {
 
 
 		Bundle data = getIntent().getExtras();
+		assert data != null;
 		String nameProject = data.getString("nameProject");
 		idProject = data.getInt("idProject");
 

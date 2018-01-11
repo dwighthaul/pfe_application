@@ -2,7 +2,6 @@ package fr.eseo.dis.hubertpa.pfe_application.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
@@ -18,9 +17,10 @@ public class RateStudentActivity extends AppCompatActivity {
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();
 
-		TextView studentNameTextView = (TextView)  findViewById(R.id.textViewStudentName);
-		TextView studentIdTextView = (TextView) findViewById(R.id.textViewStudentId);
+		TextView studentNameTextView = findViewById(R.id.textViewStudentName);
+		TextView studentIdTextView = findViewById(R.id.textViewStudentId);
 
+		assert bundle != null;
 		studentNameTextView.setText(String.valueOf(bundle.getInt("studentId")));
 		studentIdTextView.setText(bundle.getString("studentName"));
 	}

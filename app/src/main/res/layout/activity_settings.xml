@@ -20,12 +20,6 @@
             android:layout_height="wrap_content"
             android:text="Test" />
 
-        <TextView
-            android:id="@+id/textViewPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Test" />
-
         <Button
             android:id="@+id/button_disconnect"
             android:layout_width="match_parent"

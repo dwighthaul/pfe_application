@@ -1,7 +1,6 @@
 package fr.eseo.dis.hubertpa.pfe_application.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
-import fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings;
 import fr.eseo.dis.hubertpa.pfe_application.partials.BottomNavigationViewHelper;
 import fr.eseo.dis.hubertpa.pfe_application.partials.NavigationBottom;
 
@@ -33,14 +31,13 @@ public class SettingsActivity extends AppCompatActivity {
 
 		navigation.getMenu().getItem(3).setChecked(true);
 
-		TextView loginTextView = (TextView) findViewById(R.id.textViewLogin);
-		TextView passwordTextView = (TextView) findViewById(R.id.textViewPassword);
+		TextView loginTextView = findViewById(R.id.textViewLogin);
 
 		String login = WebServiceConnexion.getLogin(this);
 
 		loginTextView.setText(login);
 
-		disconnect = (Button) findViewById(R.id.button_disconnect);
+		disconnect = findViewById(R.id.button_disconnect);
 
 		disconnect.setOnClickListener(new View.OnClickListener() {
 
