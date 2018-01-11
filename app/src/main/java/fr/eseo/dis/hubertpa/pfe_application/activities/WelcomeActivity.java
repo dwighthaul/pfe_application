@@ -1,12 +1,7 @@
 package fr.eseo.dis.hubertpa.pfe_application.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -17,12 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.Date;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
-import fr.eseo.dis.hubertpa.pfe_application.controller.UserLoginTask;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.VolleyCallbackLOGON;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
 import fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings;
@@ -40,7 +31,7 @@ public class WelcomeActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.welcome);
+		setContentView(R.layout.activity_welcome);
 
 		login = (Button) findViewById(R.id.button_login);
 		visiteur = (Button) findViewById(R.id.button_visitor);
@@ -81,7 +72,12 @@ public class WelcomeActivity extends AppCompatActivity {
 	}
 
 	private void connectUser(String userLogin, String userPassword) {
-		WebServiceConnexion.getConnected(userLogin, userPassword, this, processResponseVisitor);
+		Intent intent = new Intent(this, ProjectActivity.class);
+		startActivity(intent);
+
+
+
+//		WebServiceConnexion.getConnected(userLogin, userPassword, this, processResponseVisitor);
 	}
 
 
@@ -115,7 +111,7 @@ public class WelcomeActivity extends AppCompatActivity {
 		// Récuperation des identifiants
 		String userLogin = prefs.getString(BasicSettings.sharedLogin, "default");
 
-		CharSequence text = "A profil has been find with the following login : " + userLogin + "\n try to auto-connect";
+		CharSequence text = "A profil has been find with the following activity_login : " + userLogin + "\n try to auto-connect";
 
 		snack = Snackbar.make(findViewById(android.R.id.content), text, Snackbar.LENGTH_LONG);
 

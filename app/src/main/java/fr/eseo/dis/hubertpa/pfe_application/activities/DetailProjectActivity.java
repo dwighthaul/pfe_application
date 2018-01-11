@@ -76,8 +76,10 @@ public class DetailProjectActivity extends AppCompatActivity {
 		String supervisor = projectLIPRJ.getSupervisor().getForename() + " " + projectLIPRJ.getSupervisor().getSurname();
 		supeView.setText(supervisor);
 
+		String poster = (projectLIPRJ.isPoster()) ? "Poster Disponible" : "Poster non disponible";
+		posterView.setText(poster);
+
 		ListUser listStudents = projectLIPRJ.getListStudents();
-		Log.d("TEST", "" + listStudents.size());
 
 		HashMap<Integer, String> listStudentsMap = new HashMap<Integer, String>();
 		for (User student : listStudents) {
@@ -88,19 +90,9 @@ public class DetailProjectActivity extends AppCompatActivity {
 		AdaptorRateStudent adapter = new AdaptorRateStudent(this, listStudentsMap);
 		studListView.setAdapter(adapter);
 
-		String poster = (projectLIPRJ.isPoster()) ? "Poster Disponible" : "Poster non disponible";
-		posterView.setText(poster);
-
-	}
-
-	public void goToRate() {
-		Log.d("Test", "Voila");
-
 	}
 
 	public void goToRatePage(Map.Entry<Integer, String> student) {
-		Log.d("Test", student.getValue());
-
 		Intent intent = new Intent(DetailProjectActivity.this, RateStudentActivity.class);
 		intent.putExtra("studentId", student.getKey());
 		intent.putExtra("studentName", student.getValue());

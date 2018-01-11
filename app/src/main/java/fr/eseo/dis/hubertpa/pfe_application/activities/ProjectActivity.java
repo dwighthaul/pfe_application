@@ -1,11 +1,9 @@
 package fr.eseo.dis.hubertpa.pfe_application.activities;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -13,11 +11,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -32,7 +26,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,12 +33,9 @@ import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.controller.adapters.ProjectAdapter;
 import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.VolleyCallbackListProject;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.JsonParserAPI;
-import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.StyleProject;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
 import fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings;
-import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Project;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIPRJ;
-import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIJUR;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIPRJ;
 import fr.eseo.dis.hubertpa.pfe_application.partials.BottomNavigationViewHelper;
 import fr.eseo.dis.hubertpa.pfe_application.partials.NavigationBottom;
@@ -88,7 +78,7 @@ public class ProjectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-	    setContentView(R.layout.list_projects);
+	    setContentView(R.layout.activity_list_projects);
 
 		mySwipeRefreshLayout = findViewById(R.id.swip_to_refresh);
 
@@ -110,9 +100,23 @@ public class ProjectActivity extends AppCompatActivity {
 
 		setActionOnRefrech();
 
-	    processGetProjects();
+//	    processGetProjects();
 
+	    processGetProjectsFake();
     }
+
+	private void processGetProjectsFake() {
+		String jsonObjectString = "{\"result\": \"OK\",\"api\": \"LIPRJ\",\"projects\": [{\"projectId\": 0,\"title\": \"Gestion main-libre tablette android\",\"descrip\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed placerat justo. Nunc a nulla pulvinar, pellentesque elit sed, interdum tellus. Nullam scelerisque tortor vel diam sagittis feugiat. Nullam tincidunt lectus nibh, et vestibulum arcu vehicula eu. Nullam ut elit interdum, vestibulum augue at, rutrum diam. Donec convallis, libero a ultricies congue, sem odio malesuada tortor, vitae vestibulum turpis tortor a augue. Donec sit amet pharetra magna. Vestibulum venenatis ligula a urna sodales cursus. Morbi hendrerit est vitae porttitor interdum. Sed lectus urna, blandit et lacinia non, porttitor nec sem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas ut fringilla justo. Integer accumsan vehicula pretium. Vestibulum non nisi et nulla lobortis fermentum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam urna sapien, maximus tempus orci ut, porta scelerisque nunc. Nunc dictum ultrices luctus. Aenean id tellus nec magna iaculis consequat. Donec sollicitudin tincidunt mauris. Mauris ut odio nulla. Etiam leo tellus, cursus cursus efficitur quis, sagittis quis turpis. Aenean et feugiat metus. Quisque leo neque, dictum sed ullamcorper non, varius sit amet eros. In ornare magna a mauris luctus, vel rutrum mauris mattis. Donec lacinia, urna quis condimentum pharetra, nisi nisl porta orci, non dapibus mi sem id eros. Donec iaculis rutrum tellus et vulputate. Phasellus eget luctus elit. Aliquam maximus tincidunt augue, vel lobortis mauris dignissim eget. Vivamus vestibulum pretium magna, vel ultricies augue elementum in. In vel hendrerit lacus. Aenean nec libero dictum, finibus libero sed, commodo dolor. Suspendisse magna dui, scelerisque quis sapien ut, vestibulum lacinia augue. Suspendisse a efficitur enim. In ullamcorper massa quis convallis imperdiet. In posuere ligula leo, hendrerit condimentum ligula iaculis eu. Vestibulum nisl lectus, porttitor vel rutrum et, scelerisque at dui. Phasellus a purus at nisi auctor laoreet et eu est. Aenean posuere.\",\"supervisor\": {\"forename\": \"Patrick\",\"surname\": \"ALBERS\"},\"poster\": true,\"confid\": 0,\"students\": [{\"userId\": 17,\"forename\": \"Victor\",\"surname\": \"VALLOIS\"},{\"userId\": 18,\"forename\": \"Josselin\",\"surname\": \"DORSO\"},{\"userId\": 19,\"forename\": \"Thomas\",\"surname\": \"JOUAULT\"}]},{\"projectId\": 1,\"title\": \"Reconnaissance langue des signes\",\"descrip\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed placerat justo. Nunc a nulla pulvinar, pellentesque elit sed, interdum tellus. Nullam scelerisque tortor vel diam sagittis feugiat. Nullam tincidunt lectus nibh, et vestibulum arcu vehicula eu. Nullam ut elit interdum, vestibulum augue at, rutrum diam. Donec convallis, libero a ultricies congue, sem odio malesuada tortor, vitae vestibulum turpis tortor a augue. Donec sit amet pharetra magna. Vestibulum venenatis ligula a urna sodales cursus. Morbi hendrerit est vitae porttitor interdum. Sed lectus urna, blandit et lacinia non, porttitor nec sem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas ut fringilla justo. Integer accumsan vehicula pretium. Vestibulum non nisi et nulla lobortis fermentum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam urna sapien, maximus tempus orci ut, porta scelerisque nunc. Nunc dictum ultrices luctus. Aenean id tellus nec magna iaculis consequat. Donec sollicitudin tincidunt mauris. Mauris ut odio nulla. Etiam leo tellus, cursus cursus efficitur quis, sagittis quis turpis. Aenean et feugiat metus. Quisque leo neque, dictum sed ullamcorper non, varius sit amet eros. In ornare magna a mauris luctus, vel rutrum mauris mattis. Donec lacinia, urna quis condimentum pharetra, nisi nisl porta orci, non dapibus mi sem id eros. Donec iaculis rutrum tellus et vulputate. Phasellus eget luctus elit. Aliquam maximus tincidunt augue, vel lobortis mauris dignissim eget. Vivamus vestibulum pretium magna, vel ultricies augue elementum in. In vel hendrerit lacus. Aenean nec libero dictum, finibus libero sed, commodo dolor. Suspendisse magna dui, scelerisque quis sapien ut, vestibulum lacinia augue. Suspendisse a efficitur enim. In ullamcorper massa quis convallis imperdiet. In posuere ligula leo, hendrerit condimentum ligula iaculis eu. Vestibulum nisl lectus, porttitor vel rutrum et, scelerisque at dui. Phasellus a purus at nisi auctor laoreet et eu est. Aenean posuere.\",\"supervisor\": {\"forename\": \"Patrick\",\"surname\": \"ALBERS\"},\"poster\": true,\"confid\": 0,\"students\": [{\"userId\": 20,\"forename\": \"Romain\",\"surname\": \"CREVAN\"},{\"userId\": 21,\"forename\": \"Anatole\",\"surname\": \"CHARRON\"},{\"userId\": 22,\"forename\": \"Thibaud\",\"surname\": \"CHEVRIER\"}]},{\"projectId\": 2,\"title\": \"Greenygrass\",\"descrip\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed placerat justo. Nunc a nulla pulvinar, pellentesque elit sed, interdum tellus. Nullam scelerisque tortor vel diam sagittis feugiat. Nullam tincidunt lectus nibh, et vestibulum arcu vehicula eu. Nullam ut elit interdum, vestibulum augue at, rutrum diam. Donec convallis, libero a ultricies congue, sem odio malesuada tortor, vitae vestibulum turpis tortor a augue. Donec sit amet pharetra magna. Vestibulum venenatis ligula a urna sodales cursus. Morbi hendrerit est vitae porttitor interdum. Sed lectus urna, blandit et lacinia non, porttitor nec sem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas ut fringilla justo. Integer accumsan vehicula pretium. Vestibulum non nisi et nulla lobortis fermentum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam urna sapien, maximus tempus orci ut, porta scelerisque nunc. Nunc dictum ultrices luctus. Aenean id tellus nec magna iaculis consequat. Donec sollicitudin tincidunt mauris. Mauris ut odio nulla. Etiam leo tellus, cursus cursus efficitur quis, sagittis quis turpis. Aenean et feugiat metus. Quisque leo neque, dictum sed ullamcorper non, varius sit amet eros. In ornare magna a mauris luctus, vel rutrum mauris mattis. Donec lacinia, urna quis condimentum pharetra, nisi nisl porta orci, non dapibus mi sem id eros. Donec iaculis rutrum tellus et vulputate. Phasellus eget luctus elit. Aliquam maximus tincidunt augue, vel lobortis mauris dignissim eget. Vivamus vestibulum pretium magna, vel ultricies augue elementum in. In vel hendrerit lacus. Aenean nec libero dictum, finibus libero sed, commodo dolor. Suspendisse magna dui, scelerisque quis sapien ut, vestibulum lacinia augue. Suspendisse a efficitur enim. In ullamcorper massa quis convallis imperdiet. In posuere ligula leo, hendrerit condimentum ligula iaculis eu. Vestibulum nisl lectus, porttitor vel rutrum et, scelerisque at dui. Phasellus a purus at nisi auctor laoreet et eu est. Aenean posuere.\",\"supervisor\": {\"forename\": \"Sebastien\",\"surname\": \"AUBIN\"},\"poster\": true,\"confid\": 0,\"students\": [{\"userId\": 23,\"forename\": \"Arnaud\",\"surname\": \"BILLY\"},{\"userId\": 24,\"forename\": \"Antoine\",\"surname\": \"ROBIC\"},{\"userId\": 25,\"forename\": \"Flavien\",\"surname\": \"REYNAUD\"},{\"userId\": 26,\"forename\": \"Timé\",\"surname\": \"KADEL\"},{\"userId\": 27,\"forename\": \"Lucas\",\"surname\": \"LEJEUNE\"}]},{\"projectId\": 3,\"title\": \"OPAL - Sécu des réseaux et dev. outils win\",\"descrip\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed placerat justo. Nunc a nulla pulvinar, pellentesque elit sed, interdum tellus. Nullam scelerisque tortor vel diam sagittis feugiat. Nullam tincidunt lectus nibh, et vestibulum arcu vehicula eu. Nullam ut elit interdum, vestibulum augue at, rutrum diam. Donec convallis, libero a ultricies congue, sem odio malesuada tortor, vitae vestibulum turpis tortor a augue. Donec sit amet pharetra magna. Vestibulum venenatis ligula a urna sodales cursus. Morbi hendrerit est vitae porttitor interdum. Sed lectus urna, blandit et lacinia non, porttitor nec sem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas ut fringilla justo. Integer accumsan vehicula pretium. Vestibulum non nisi et nulla lobortis fermentum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam urna sapien, maximus tempus orci ut, porta scelerisque nunc. Nunc dictum ultrices luctus. Aenean id tellus nec magna iaculis consequat. Donec sollicitudin tincidunt mauris. Mauris ut odio nulla. Etiam leo tellus, cursus cursus efficitur quis, sagittis quis turpis. Aenean et feugiat metus. Quisque leo neque, dictum sed ullamcorper non, varius sit amet eros. In ornare magna a mauris luctus, vel rutrum mauris mattis. Donec lacinia, urna quis condimentum pharetra, nisi nisl porta orci, non dapibus mi sem id eros. Donec iaculis rutrum tellus et vulputate. Phasellus eget luctus elit. Aliquam maximus tincidunt augue, vel lobortis mauris dignissim eget. Vivamus vestibulum pretium magna, vel ultricies augue elementum in. In vel hendrerit lacus. Aenean nec libero dictum, finibus libero sed, commodo dolor. Suspendisse magna dui, scelerisque quis sapien ut, vestibulum lacinia augue. Suspendisse a efficitur enim. In ullamcorper massa quis convallis imperdiet. In posuere ligula leo, hendrerit condimentum ligula iaculis eu. Vestibulum nisl lectus, porttitor vel rutrum et, scelerisque at dui. Phasellus a purus at nisi auctor laoreet et eu est. Aenean posuere.\",\"supervisor\": {\"forename\": \"Olivier\",\"surname\": \"BEAUDOUX\"},\"poster\": true,\"confid\": 0,\"students\": [{\"userId\": 28,\"forename\": \"Alexis\",\"surname\": \"DEMAY\"},{\"userId\": 29,\"forename\": \"Romain\",\"surname\": \"HAMON\"},{\"userId\": 30,\"forename\": \"Thibaud\",\"surname\": \"DUBLE\"}]}]}\";	}";
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = new JSONObject(jsonObjectString);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		LIPRJ liprj = JsonParserAPI.parseLIPRJ(jsonObject);
+
+		callback.onSuccess(liprj);
+	}
 
 
 	/**

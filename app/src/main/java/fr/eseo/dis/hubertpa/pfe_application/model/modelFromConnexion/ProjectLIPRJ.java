@@ -18,7 +18,7 @@ import lombok.Setter;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class ProjectLIPRJ implements Parcelable{
+public class ProjectLIPRJ implements Parcelable {
 
 	@Getter @Setter @NonNull
 	Project project;

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="fr.eseo.dis.hubertpa.pfe_application">
 
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <!-- To auto-complete the email text field in activity_loginogin form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -11,38 +12,43 @@
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
     <application
-        android:allowBackup="true"
+
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup">
         <activity
             android:name=".activities.WelcomeActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".activities.ProjectActivity" />
+
         <activity android:name=".activities.LoginActivity" />
+
         <activity android:name=".activities.JuryActivity" />
+
         <activity android:name=".activities.MarkActivity" />
-        <activity
-            android:name=".testActivities.Test"
-            android:label="TestActivities.Test" />
+
+        <activity android:name=".testActivities.Test" />
+
         <activity android:name=".activities.DetailProjectActivity" />
-        <activity android:name=".MainBottomActivity" />
+
         <activity android:name=".activities.SettingsActivity" />
+
         <activity android:name=".activities.RateStudentActivity" />
-        <activity
-            android:name=".activities.DislayPosterActivity"
-            android:label="@string/title_activity_dislay_poster" />
-        <activity
-            android:name=".activities.TakeNotesProjectActivity"
-            android:label="@string/title_activity_take_notes_project"></activity>
+
+        <activity android:name=".activities.DislayPosterActivity" />
+
+        <activity android:name=".activities.TakeNotesProjectActivity" />
+
+        <activity android:name=".activities.DetailJuryActivity"/>
     </application>
 
 </manifest>

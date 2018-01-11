@@ -20,14 +20,14 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textViewId"
+                android:id="@+id/idProjectTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="TextView" />
 
             <TextView
-                android:id="@+id/textViewTitle"
+                android:id="@+id/nameProjectTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

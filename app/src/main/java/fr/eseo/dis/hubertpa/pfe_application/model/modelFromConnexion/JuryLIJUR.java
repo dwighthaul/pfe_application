@@ -2,11 +2,14 @@ package fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Jury;
+import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListProject;
+import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListUser;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.User;
 import lombok.Getter;
 import lombok.NonNull;
@@ -18,16 +21,20 @@ import lombok.Setter;
  */
 
 @RequiredArgsConstructor
-public class JuryLIJUR {
+public class JuryLIJUR implements Parcelable {
 
 	@Getter @Setter @NonNull
 	Jury jury;
 
 	@Getter @Setter @NonNull
-	List<ProjectLIJUR> listProject;
+	ListUser listMembers;
+
+	@Getter @Setter @NonNull
+	ListProject listProject;
 
 	public JuryLIJUR() {
-		listProject = new ArrayList<ProjectLIJUR>();
+		listProject = new ListProject();
+		listMembers = new ListUser();
 	}
 
 	protected JuryLIJUR(Parcel in) {
@@ -35,12 +42,12 @@ public class JuryLIJUR {
 
 		this.jury.setIdJury(in.readInt());
 		this.jury.setDate(in.readString());
-		//this.project.setDescription(in.readString());
 
-		//this.project.setConfidentiality(in.readInt());
+		this.listMembers = new ListUser();
+		in.readList(this.listMembers, ListUser.class.getClassLoader());
 
-
-
+		this.listProject = new ListProject();
+		in.readList(this.listProject, ListProject.class.getClassLoader());
 	}
 
 	public static final Parcelable.Creator<JuryLIJUR> CREATOR = new Parcelable.Creator<JuryLIJUR>() {
@@ -55,15 +62,19 @@ public class JuryLIJUR {
 		}
 	};
 
-	/*@Override
+	@Override
 	public int describeContents() {
 		return 0;
 	}
 
 	@Override
-	public void writeToParcel(Parcel parcel, int i) {
-		parcel.writeInt(this.jury.getIdJury());
-	}*/
+	public void writeToParcel(Parcel dest, int i) {
+		dest.writeInt(getJury().getIdJury());
+		dest.writeString(getJury().getDate());
 
+		dest.writeList(this.listMembers);
+
+		dest.writeList(this.listProject);
+	}
 
 }

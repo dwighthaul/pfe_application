@@ -14,6 +14,7 @@ import java.util.List;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.activities.JuryActivity;
+import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListProject;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListUser;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Project;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.User;
@@ -28,6 +29,9 @@ public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder
 
     private JuryActivity activity;
 
+    private ListProject listProjects;
+	private ListUser listMembers;
+
     public JuryAdapter(JuryActivity juryActivity) {
         this.activity = juryActivity;
     }
@@ -39,27 +43,47 @@ public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder
         return new JuryViewHolder(juryView);
     }
 
-    @Override
     public void onBindViewHolder(JuryViewHolder holder, final int position) {
         Log.d("JuryViewHolder","onBindViewHolder()");
 
         final JuryLIJUR juryLIJUR = activity.getJuryListBuffer().get(position);
-        holder.juryId.setText("" + juryLIJUR.getJury().getIdJury());
+        holder.juryId.setText(String.format("%d", juryLIJUR.getJury().getIdJury()));
         holder.juryDate.setText(juryLIJUR.getJury().getDate());
-	    holder.nbrProject.setText("" + juryLIJUR.getListProject().size());
+
+        listProjects = juryLIJUR.getListProject();
+        StringBuilder stringBuilderProjects = new StringBuilder();
+
+	    for (ProjectLIJUR project : listProjects) {
+		    stringBuilderProjects.append(String.valueOf(project.getProject().getIdProject() + " - "));
+		    stringBuilderProjects.append(project.getProject().getTitle());
+		    stringBuilderProjects.append("\n");
+	    }
+	    holder.listProjectTextView.setText(stringBuilderProjects.toString());
+
+	    listMembers = juryLIJUR.getListMembers();
+	    StringBuilder stringBuilderMemeber = new StringBuilder();
+
+	    for (User member : listMembers) {
+		    stringBuilderMemeber.append(member.getForename() + " " + member.getSurname());
+		    stringBuilderMemeber.append("\n");
+	    }
+
+	    holder.listMemberTextView.setText(stringBuilderMemeber.toString());
+
+	    holder.view.setOnClickListener(new View.OnClickListener() {
+		    @Override
+		    public void onClick(View v) {
+			    Log.d("ProjectAdapter","Item 'clicked'");
+			    activity.clickItem(juryLIJUR);
+		    }
+	    });
 
 
-        List<ProjectLIJUR> listProjects = juryLIJUR.getListProject();
 
-        List<String> listProjectsMap = new ArrayList<String> ();
-        for (ProjectLIJUR project : listProjects) {
-            String fullName = project.getProject().getTitle();
-            listProjectsMap.add("" + project.getProject().getIdProject());
-	        listProjectsMap.add(fullName);
 
-	        AdaptorListProjectJury adapter = new AdaptorListProjectJury(activity, listProjectsMap);
-	        holder.listProjectJury.setAdapter(adapter);
-        }
+//	    AdaptorListProjectJury adapter = new AdaptorListProjectJury(activity, listProjectsMap);
+//        Log.d("TEST" , "" + adapter.getCount());
+//	    holder.listProjectJuryListView.setAdapter(adapter);
 
 
         /*holder.view.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +101,6 @@ public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder
 
     @Override
     public int getItemCount() {
-        Log.d("JuryAdapter","getItemCount()");
         return activity.getJuryListBuffer().size();
     }
 
@@ -87,8 +110,8 @@ public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder
 
         private final TextView juryId;
         private final TextView juryDate;
-	    private final TextView nbrProject;
-        private final ListView listProjectJury;
+		private final TextView listProjectTextView;
+	    private final TextView listMemberTextView;
 
         public JuryViewHolder(View view) {
             super(view);
@@ -97,9 +120,9 @@ public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder
 
             juryId = (TextView) view.findViewById(R.id.idtextView);
             juryDate = (TextView) view.findViewById(R.id.datetextView);
-	        nbrProject = (TextView) view.findViewById(R.id.nbrProject);
-            listProjectJury = (ListView) view.findViewById(R.id.list_projects_by_jury);
 
+	        listProjectTextView = (TextView) view.findViewById(R.id.listProjectTextView);
+	        listMemberTextView = (TextView) view.findViewById(R.id.listMemberTextView);
         }
     }
 

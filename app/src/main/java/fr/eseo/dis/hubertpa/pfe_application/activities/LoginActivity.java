@@ -3,9 +3,7 @@ package fr.eseo.dis.hubertpa.pfe_application.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -36,15 +34,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
-import fr.eseo.dis.hubertpa.pfe_application.controller.UserLoginTask;
-import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.VolleyCallbackListProject;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.VolleyCallbackLOGON;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
- * A login screen that offers login via email/password.
+ * A activity_login screen that offers activity_login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
@@ -64,8 +60,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.login);
-		// Set up the login form.
+		setContentView(R.layout.activity_login);
+		// Set up the activity_login form.
 
 		mLoginView = (AutoCompleteTextView) findViewById(R.id.login);
 		populateAutoComplete();
@@ -169,9 +165,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
 	/**
-	 * Attempts to sign in or register the account specified by the login form.
+	 * Attempts to sign in or register the account specified by the activity_login form.
 	 * If there are form errors (invalid email, missing fields, etc.), the
-	 * errors are presented and no actual login attempt is made.
+	 * errors are presented and no actual activity_login attempt is made.
 	 */
 	private void attemptLogin() {
 
@@ -179,7 +175,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 		mLoginView.setError(null);
 		mPasswordView.setError(null);
 
-		// Store values at the time of the login attempt.
+		// Store values at the time of the activity_login attempt.
 		final String login = mLoginView.getText().toString();
 		final String password = mPasswordView.getText().toString();
 
@@ -208,7 +204,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 		if (!cancel) {
 			// Show a progress spinner, and kick off a background task to
-			// perform the user login attempt.
+			// perform the user activity_login attempt.
 			showProgress(true);
 			WebServiceConnexion.getConnected(login, password, this, response);
 		}
@@ -225,7 +221,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 	}
 
 	/**
-	 * Shows the progress UI and hides the login form.
+	 * Shows the progress UI and hides the activity_login form.
 	 */
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 	private void showProgress(final boolean show) {
