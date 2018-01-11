@@ -44,21 +44,23 @@ public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder
         Log.d("JuryViewHolder","onBindViewHolder()");
 
         final JuryLIJUR juryLIJUR = activity.getJuryListBuffer().get(position);
-	    Log.d("ICI MEME", "List juries : " + activity.getJuryListBuffer());
         holder.juryId.setText("" + juryLIJUR.getJury().getIdJury());
         holder.juryDate.setText(juryLIJUR.getJury().getDate());
+	    holder.nbrProject.setText("" + juryLIJUR.getListProject().size());
+
 
         List<ProjectLIJUR> listProjects = juryLIJUR.getListProject();
-        Log.d("TEST", "" + listProjects.size());
 
-        HashMap<Integer, String> listProjectsMap = new HashMap<Integer, String>();
+        List<String> listProjectsMap = new ArrayList<String> ();
         for (ProjectLIJUR project : listProjects) {
             String fullName = project.getProject().getTitle();
-            listProjectsMap.put(project.getProject().getIdProject(), fullName);
+            listProjectsMap.add("" + project.getProject().getIdProject());
+	        listProjectsMap.add(fullName);
+
+	        AdaptorListProjectJury adapter = new AdaptorListProjectJury(activity, listProjectsMap);
+	        holder.listProjectJury.setAdapter(adapter);
         }
 
-        AdaptorListProjectJury adapter = new AdaptorListProjectJury(this, listProjectsMap);
-        holder.listProjectJury.setAdapter(adapter);
 
         /*holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,15 +87,17 @@ public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder
 
         private final TextView juryId;
         private final TextView juryDate;
+	    private final TextView nbrProject;
         private final ListView listProjectJury;
 
-        public JuryViewHolder(View viewi) {
-            super(viewi);
+        public JuryViewHolder(View view) {
+            super(view);
             Log.d("JuryViewHolder","JuryViewHolder()");
-            this.view = viewi;
+            this.view = view;
 
             juryId = (TextView) view.findViewById(R.id.idtextView);
             juryDate = (TextView) view.findViewById(R.id.datetextView);
+	        nbrProject = (TextView) view.findViewById(R.id.nbrProject);
             listProjectJury = (ListView) view.findViewById(R.id.list_projects_by_jury);
 
         }

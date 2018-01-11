@@ -10,21 +10,24 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
+import fr.eseo.dis.hubertpa.pfe_application.activities.JuryActivity;
 
 /**
  * Created by Morgan on 10/01/2018.
  */
 
 public class AdaptorListProjectJury extends BaseAdapter {
-    private final ArrayList _listProjects;
+    private final List<String> _listProjects;
+    private JuryActivity _activity;
 
-    public AdaptorListProjectJury(JuryAdapter activity, HashMap<Integer, String> listProjects) {
-        _listProjects = new ArrayList();
-        _listProjects.addAll(listProjects.entrySet());
-
+	public AdaptorListProjectJury(JuryActivity activity, List<String> listProjects) {
+        _listProjects = listProjects;
+		Log.d("TEST", "" + _listProjects.size());
+        _activity = activity;
     }
 
     @Override
@@ -33,8 +36,8 @@ public class AdaptorListProjectJury extends BaseAdapter {
     }
 
     @Override
-    public Map.Entry<Integer, String> getItem(int position) {
-        return (Map.Entry) _listProjects.get(position);
+    public String getItem(int position) {
+        return  _listProjects.get(position);
     }
 
 
@@ -53,13 +56,14 @@ public class AdaptorListProjectJury extends BaseAdapter {
             result = convertView;
         }
 
-        final Map.Entry<Integer, String> item = getItem(position);
+        final String item = getItem(position);
 
-        ((TextView) result.findViewById(R.id.textViewTitle)).setText(item.getValue());
-        ((TextView) result.findViewById(R.id.textViewConfid)).setText(item.getValue());
-        ((TextView) result.findViewById(R.id.textViewPoster)).setText(item.getValue());
-        ((TextView) result.findViewById(R.id.textViewSupervisorForename)).setText(item.getValue());
-        ((TextView) result.findViewById(R.id.textViewSupervisorSurname)).setText(item.getValue());
+	    ((TextView) result.findViewById(R.id.textViewId)).setText(item);
+        ((TextView) result.findViewById(R.id.textViewTitle)).setText(item);
+//        ((TextView) result.findViewById(R.id.textViewConfid)).setText(item.getValue());
+//        ((TextView) result.findViewById(R.id.textViewPoster)).setText(item.getValue());
+//        ((TextView) result.findViewById(R.id.textViewSupervisorForename)).setText(item.getValue());
+//        ((TextView) result.findViewById(R.id.textViewSupervisorSurname)).setText(item.getValue());
 
         //ImageButton goToRate = ((ImageButton) result.findViewById(R.id.rateStudent));
 

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,6 +24,7 @@ public class DetailProjectActivity extends AppCompatActivity {
 
 	private TextView idView;
 	private TextView titleView;
+	private Button displayPoster;
 	private TextView descView;
 	private TextView supeView;
 	private ListView studListView;
@@ -41,7 +44,8 @@ public class DetailProjectActivity extends AppCompatActivity {
 
 		idView = (TextView) findViewById(R.id.textViewiD);
 		titleView = (TextView) findViewById(R.id.textViewTitle);
-		descView = (TextView) findViewById(R.id.textViewDescriptionLabel);
+		displayPoster = (Button) findViewById(R.id.displayPoster);
+		descView = (TextView) findViewById(R.id.textViewDescriptionValue);
 		descView.setMovementMethod(new ScrollingMovementMethod());
 		supeView = (TextView) findViewById(R.id.textViewSupervisorValue);
 		studListView  = (ListView) findViewById(R.id.textViewStudentValue);
@@ -58,6 +62,16 @@ public class DetailProjectActivity extends AppCompatActivity {
 		idView.setText(idProject);
 		titleView.setText(projectLIPRJ.getProject().getTitle());
 		descView.setText(projectLIPRJ.getProject().getDescription());
+
+		displayPoster.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				Log.d("Welcome", "Connect");
+				seePoster(projectLIPRJ);
+			}
+
+		});
 
 		String supervisor = projectLIPRJ.getSupervisor().getForename() + " " + projectLIPRJ.getSupervisor().getSurname();
 		supeView.setText(supervisor);
@@ -91,6 +105,12 @@ public class DetailProjectActivity extends AppCompatActivity {
 		intent.putExtra("studentId", student.getKey());
 		intent.putExtra("studentName", student.getValue());
 		DetailProjectActivity.this.startActivity(intent);
+	}
+
+	public void seePoster(ProjectLIPRJ projectLIPRJ) {
+		Intent intent = new Intent(this, DislayPosterActivity.class);
+		intent.putExtra("selected_project", projectLIPRJ);
+		startActivity(intent);
 	}
 
 

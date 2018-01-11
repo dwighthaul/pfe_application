@@ -50,7 +50,6 @@ public class JuryActivity  extends AppCompatActivity {
 	@Getter @Setter
 	List<JuryLIJUR> juryListBuffer;
 
-	RecyclerView recycler;
 
 	CardView listView;
 
@@ -61,6 +60,8 @@ public class JuryActivity  extends AppCompatActivity {
 	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new NavigationBottom(this, NavigationBottom.PAGES.JURIES);
 
 	VolleyCallbackListJury callback;
+
+	RecyclerView recycler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
