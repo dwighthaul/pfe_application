@@ -7,6 +7,8 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -67,11 +69,19 @@ public class User implements Parcelable {
 		}
 
 		if (jsonObject.has("forename")) {
-			user.setForename(jsonObject.getString("forename"));
+			try {
+				user.setForename(new String(jsonObject.getString("forename").getBytes("ISO-8859-1"), "UTF-8"));
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 		}
 
 		if (jsonObject.has("surname")) {
-			user.setSurname(jsonObject.getString("surname"));
+			try {
+				user.setSurname(new String(jsonObject.getString("surname").getBytes("ISO-8859-1"), "UTF-8"));
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return user;

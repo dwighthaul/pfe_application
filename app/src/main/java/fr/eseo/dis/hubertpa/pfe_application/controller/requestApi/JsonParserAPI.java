@@ -10,7 +10,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eseo.dis.hubertpa.pfe_application.model.APIAndroid;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Jury;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListProject;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListUser;
@@ -23,62 +22,13 @@ import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.PORTE;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.POSTR;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.NotesNOTES;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIJUR;
-import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.JYINF;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIJUR;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIPRJ;
-import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.MYJUR;
-import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.MYPRJ;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.JuryLIJUR;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIPRJ;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectPORTE;
 
-/**
- * Created by paulhubert on 30/12/17.
- */
-
 public class JsonParserAPI {
-	public static User parseUser(JSONObject jsonObject) {
-		User user = new User();
-
-		try {
-			user.setIdUser(0);
-			user.setForename(jsonObject.getString("current_user_url"));
-			user.setPassword(jsonObject.getString("emails_url"));
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		return user;
-	}
-
-	public static APIAndroid parseTest(JSONObject jsonObject) {
-		APIAndroid api = new APIAndroid();
-
-		try {
-
-			api.set_current_user_url(jsonObject.getString("current_user_url"));
-			api.set_current_user_authorizations_html_url(jsonObject.getString("current_user_authorizations_html_url"));
-			api.set_authorizations_url(jsonObject.getString("authorizations_url"));
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		return api;
-	}
-
-
-	public static APIAndroid parseTest2(JSONObject jsonObject) {
-		APIAndroid api = new APIAndroid();
-
-		try {
-			api.set_current_user_url(jsonObject.getString("current_user_url"));
-			api.set_current_user_authorizations_html_url(jsonObject.getString("current_user_authorizations_html_url"));
-			api.set_authorizations_url(jsonObject.getString("authorizations_url"));
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		return api;
-	}
 
 	public static LOGON parseLOGON(JSONObject jsonObject) {
 
@@ -86,14 +36,11 @@ public class JsonParserAPI {
 
 		try {
 			logon.setToken(jsonObject.getString("token"));
-
-
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 		return logon;
 	}
-
 
 	public static LIPRJ parseLIPRJ(JSONObject jsonObject) {
 		LIPRJ lirpj = new LIPRJ();
@@ -140,7 +87,6 @@ public class JsonParserAPI {
 		LIJUR lijur = new LIJUR();
 		try {
 			JSONArray listJuryJson = jsonObject.getJSONArray("juries");
-			List<JuryLIJUR> listJury = new ArrayList<JuryLIJUR>();
 
 			for (int i = 0; i < listJuryJson.length(); i++) {
 
@@ -157,7 +103,7 @@ public class JsonParserAPI {
 				for (int j = 0; j < membersJson.length(); j++) {
 
 					JSONObject supervisorJson = membersJson.getJSONObject(j);
-					User supervisor = (User) User.fromJson(supervisorJson);
+					User supervisor = User.fromJson(supervisorJson);
 
 					listMembers.add(supervisor);
 				}
@@ -175,7 +121,7 @@ public class JsonParserAPI {
 					boolean poster = projectJson.getBoolean("poster");
 
 					JSONObject supervisorJson = projectJson.getJSONObject("supervisor");
-					User supervisor = (User) User.fromJson(supervisorJson);
+					User supervisor = User.fromJson(supervisorJson);
 
 					ProjectLIJUR projectLIJUR = new ProjectLIJUR(project, poster, supervisor);
 					listProject.add(projectLIJUR);
@@ -219,7 +165,7 @@ public class JsonParserAPI {
 		NOTES notes = new NOTES();
 		try {
 			JSONArray listNotesJson = jsonObject.getJSONArray("notes");
-			List<JuryLIJUR> listJury = new ArrayList<JuryLIJUR>();
+			List<JuryLIJUR> listJury = new ArrayList<>();
 
 
 			for (int i = 0; i < listNotesJson.length(); i++) {
@@ -248,7 +194,7 @@ public class JsonParserAPI {
 
 		try {
 			JSONArray listNotesJson = jsonObject.getJSONArray("projects");
-			List<ProjectPORTE> listProjectPORTE = new ArrayList<ProjectPORTE>();
+			List<ProjectPORTE> listProjectPORTE = new ArrayList<>();
 
 			for (int i = 0; i < listNotesJson.length(); i++) {
 
