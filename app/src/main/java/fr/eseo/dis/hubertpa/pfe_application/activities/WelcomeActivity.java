@@ -33,8 +33,8 @@ public class WelcomeActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
 
-		login = (Button) findViewById(R.id.button_login);
-		visiteur = (Button) findViewById(R.id.button_visitor);
+		login = findViewById(R.id.button_login);
+		visiteur = findViewById(R.id.button_visitor);
 
 		setCallback();
 
@@ -45,8 +45,6 @@ public class WelcomeActivity extends AppCompatActivity {
 		attemptLoginWithPreferences();
 
 	}
-
-	String defaultValue = BasicSettings.sharedLoginDefault;
 
 	private void setListeners() {
 		login.setOnClickListener(new View.OnClickListener() {
@@ -72,12 +70,7 @@ public class WelcomeActivity extends AppCompatActivity {
 	}
 
 	private void connectUser(String userLogin, String userPassword) {
-		Intent intent = new Intent(this, ProjectActivity.class);
-		startActivity(intent);
-
-
-
-//		WebServiceConnexion.getConnected(userLogin, userPassword, this, processResponseVisitor);
+		WebServiceConnexion.getConnected(userLogin, userPassword, this, processResponseVisitor);
 	}
 
 
@@ -109,25 +102,26 @@ public class WelcomeActivity extends AppCompatActivity {
 		SharedPreferences prefs = getSharedPreferences(BasicSettings.saveFilenameShared, MODE_PRIVATE);
 
 		// Récuperation des identifiants
-		String userLogin = prefs.getString(BasicSettings.sharedLogin, "default");
+		String userLogin = prefs.getString(BasicSettings.sharedLogin, BasicSettings.sharedLoginDefault);
 
-		CharSequence text = "A profil has been find with the following activity_login : " + userLogin + "\n try to auto-connect";
+		if (!userLogin.equals(BasicSettings.sharedLoginDefault)) {
 
-		snack = Snackbar.make(findViewById(android.R.id.content), text, Snackbar.LENGTH_LONG);
+			CharSequence text = "A profil has been find with the following activity_login : " + userLogin + "\n try to auto-connect";
 
+			snack = Snackbar.make(findViewById(android.R.id.content), text, Snackbar.LENGTH_LONG);
 
-		View snackbarView = snack.getView();
-		FrameLayout.LayoutParams params =(FrameLayout.LayoutParams)snackbarView.getLayoutParams();
-		params.gravity = Gravity.TOP;
-		snackbarView.setLayoutParams(params);
+			View snackbarView = snack.getView();
+			FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) snackbarView.getLayoutParams();
+			params.gravity = Gravity.TOP;
+			snackbarView.setLayoutParams(params);
 
-		snackbarView.setBackgroundColor(ContextCompat.getColor(this, R.color.grey_eseo_3));
+			snackbarView.setBackgroundColor(ContextCompat.getColor(this, R.color.grey_eseo_3));
 
-		TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-		textView.setMaxLines(3);  // show multiple line
-		textView.setTextColor(ContextCompat.getColor(this, R.color.blue_eseo_1));
-		textView.setBackgroundColor(ContextCompat.getColor(this, R.color.grey_eseo_3));
-
+			TextView textView = snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+			textView.setMaxLines(3);  // show multiple line
+			textView.setTextColor(ContextCompat.getColor(this, R.color.blue_eseo_1));
+			textView.setBackgroundColor(ContextCompat.getColor(this, R.color.grey_eseo_3));
+		}
 	}
 
 
@@ -142,7 +136,6 @@ public class WelcomeActivity extends AppCompatActivity {
 		// Si l'utilisateur s'est déjà identifié précedement
 		if (!userLogin.equals(BasicSettings.sharedLoginDefault)) {
 			snack.show();
-
 			// Try to connect the user with the given values.
 			connectUser(userLogin, userPassword);
 
