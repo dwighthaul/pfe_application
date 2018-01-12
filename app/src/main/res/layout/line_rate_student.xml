@@ -27,8 +27,17 @@
             android:id="@+id/StudentID"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.40"
+            android:layout_weight="0.50"
             android:text="[StudentID]" />
+
+        <TextView
+            android:id="@+id/textViewNoter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="Noter"
+            tools:ignore="HardcodedText" />
 
         <ImageButton
             android:id="@+id/rateStudent"
@@ -36,6 +45,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/ic_content_paste_black_24dp" />
+
+
     </LinearLayout>
+
 
 </android.support.v7.widget.CardView>

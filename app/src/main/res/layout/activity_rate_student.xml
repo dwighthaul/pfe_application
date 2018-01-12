@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_eseo_3"
+    android:layout_margin="6dp"
+    android:padding="6dp"
     tools:context="fr.eseo.dis.hubertpa.pfe_application.activities.RateStudentActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/grey_eseo_3"
         android:orientation="vertical">
 
         <LinearLayout
@@ -23,6 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:text="[Student Id]" />
 
             <TextView
@@ -30,13 +31,41 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:text="[Student Name]" />
 
-            <ImageButton
-                android:id="@+id/rateStudent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/border_rounded_grey_eseo"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:padding="7dp">
+
+            <EditText
+                android:id="@+id/markeditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:nextFocusLeft="@id/globalMarkeditText"
+                android:nextFocusUp="@id/globalMarkeditText"
+                android:text="" />
+
+            <Button
+                android:id="@+id/buttonRate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.4"
+                android:text="Valider"
+                android:background="@drawable/border_rounded_blackgrey_eseo"
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
     </LinearLayout>

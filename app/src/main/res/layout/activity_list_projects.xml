@@ -33,63 +33,26 @@
                     android:layout_height="40dp"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/markSwitchMines"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:layout_weight="0.9"
+                        android:checked="false"
+                        tools:layout_editor_absoluteX="165dp" />
 
-                        <Switch
-                            android:id="@+id/markSwitch"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:checked="false"
-                            tools:layout_editor_absoluteX="69dp" />
-
-                        <TextView
-                            android:id="@+id/textViewFavoriteLabel"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_weight="1"
-                            android:text="Favoris"
-                            app:layout_constraintStart_toEndOf="@+id/markSwitch"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="HardcodedText,RtlCompat" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/textViewMesProjectsLabel"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.9">
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="0.9"
+                        android:text="Mes projects"
+                        app:layout_constraintStart_toEndOf="@+id/markSwitch"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText,RtlCompat" />
 
-                        <Switch
-                            android:id="@+id/markSwitchMines"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:checked="false"
-                            tools:layout_editor_absoluteX="165dp" />
-
-                        <TextView
-                            android:id="@+id/textViewMesProjectsLabel"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_weight="0.5"
-                            android:text="Mes projects"
-                            app:layout_constraintStart_toEndOf="@+id/markSwitch"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="HardcodedText,RtlCompat" />
-                    </LinearLayout>
-
-                    <Spinner
-                        android:id="@+id/juries_spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1" />
                 </LinearLayout>
 
                 <SearchView

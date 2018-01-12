@@ -7,6 +7,7 @@
     android:layout_margin="6dp"
     android:padding="6dp"
     tools:context="fr.eseo.dis.hubertpa.pfe_application.activities.DetailProjectActivity">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -26,6 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:text="[textViewiD]"
                     tools:ignore="HardcodedText" />
 
