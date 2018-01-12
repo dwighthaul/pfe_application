@@ -33,8 +33,8 @@ public class WelcomeActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
 
-		login = (Button) findViewById(R.id.button_login);
-		visiteur = (Button) findViewById(R.id.button_visitor);
+		login = findViewById(R.id.button_login);
+		visiteur = findViewById(R.id.button_visitor);
 
 		setCallback();
 
@@ -123,7 +123,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
 		snackbarView.setBackgroundColor(ContextCompat.getColor(this, R.color.grey_eseo_3));
 
-		TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+		TextView textView = snackbarView.findViewById(android.support.design.R.id.snackbar_text);
 		textView.setMaxLines(3);  // show multiple line
 		textView.setTextColor(ContextCompat.getColor(this, R.color.blue_eseo_1));
 		textView.setBackgroundColor(ContextCompat.getColor(this, R.color.grey_eseo_3));
