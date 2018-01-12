@@ -47,8 +47,9 @@ public class ProjectLIPRJ implements Parcelable {
 		this.project.setIdProject(in.readInt());
 		this.project.setTitle(in.readString());
 		this.project.setDescription(in.readString());
-
 		this.project.setConfidentiality(in.readInt());
+
+		this.setPoster(in.readByte() != 0);
 
 		this.supervisor = new User();
 		this.supervisor.setForename(in.readString());
@@ -82,8 +83,9 @@ public class ProjectLIPRJ implements Parcelable {
 		dest.writeInt(this.project.getIdProject());
 		dest.writeString(this.project.getTitle());
 		dest.writeString(this.project.getDescription());
-
 		dest.writeInt(this.project.getConfidentiality());
+
+		dest.writeByte((byte) (this.isPoster() ? 1 : 0));
 
 		dest.writeString(this.supervisor.getForename());
 		dest.writeString(this.supervisor.getSurname());

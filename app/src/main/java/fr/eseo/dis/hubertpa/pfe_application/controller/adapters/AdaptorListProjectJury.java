@@ -72,20 +72,6 @@ public class AdaptorListProjectJury extends BaseAdapter {
 		((TextView) result.findViewById(R.id.idProjectTextView)).setText(String.valueOf(item.getKey()));
 		((TextView) result.findViewById(R.id.nameProjectTextView)).setText(item.getValue());
 
-//		ImageButton goToRate = ((ImageButton) result.findViewById(R.id.rateStudent));
-//
-//		goToRate.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				final Map.Entry<Integer, String> student = item;
-//				Log.d("Test","Go to rate" + student.getValue());
-//				// student.getKey(), student.getValue()
-////				_activity.goToRatePage(item);
-//			}
-//		});
-
-
-
 		return result;
 	}
 

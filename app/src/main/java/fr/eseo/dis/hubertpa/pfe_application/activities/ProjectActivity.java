@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -53,6 +54,8 @@ public class ProjectActivity extends AppCompatActivity {
 	@Getter @Setter
 	LIPRJ liproj;
 
+	@Getter @Setter
+	LIPRJ myLiproj;
 	// The following list is use to be a buffer, the list to be display.
 	// This list can be modified if the user filter the result, ask to only display the favorits one
 	@Getter @Setter
@@ -74,11 +77,15 @@ public class ProjectActivity extends AppCompatActivity {
 
 	SearchView findProjectSearchView;
 
+	SwitchCompat sButton;
+
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 	    setContentView(R.layout.activity_list_projects);
+
+		sButton = findViewById(R.id.markSwitchMines);
 
 		mySwipeRefreshLayout = findViewById(R.id.swip_to_refresh);
 		findProjectSearchView = findViewById(R.id.findProjectSearchView);
@@ -90,6 +97,8 @@ public class ProjectActivity extends AppCompatActivity {
 
 	    liproj = new LIPRJ();
 
+		myLiproj = new LIPRJ();
+
 	    projectListBuffer = new ArrayList<>();
 
 	    NEW_CARD_COUNTER = 0;
@@ -99,6 +108,8 @@ public class ProjectActivity extends AppCompatActivity {
 		setCallback();
 
 		setActionOnRefrech();
+
+		setSwitchListeners();
 
 		setActionOnResearch();
 
@@ -114,29 +125,22 @@ public class ProjectActivity extends AppCompatActivity {
 
 				LIPRJ liproj = ProjectActivity.this.getLiproj();
 				List<ProjectLIPRJ> liprjsToSend = new ArrayList<>();
-				if (query.length() != 0) {
 
-					for (ProjectLIPRJ projectLIPRJ: liproj.getProjectList()) {
-						if(projectLIPRJ.getProject().getTitle().toLowerCase().contains(query.toLowerCase())) {
-							liprjsToSend.add(projectLIPRJ);
-						}
+				for (ProjectLIPRJ projectLIPRJ: liproj.getProjectList()) {
+					if(projectLIPRJ.getProject().getTitle().toLowerCase().contains(query.toLowerCase())) {
+						liprjsToSend.add(projectLIPRJ);
 					}
-					callback.onSuccess(liprjsToSend);
-				} else {
-					callback.onSuccess(liproj.getProjectList());
 				}
+				callback.onSuccess(liprjsToSend);
 				return true;
 			}
 
 			@Override
 			public boolean onQueryTextChange(String newText) {
 				callback.onSuccess(liproj.getProjectList());
-
 				return false;
 			}
-
 		});
-
 		findProjectSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
 			@Override
 			public boolean onClose() {
@@ -146,18 +150,7 @@ public class ProjectActivity extends AppCompatActivity {
 		});
 	}
 
-	private void processGetProjectsFake() {
-		String jsonObjectString = "{\"result\": \"OK\",\"api\": \"LIPRJ\",\"projects\": [{\"projectId\": 0,\"title\": \"Gestion main-libre tablette android\",\"descrip\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed placerat justo. Nunc a nulla pulvinar, pellentesque elit sed, interdum tellus. Nullam scelerisque tortor vel diam sagittis feugiat. Nullam tincidunt lectus nibh, et vestibulum arcu vehicula eu. Nullam ut elit interdum, vestibulum augue at, rutrum diam. Donec convallis, libero a ultricies congue, sem odio malesuada tortor, vitae vestibulum turpis tortor a augue. Donec sit amet pharetra magna. Vestibulum venenatis ligula a urna sodales cursus. Morbi hendrerit est vitae porttitor interdum. Sed lectus urna, blandit et lacinia non, porttitor nec sem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas ut fringilla justo. Integer accumsan vehicula pretium. Vestibulum non nisi et nulla lobortis fermentum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam urna sapien, maximus tempus orci ut, porta scelerisque nunc. Nunc dictum ultrices luctus. Aenean id tellus nec magna iaculis consequat. Donec sollicitudin tincidunt mauris. Mauris ut odio nulla. Etiam leo tellus, cursus cursus efficitur quis, sagittis quis turpis. Aenean et feugiat metus. Quisque leo neque, dictum sed ullamcorper non, varius sit amet eros. In ornare magna a mauris luctus, vel rutrum mauris mattis. Donec lacinia, urna quis condimentum pharetra, nisi nisl porta orci, non dapibus mi sem id eros. Donec iaculis rutrum tellus et vulputate. Phasellus eget luctus elit. Aliquam maximus tincidunt augue, vel lobortis mauris dignissim eget. Vivamus vestibulum pretium magna, vel ultricies augue elementum in. In vel hendrerit lacus. Aenean nec libero dictum, finibus libero sed, commodo dolor. Suspendisse magna dui, scelerisque quis sapien ut, vestibulum lacinia augue. Suspendisse a efficitur enim. In ullamcorper massa quis convallis imperdiet. In posuere ligula leo, hendrerit condimentum ligula iaculis eu. Vestibulum nisl lectus, porttitor vel rutrum et, scelerisque at dui. Phasellus a purus at nisi auctor laoreet et eu est. Aenean posuere.\",\"supervisor\": {\"forename\": \"Patrick\",\"surname\": \"ALBERS\"},\"poster\": true,\"confid\": 0,\"students\": [{\"userId\": 17,\"forename\": \"Victor\",\"surname\": \"VALLOIS\"},{\"userId\": 18,\"forename\": \"Josselin\",\"surname\": \"DORSO\"},{\"userId\": 19,\"forename\": \"Thomas\",\"surname\": \"JOUAULT\"}]},{\"projectId\": 1,\"title\": \"Reconnaissance langue des signes\",\"descrip\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed placerat justo. Nunc a nulla pulvinar, pellentesque elit sed, interdum tellus. Nullam scelerisque tortor vel diam sagittis feugiat. Nullam tincidunt lectus nibh, et vestibulum arcu vehicula eu. Nullam ut elit interdum, vestibulum augue at, rutrum diam. Donec convallis, libero a ultricies congue, sem odio malesuada tortor, vitae vestibulum turpis tortor a augue. Donec sit amet pharetra magna. Vestibulum venenatis ligula a urna sodales cursus. Morbi hendrerit est vitae porttitor interdum. Sed lectus urna, blandit et lacinia non, porttitor nec sem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas ut fringilla justo. Integer accumsan vehicula pretium. Vestibulum non nisi et nulla lobortis fermentum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam urna sapien, maximus tempus orci ut, porta scelerisque nunc. Nunc dictum ultrices luctus. Aenean id tellus nec magna iaculis consequat. Donec sollicitudin tincidunt mauris. Mauris ut odio nulla. Etiam leo tellus, cursus cursus efficitur quis, sagittis quis turpis. Aenean et feugiat metus. Quisque leo neque, dictum sed ullamcorper non, varius sit amet eros. In ornare magna a mauris luctus, vel rutrum mauris mattis. Donec lacinia, urna quis condimentum pharetra, nisi nisl porta orci, non dapibus mi sem id eros. Donec iaculis rutrum tellus et vulputate. Phasellus eget luctus elit. Aliquam maximus tincidunt augue, vel lobortis mauris dignissim eget. Vivamus vestibulum pretium magna, vel ultricies augue elementum in. In vel hendrerit lacus. Aenean nec libero dictum, finibus libero sed, commodo dolor. Suspendisse magna dui, scelerisque quis sapien ut, vestibulum lacinia augue. Suspendisse a efficitur enim. In ullamcorper massa quis convallis imperdiet. In posuere ligula leo, hendrerit condimentum ligula iaculis eu. Vestibulum nisl lectus, porttitor vel rutrum et, scelerisque at dui. Phasellus a purus at nisi auctor laoreet et eu est. Aenean posuere.\",\"supervisor\": {\"forename\": \"Patrick\",\"surname\": \"ALBERS\"},\"poster\": true,\"confid\": 0,\"students\": [{\"userId\": 20,\"forename\": \"Romain\",\"surname\": \"CREVAN\"},{\"userId\": 21,\"forename\": \"Anatole\",\"surname\": \"CHARRON\"},{\"userId\": 22,\"forename\": \"Thibaud\",\"surname\": \"CHEVRIER\"}]},{\"projectId\": 2,\"title\": \"Greenygrass\",\"descrip\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed placerat justo. Nunc a nulla pulvinar, pellentesque elit sed, interdum tellus. Nullam scelerisque tortor vel diam sagittis feugiat. Nullam tincidunt lectus nibh, et vestibulum arcu vehicula eu. Nullam ut elit interdum, vestibulum augue at, rutrum diam. Donec convallis, libero a ultricies congue, sem odio malesuada tortor, vitae vestibulum turpis tortor a augue. Donec sit amet pharetra magna. Vestibulum venenatis ligula a urna sodales cursus. Morbi hendrerit est vitae porttitor interdum. Sed lectus urna, blandit et lacinia non, porttitor nec sem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas ut fringilla justo. Integer accumsan vehicula pretium. Vestibulum non nisi et nulla lobortis fermentum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam urna sapien, maximus tempus orci ut, porta scelerisque nunc. Nunc dictum ultrices luctus. Aenean id tellus nec magna iaculis consequat. Donec sollicitudin tincidunt mauris. Mauris ut odio nulla. Etiam leo tellus, cursus cursus efficitur quis, sagittis quis turpis. Aenean et feugiat metus. Quisque leo neque, dictum sed ullamcorper non, varius sit amet eros. In ornare magna a mauris luctus, vel rutrum mauris mattis. Donec lacinia, urna quis condimentum pharetra, nisi nisl porta orci, non dapibus mi sem id eros. Donec iaculis rutrum tellus et vulputate. Phasellus eget luctus elit. Aliquam maximus tincidunt augue, vel lobortis mauris dignissim eget. Vivamus vestibulum pretium magna, vel ultricies augue elementum in. In vel hendrerit lacus. Aenean nec libero dictum, finibus libero sed, commodo dolor. Suspendisse magna dui, scelerisque quis sapien ut, vestibulum lacinia augue. Suspendisse a efficitur enim. In ullamcorper massa quis convallis imperdiet. In posuere ligula leo, hendrerit condimentum ligula iaculis eu. Vestibulum nisl lectus, porttitor vel rutrum et, scelerisque at dui. Phasellus a purus at nisi auctor laoreet et eu est. Aenean posuere.\",\"supervisor\": {\"forename\": \"Sebastien\",\"surname\": \"AUBIN\"},\"poster\": true,\"confid\": 0,\"students\": [{\"userId\": 23,\"forename\": \"Arnaud\",\"surname\": \"BILLY\"},{\"userId\": 24,\"forename\": \"Antoine\",\"surname\": \"ROBIC\"},{\"userId\": 25,\"forename\": \"Flavien\",\"surname\": \"REYNAUD\"},{\"userId\": 26,\"forename\": \"Timé\",\"surname\": \"KADEL\"},{\"userId\": 27,\"forename\": \"Lucas\",\"surname\": \"LEJEUNE\"}]},{\"projectId\": 3,\"title\": \"OPAL - Sécu des réseaux et dev. outils win\",\"descrip\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed placerat justo. Nunc a nulla pulvinar, pellentesque elit sed, interdum tellus. Nullam scelerisque tortor vel diam sagittis feugiat. Nullam tincidunt lectus nibh, et vestibulum arcu vehicula eu. Nullam ut elit interdum, vestibulum augue at, rutrum diam. Donec convallis, libero a ultricies congue, sem odio malesuada tortor, vitae vestibulum turpis tortor a augue. Donec sit amet pharetra magna. Vestibulum venenatis ligula a urna sodales cursus. Morbi hendrerit est vitae porttitor interdum. Sed lectus urna, blandit et lacinia non, porttitor nec sem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas ut fringilla justo. Integer accumsan vehicula pretium. Vestibulum non nisi et nulla lobortis fermentum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam urna sapien, maximus tempus orci ut, porta scelerisque nunc. Nunc dictum ultrices luctus. Aenean id tellus nec magna iaculis consequat. Donec sollicitudin tincidunt mauris. Mauris ut odio nulla. Etiam leo tellus, cursus cursus efficitur quis, sagittis quis turpis. Aenean et feugiat metus. Quisque leo neque, dictum sed ullamcorper non, varius sit amet eros. In ornare magna a mauris luctus, vel rutrum mauris mattis. Donec lacinia, urna quis condimentum pharetra, nisi nisl porta orci, non dapibus mi sem id eros. Donec iaculis rutrum tellus et vulputate. Phasellus eget luctus elit. Aliquam maximus tincidunt augue, vel lobortis mauris dignissim eget. Vivamus vestibulum pretium magna, vel ultricies augue elementum in. In vel hendrerit lacus. Aenean nec libero dictum, finibus libero sed, commodo dolor. Suspendisse magna dui, scelerisque quis sapien ut, vestibulum lacinia augue. Suspendisse a efficitur enim. In ullamcorper massa quis convallis imperdiet. In posuere ligula leo, hendrerit condimentum ligula iaculis eu. Vestibulum nisl lectus, porttitor vel rutrum et, scelerisque at dui. Phasellus a purus at nisi auctor laoreet et eu est. Aenean posuere.\",\"supervisor\": {\"forename\": \"Olivier\",\"surname\": \"BEAUDOUX\"},\"poster\": true,\"confid\": 0,\"students\": [{\"userId\": 28,\"forename\": \"Alexis\",\"surname\": \"DEMAY\"},{\"userId\": 29,\"forename\": \"Romain\",\"surname\": \"HAMON\"},{\"userId\": 30,\"forename\": \"Thibaud\",\"surname\": \"DUBLE\"}]}]}\";	}";
-		JSONObject jsonObject = null;
-		try {
-			jsonObject = new JSONObject(jsonObjectString);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		liproj = JsonParserAPI.parseLIPRJ(jsonObject);
 
-		callback.onSuccess(liproj.getProjectList());
-	}
 
 
 	/**
@@ -220,6 +213,12 @@ public class ProjectActivity extends AppCompatActivity {
 	 *
 	 */
 	private void processGetProjects() {
+		sButton.setChecked(false);
+		getListProjects();
+		getMyProjects();
+	}
+
+	private void getListProjects() {
 		mySwipeRefreshLayout.setRefreshing(true);
 
 		// Dont care about this, it's just to display an error if the user
@@ -234,6 +233,7 @@ public class ProjectActivity extends AppCompatActivity {
 		// Get the good url with the good variables
 
 		String url = WebServiceConnexion.getLIPRJ(_login, _token);
+
 		RequestQueue queue = Volley.newRequestQueue(this, new HurlStack(null, WebServiceConnexion.newSslSocketFactory(this)));
 
 		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -248,7 +248,7 @@ public class ProjectActivity extends AppCompatActivity {
 					if (result.equals("OK")) {
 						LIPRJ liprj = JsonParserAPI.parseLIPRJ(jsonObject);
 						ProjectActivity.this.setLiproj(liprj);
-						Toast.makeText(ProjectActivity.this, "List of all the projects", Toast.LENGTH_LONG).show();
+						Toast.makeText(ProjectActivity.this, "List of all the projects. \n Nombre de projets : " + liprj.getProjectList().size(), Toast.LENGTH_LONG).show();
 
 						callback.onSuccess(liprj.getProjectList());
 					} else {
@@ -256,6 +256,38 @@ public class ProjectActivity extends AppCompatActivity {
 						callback.onError(jsonObject.getString(error));
 					}
 					mySwipeRefreshLayout.setRefreshing(false);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+			}
+		});
+		queue.add(stringRequest);
+	}
+
+	private void getMyProjects() {
+		// Get the token from the saved data
+		final String _token = WebServiceConnexion.getToken(this);
+		final String _login = WebServiceConnexion.getLogin(this);
+
+		// Get the good url with the good variables
+
+		String url = WebServiceConnexion.getMYPRJ(_login, _token);
+
+		RequestQueue queue = Volley.newRequestQueue(this, new HurlStack(null, WebServiceConnexion.newSslSocketFactory(this)));
+
+		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+			@Override
+			public void onResponse(String response) {
+				try {
+					JSONObject jsonObject = new JSONObject(response);
+					String result = jsonObject.getString("result");
+					if (result.equals("OK")) {
+						myLiproj = JsonParserAPI.parseLIPRJ(jsonObject);
+					}
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -302,8 +334,6 @@ public class ProjectActivity extends AppCompatActivity {
 	}
 
 	public void setSwitchListeners() {
-		//Get widgets reference from XML layout
-		Switch sButton = findViewById(R.id.markSwitchMines);
 
 		//Set a CheckedChange Listener for Switch Button
 		sButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
@@ -311,11 +341,15 @@ public class ProjectActivity extends AppCompatActivity {
 			public void onCheckedChanged(CompoundButton cb, boolean on){
 				if(on)
 				{
-					//Do something when Switch button is on/checked
+					Toast.makeText(ProjectActivity.this, "Mes projets. \n Nombre de projets : " +
+							myLiproj.getProjectList().size(), Toast.LENGTH_LONG).show();
+					callback.onSuccess(myLiproj.getProjectList());
 				}
 				else
 				{
-					//Do something when Switch is off/unchecked
+					Toast.makeText(ProjectActivity.this, "Liste tous les projets. \n Nombre de projets : " +
+							liproj.getProjectList().size(), Toast.LENGTH_LONG).show();
+					callback.onSuccess(liproj.getProjectList());
 				}
 			}
 		});

@@ -2,6 +2,7 @@ package fr.eseo.dis.hubertpa.pfe_application.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,15 +12,26 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.controller.adapters.AdaptorRateStudent;
+import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.VolleyCallbackPOSTR;
+import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.StyleProject;
+import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListUser;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.User;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIPRJ;
@@ -33,6 +45,7 @@ public class DetailProjectActivity extends AppCompatActivity {
 	private TextView supeView;
 	private ListView studListView;
 	private TextView posterView;
+	private ImageView projectImageView;
 
 	ProjectLIPRJ projectLIPRJ;
 
@@ -53,11 +66,31 @@ public class DetailProjectActivity extends AppCompatActivity {
 		supeView = findViewById(R.id.textViewSupervisorValue);
 		studListView  = findViewById(R.id.textViewStudentValue);
 		posterView = findViewById(R.id.TextViewPoster);
+		projectImageView = findViewById(R.id.projectImageView);
 
 		loadElements();
 
 		dealWithLayoutIssues();
 
+		dealWithPosterDisplay();
+	}
+
+	private void dealWithPosterDisplay() {
+		if(projectLIPRJ.isPoster()) {
+			displayPoster.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View view) {
+					Log.d("Welcome", "Connect");
+					seePoster(projectLIPRJ);
+				}
+
+			});
+		} else {
+			displayPoster.setText("Poster non disponible");
+			ConstraintLayout constraintLayout = findViewById(R.id.containerImage);
+			constraintLayout.setVisibility(View.GONE);
+		}
 	}
 
 	private void dealWithLayoutIssues() {
@@ -85,15 +118,6 @@ public class DetailProjectActivity extends AppCompatActivity {
 		titleView.setText(projectLIPRJ.getProject().getTitle());
 		descView.setText(projectLIPRJ.getProject().getDescription());
 
-		displayPoster.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View view) {
-				Log.d("Welcome", "Connect");
-				seePoster(projectLIPRJ);
-			}
-
-		});
 
 		String supervisor = projectLIPRJ.getSupervisor().getForename() + " " + projectLIPRJ.getSupervisor().getSurname();
 		supeView.setText(supervisor);
@@ -118,16 +142,17 @@ public class DetailProjectActivity extends AppCompatActivity {
 	public void loadPoster() {
 		if(projectLIPRJ.isPoster()) {
 			posterView.setVisibility(View.GONE);
+			setImage(getCallbackPoster());
 		} else {
 			ConstraintLayout constraintLayout = findViewById(R.id.containerImage);
 			constraintLayout.setVisibility(View.GONE);
 		}
-		// TODO
 	}
 
 	public void goToRatePage(Map.Entry<Integer, String> student) {
 		Intent intent = new Intent(DetailProjectActivity.this, RateStudentActivity.class);
 		intent.putExtra("studentId", student.getKey());
+		intent.putExtra("projectId", projectLIPRJ.getProject().getIdProject());
 		intent.putExtra("studentName", student.getValue());
 		DetailProjectActivity.this.startActivity(intent);
 	}
@@ -136,6 +161,51 @@ public class DetailProjectActivity extends AppCompatActivity {
 		Intent intent = new Intent(this, DislayPosterActivity.class);
 		intent.putExtra("selected_project", projectLIPRJ);
 		startActivity(intent);
+	}
+
+	private void setImage(final VolleyCallbackPOSTR callbackPOSTR){
+
+		// Get the token from the saved data
+		final String _token = WebServiceConnexion.getToken(this);
+		final String _login = WebServiceConnexion.getLogin(this);
+
+		// Get the good url with the good variables
+		String url = WebServiceConnexion.getPOSTR(_login, _token, projectLIPRJ.getProject().getIdProject(), StyleProject.FULL);
+		RequestQueue queue = Volley.newRequestQueue(this, new HurlStack(null, WebServiceConnexion.newSslSocketFactory(this)));
+
+
+		ImageRequest stringRequest = new ImageRequest(url,
+				new Response.Listener<Bitmap>() {
+					@Override
+					public void onResponse(Bitmap bitmap) {
+						callbackPOSTR.onSuccess(bitmap);
+					}
+				}, 0, 0, null,
+				new Response.ErrorListener() {
+					public void onErrorResponse(VolleyError error) {
+					}
+				});
+
+
+		queue.add(stringRequest);
+	}
+
+	public VolleyCallbackPOSTR getCallbackPoster() {
+		return new VolleyCallbackPOSTR() {
+
+			@Override
+			public void onSuccess(Bitmap bitmap) {
+				try {
+					projectImageView .setImageBitmap(bitmap);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onError(String errorMessage) {
+			}
+		};
 	}
 
 

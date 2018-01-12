@@ -65,19 +65,13 @@ public class WelcomeActivity extends AppCompatActivity {
 			public void onClick(View view) {
 				Log.d("Welcome", "Visiteur");
 				connectUser(WebServiceConnexion.DEFAULT_LOGIN, WebServiceConnexion.DEFAULT_PASSWORD);
-
 			}
 		});
 
 	}
 
 	private void connectUser(String userLogin, String userPassword) {
-		Intent intent = new Intent(this, ProjectActivity.class);
-		startActivity(intent);
-
-
-
-//		WebServiceConnexion.getConnected(userLogin, userPassword, this, processResponseVisitor);
+		WebServiceConnexion.getConnected(userLogin, userPassword, this, processResponseVisitor);
 	}
 
 
@@ -99,10 +93,8 @@ public class WelcomeActivity extends AppCompatActivity {
 			}
 			@Override
 			public void onError() {
-
 			}
 		};
-
 	}
 
 	private void setSnackbar() {
