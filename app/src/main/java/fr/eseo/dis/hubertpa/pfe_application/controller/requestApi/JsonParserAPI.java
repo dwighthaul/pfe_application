@@ -1,5 +1,6 @@
 package fr.eseo.dis.hubertpa.pfe_application.controller.requestApi;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -18,6 +19,7 @@ import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Student;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.User;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LOGON;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.NOTES;
+import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.PORTE;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.POSTR;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.NotesNOTES;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIJUR;
@@ -28,6 +30,7 @@ import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.MYJUR;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.MYPRJ;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.JuryLIJUR;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIPRJ;
+import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectPORTE;
 
 /**
  * Created by paulhubert on 30/12/17.
@@ -128,8 +131,8 @@ public class JsonParserAPI {
 		return lirpj;
 	}
 
-	public static MYPRJ parseMYPRJ(JSONObject jsonObject) {
-		return (MYPRJ) parseLIPRJ(jsonObject);
+	public static LIPRJ parseMYPRJ(JSONObject jsonObject) {
+		return parseLIPRJ(jsonObject);
 	}
 
 
@@ -191,12 +194,12 @@ public class JsonParserAPI {
 		return lijur;
 	}
 
-	public static MYJUR parseMYJUR(JSONObject jsonObject) {
-		return (MYJUR) parseMYJUR(jsonObject);
+	public static LIJUR parseMYJUR(JSONObject jsonObject) {
+		return parseLIJUR(jsonObject);
 	}
 
-	public static JYINF parseJYINF(JSONObject jsonObject) {
-		return (JYINF) parseLIJUR(jsonObject);
+	public static LIPRJ parseJYINF(JSONObject jsonObject) {
+		return parseLIPRJ(jsonObject);
 
 	}
 
@@ -210,7 +213,6 @@ public class JsonParserAPI {
 	@Deprecated
 	public static POSTR parsePOSTR(JSONObject jsonObject) {
 		return null;
-
 	}
 
 	public static NOTES parseNOTES(JSONObject jsonObject) {
@@ -241,15 +243,33 @@ public class JsonParserAPI {
 		return notes;
 	}
 
+	public static PORTE parsePORTE(JSONObject jsonObject) {
+		PORTE porte = new PORTE();
 
+		try {
+			JSONArray listNotesJson = jsonObject.getJSONArray("projects");
+			List<ProjectPORTE> listProjectPORTE = new ArrayList<ProjectPORTE>();
 
+			for (int i = 0; i < listNotesJson.length(); i++) {
 
+				JSONObject jsonObjectProject = listNotesJson.getJSONObject(i);
+				jsonObjectProject.put("descrip", jsonObjectProject.getString("description"));
 
+				Project project = Project.fromJson(jsonObjectProject);
 
+				Bitmap bitmap = null;
+				//new Bitmap();
+				//jsonObjectProject.get("poster");
 
+				ProjectPORTE projectPORTE = new ProjectPORTE(project, bitmap);
+				listProjectPORTE.add(projectPORTE);
+			}
 
-
-
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return porte;
+	}
 
 
 

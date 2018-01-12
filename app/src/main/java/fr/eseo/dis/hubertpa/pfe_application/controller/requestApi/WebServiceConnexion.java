@@ -57,7 +57,7 @@ public abstract class WebServiceConnexion  {
 
 	private static final String URL_ESEO = "https://192.168.4.10/www/pfe/webservice.php?q=";
 
-	public static final String URL = URL_PERSO_PAUL;
+	public static final String URL = URL_ESEO;
 
 	//Initial validation of users credentials
 	private static final String LOGON = URL + "LOGON";
@@ -173,7 +173,7 @@ public abstract class WebServiceConnexion  {
 		final String _password = password;
 
 		// Get the URL to log into the server
-		String url = WebServiceConnexion.getLOGON(login, password);
+		final String url = WebServiceConnexion.getLOGON(login, password);
 
 		RequestQueue queue = Volley.newRequestQueue(activity, new HurlStack(null, WebServiceConnexion.newSslSocketFactory(activity)));
 
@@ -181,7 +181,6 @@ public abstract class WebServiceConnexion  {
 			@Override
 			public void onResponse(String response) {
 				try {
-
 					JSONObject jsonObject = new JSONObject(response);
 					String result = jsonObject.getString("result");
 
@@ -201,6 +200,7 @@ public abstract class WebServiceConnexion  {
 					}
 
 				} catch (JSONException e) {
+
 					e.printStackTrace();
 				}
 			}
@@ -208,7 +208,7 @@ public abstract class WebServiceConnexion  {
 
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				makeToster(_activity, "Error to connected");
+				makeToster(_activity, "Error to connect");
 			}
 		});
 
