@@ -1,5 +1,7 @@
 package fr.eseo.dis.hubertpa.pfe_application.activities;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;

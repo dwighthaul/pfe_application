@@ -2,6 +2,7 @@ package fr.eseo.dis.hubertpa.pfe_application.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -56,7 +57,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 	private View mLoginFormView;
 	View focusView = null;
 
+	Button visiteur;
+
 	VolleyCallbackLOGON response;
+	@SuppressLint("WrongViewCast")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -90,14 +94,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 		mLoginFormView = findViewById(R.id.login_form);
 		mProgressView = findViewById(R.id.login_progress);
 
-
-
 		response = new VolleyCallbackLOGON() {
 			@Override
 			public void onSuccess() {
-
-
-
 				Log.d("LoginActivity", "Click");
 				Intent intent = new Intent(LoginActivity.this, ProjectActivity.class);
 				// Use to set the default app as this new activity and clean the stack
@@ -115,6 +114,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 			}
 		};
+
+		//Sign in as a visitor
+		//visiteur = findViewById(R.id.visitor_sign_in);
 	}
 
 	private void populateAutoComplete() {

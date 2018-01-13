@@ -19,7 +19,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Jury {
 
-
 	@Getter @Setter
 	private int idJury;
 

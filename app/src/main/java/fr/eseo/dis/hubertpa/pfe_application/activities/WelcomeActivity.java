@@ -70,7 +70,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
 	}
 
-	private void connectUser(String userLogin, String userPassword) {
+	public void connectUser(String userLogin, String userPassword) {
 		WebServiceConnexion.getConnected(userLogin, userPassword, this, processResponseVisitor);
 	}
 
