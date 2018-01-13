@@ -34,8 +34,8 @@
 
     <ScrollView
         android:id="@+id/login_form"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/email_login_form"
@@ -82,11 +82,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/not_filled_rounded_button"
+                android:background="@drawable/filled_rounded_button"
                 android:text="@string/action_sign_in"
+                android:textColor="@color/filled_rounded_button"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
     </ScrollView>
+
+    <TextView
+        android:id="@+id/visitor_sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical|center"
+        android:text="@string/visitor_sign_in" />
+
 </LinearLayout>
