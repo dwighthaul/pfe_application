@@ -75,6 +75,8 @@
     <string name="ajouter_une_alarme_pour_ce_jury">Ajouter une alarme pour ce jury</string>
     <string name="liste_des_juries">Liste des juries :</string>
     <string name="liste_des_projects">Liste des projects :</string>
+    <string name="noter_le_project">Noter le project</string>
+    <string name="noter_le_projet">Noter le projet</string>
 
     <!--activity_detail_project_from_jury-->
 

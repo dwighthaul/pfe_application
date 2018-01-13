@@ -3,40 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="6dp"
     android:padding="6dp"
-    tools:context="fr.eseo.dis.hubertpa.pfe_application.activities.RateStudentActivity">
+    tools:context="fr.eseo.dis.hubertpa.pfe_application.activities.MarkStudentsFromProjectActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="6dp"
+        tools:layout_editor_absoluteY="6dp"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_bottom_red_eseo_large_text"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textViewStudentId"
-                android:layout_width="match_parent"
+                android:id="@+id/textViewProjectName"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="[Student Id]"
+                android:text="[NameProject]"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <TextView
-                android:id="@+id/textViewStudentName"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2"
-                android:text="[Student Name]"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,8 +40,18 @@
             android:orientation="vertical"
             android:padding="7dp">
 
+            <TextView
+                android:id="@+id/textViewNoteGlobale"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="Note globale"
+                android:textColor="@color/red_eseo_2"
+                tools:ignore="HardcodedText,RtlHardcoded" />
+
             <EditText
-                android:id="@+id/markeditText"
+                android:id="@+id/globalMarkeditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -60,14 +62,29 @@
                 android:text="" />
 
             <Button
-                android:id="@+id/buttonRate"
+                android:id="@+id/buttonRateAllStudent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.4"
-                android:text="Valider"
                 android:background="@drawable/border_rounded_blackgrey_eseo"
+                android:text="Valider"
                 tools:ignore="HardcodedText" />
-
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:padding="2dp"
+            android:background="@drawable/border_rounded_blackgrey_eseo"
+            >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/ListViewStudentValue"
+                android:padding="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

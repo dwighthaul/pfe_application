@@ -99,4 +99,8 @@ public class User implements Parcelable {
 		parcel.writeString(this.getForename());
 		parcel.writeString(this.getSurname());
 	}
+
+	public String getFormatedString() {
+		return this.getForename() + " " + this.getSurname();
+	}
 }

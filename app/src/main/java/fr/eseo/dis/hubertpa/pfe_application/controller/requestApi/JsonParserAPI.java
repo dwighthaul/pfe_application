@@ -167,18 +167,18 @@ public class JsonParserAPI {
 			JSONArray listNotesJson = jsonObject.getJSONArray("notes");
 			List<JuryLIJUR> listJury = new ArrayList<>();
 
-
 			for (int i = 0; i < listNotesJson.length(); i++) {
 
 				JSONObject noteJSON = listNotesJson.getJSONObject(i);
 
-				Student student = (Student) Student.fromJson(noteJSON);
+				User student = User.fromJson(noteJSON);
 
 				int mynote = noteJSON.getInt("mynote");
-
 				int avgnote = noteJSON.getInt("avgnote");
 
-				NotesNOTES notesNOTES = new NotesNOTES(student, mynote , avgnote);
+				NotesNOTES notesNOTES = new NotesNOTES(student);
+				notesNOTES.setMynote(mynote);
+				notesNOTES.setAvgnote(avgnote);
 
 				notes.getNotesList().add(notesNOTES);
 			}

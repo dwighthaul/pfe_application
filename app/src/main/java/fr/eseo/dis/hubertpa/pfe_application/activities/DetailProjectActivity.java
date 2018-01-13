@@ -12,23 +12,31 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
-import fr.eseo.dis.hubertpa.pfe_application.controller.adapters.AdaptorRateStudent;
+import fr.eseo.dis.hubertpa.pfe_application.controller.adapters.LineStudentDetailProject;
+import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.GlobalVolleyCallback;
 import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.VolleyCallbackPOSTR;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.StyleProject;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
@@ -40,11 +48,14 @@ public class DetailProjectActivity extends AppCompatActivity {
 
 	private TextView idView;
 	private TextView titleView;
-	private Button displayPoster;
 	private TextView descView;
+	private Button displayPoster;
+	private EditText globalMarkeditText;
+	private Button buttonRateProject;
 	private TextView supeView;
 	private ListView studListView;
 	private TextView posterView;
+	private Button buttonRateProjectValider;
 	private ImageView projectImageView;
 
 	ProjectLIPRJ projectLIPRJ;
@@ -61,9 +72,14 @@ public class DetailProjectActivity extends AppCompatActivity {
 		idView = findViewById(R.id.textViewiD);
 		titleView = findViewById(R.id.textViewTitle);
 		displayPoster = findViewById(R.id.displayPoster);
+
+		buttonRateProject = findViewById(R.id.buttonRateProject);
 		descView = findViewById(R.id.textViewDescriptionValue);
 		descView.setMovementMethod(new ScrollingMovementMethod());
+
 		supeView = findViewById(R.id.textViewSupervisorValue);
+		globalMarkeditText = findViewById(R.id.globalMarkeditText);
+		buttonRateProjectValider = findViewById(R.id.buttonRateProjectValider);
 		studListView  = findViewById(R.id.textViewStudentValue);
 		posterView = findViewById(R.id.TextViewPoster);
 		projectImageView = findViewById(R.id.projectImageView);
@@ -72,7 +88,53 @@ public class DetailProjectActivity extends AppCompatActivity {
 
 		dealWithLayoutIssues();
 
+		setListeners();
+	}
+
+
+	private void setListeners() {
+		listenerGoToRateProject();
 		dealWithPosterDisplay();
+		setButtonRateProjectValider();
+	}
+
+
+	private void listenerGoToRateProject() {
+		buttonRateProject.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				Log.d("GoToRate", "Connect");
+				goToRatePage(projectLIPRJ);
+			}
+		});
+	}
+
+	private void setButtonRateProjectValider () {
+		buttonRateProjectValider.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				Log.d("DetailProjectActivity", "setButtonRateProjectValider");
+				rateStudents(callbackValidateMark());
+			}
+
+		});
+
+	}
+
+	private GlobalVolleyCallback callbackValidateMark() {
+		return new GlobalVolleyCallback() {
+			@Override
+			public void onSuccess() {
+				Toast.makeText(DetailProjectActivity.this, "Note des étudiants du project mise à jour", Toast.LENGTH_LONG).show();
+			}
+
+			@Override
+			public void onError(String errorMessage) {
+
+			}
+		};
 	}
 
 	private void dealWithPosterDisplay() {
@@ -133,7 +195,7 @@ public class DetailProjectActivity extends AppCompatActivity {
 			listStudentsMap.put(student.getIdUser(), fullName);
 		}
 
-		AdaptorRateStudent adapter = new AdaptorRateStudent(this, listStudentsMap);
+		LineStudentDetailProject adapter = new LineStudentDetailProject(this, listStudentsMap);
 		studListView.setAdapter(adapter);
 
 		loadPoster();
@@ -149,11 +211,9 @@ public class DetailProjectActivity extends AppCompatActivity {
 		}
 	}
 
-	public void goToRatePage(Map.Entry<Integer, String> student) {
-		Intent intent = new Intent(DetailProjectActivity.this, RateStudentActivity.class);
-		intent.putExtra("studentId", student.getKey());
-		intent.putExtra("projectId", projectLIPRJ.getProject().getIdProject());
-		intent.putExtra("studentName", student.getValue());
+	public void goToRatePage(ProjectLIPRJ projectLIPRJ) {
+		Intent intent = new Intent(DetailProjectActivity.this, MarkStudentsFromProjectActivity.class);
+		intent.putExtra("selected_project", projectLIPRJ);
 		DetailProjectActivity.this.startActivity(intent);
 	}
 
@@ -161,6 +221,19 @@ public class DetailProjectActivity extends AppCompatActivity {
 		Intent intent = new Intent(this, DislayPosterActivity.class);
 		intent.putExtra("selected_project", projectLIPRJ);
 		startActivity(intent);
+	}
+
+	private void rateStudents(GlobalVolleyCallback callback) {
+		for (User student : projectLIPRJ.getListStudents()) {
+			final int _idStudent = student.getIdUser();
+			final String _nameStudent = student.getFormatedString();
+			int noteValue = Integer.valueOf(globalMarkeditText.getText().toString());
+			final GlobalVolleyCallback _callback = callback;
+			sendNoteStudentProject(noteValue, _idStudent, projectLIPRJ.getProject().getIdProject(), this, callback);
+
+
+		}
+
 	}
 
 	private void setImage(final VolleyCallbackPOSTR callbackPOSTR){
@@ -190,7 +263,7 @@ public class DetailProjectActivity extends AppCompatActivity {
 		queue.add(stringRequest);
 	}
 
-	public VolleyCallbackPOSTR getCallbackPoster() {
+	private VolleyCallbackPOSTR getCallbackPoster() {
 		return new VolleyCallbackPOSTR() {
 
 			@Override
@@ -206,6 +279,45 @@ public class DetailProjectActivity extends AppCompatActivity {
 			public void onError(String errorMessage) {
 			}
 		};
+	}
+
+
+	public static void sendNoteStudentProject(int noteValue, int idStudent, int idProject, AppCompatActivity activity, final GlobalVolleyCallback callback) {
+		// Get the token from the saved data
+
+		final String _token = WebServiceConnexion.getToken(activity);
+		final String _login = WebServiceConnexion.getLogin(activity);
+
+		if (noteValue <= 20) {
+			String url = WebServiceConnexion.getNEWNT(_login, _token, idProject, idStudent, noteValue);
+
+			StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+				@Override
+				public void onResponse(String response) {
+					try {
+						JSONObject jsonObject = new JSONObject(response);
+						String result = jsonObject.getString("result");
+
+						if (result.equals("OK")) {
+							callback.onSuccess();
+						} else {
+							callback.onError(jsonObject.getString("error"));
+						}
+
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			}, new Response.ErrorListener() {
+
+				@Override
+				public void onErrorResponse(VolleyError error) {
+				}
+			});
+
+			RequestQueue queue = Volley.newRequestQueue(activity, new HurlStack(null, WebServiceConnexion.newSslSocketFactory(activity)));
+			queue.add(stringRequest);
+		}
 	}
 
 

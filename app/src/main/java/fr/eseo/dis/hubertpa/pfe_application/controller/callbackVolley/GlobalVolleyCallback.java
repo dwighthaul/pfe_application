@@ -9,5 +9,5 @@ import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIJUR;
 public interface GlobalVolleyCallback {
 	void onSuccess();
 
-	void onError();
+	void onError(String errorMessage);
 }

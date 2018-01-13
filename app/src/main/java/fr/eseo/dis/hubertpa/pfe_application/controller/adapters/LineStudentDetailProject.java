@@ -20,17 +20,15 @@ import java.util.Map;
 import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.activities.DetailProjectActivity;
 
-/**
- * Created by paulhubert on 08/01/18.
- */
 
-public class AdaptorRateStudent extends BaseAdapter {
+
+public class LineStudentDetailProject extends BaseAdapter {
 
 	private final ArrayList _listStudents;
 
 	DetailProjectActivity _activity;
 
-	public AdaptorRateStudent(DetailProjectActivity activity, HashMap<Integer, String> listStudents) {
+	public LineStudentDetailProject(DetailProjectActivity activity, HashMap<Integer, String> listStudents) {
 		_listStudents = new ArrayList();
 		_listStudents.addAll(listStudents.entrySet());
 
@@ -60,7 +58,7 @@ public class AdaptorRateStudent extends BaseAdapter {
 		final View result;
 
 		if (convertView == null) {
-			result = LayoutInflater.from(parent.getContext()).inflate(R.layout.line_rate_student, parent, false);
+			result = LayoutInflater.from(parent.getContext()).inflate(R.layout.line_detail_student_detail_project, parent, false);
 		} else {
 			result = convertView;
 		}
@@ -69,20 +67,6 @@ public class AdaptorRateStudent extends BaseAdapter {
 
 		((TextView) result.findViewById(R.id.StudentName)).setText(String.valueOf(item.getKey()));
 		((TextView) result.findViewById(R.id.StudentID)).setText(item.getValue());
-
-		ImageButton goToRate = ((ImageButton) result.findViewById(R.id.rateStudent));
-
-		goToRate.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				final Map.Entry<Integer, String> student = item;
-				Log.d("Test","Go to rate" + student.getValue());
-				// student.getKey(), student.getValue()
-				_activity.goToRatePage(item);
-			}
-		});
-
-
 
 		return result;
 	}

@@ -12,44 +12,33 @@
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
     <application
-
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-
         <activity
             android:name=".activities.WelcomeActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".activities.ProjectActivity" />
-
         <activity android:name=".activities.LoginActivity" />
-
         <activity android:name=".activities.JuryActivity" />
-
         <activity android:name=".activities.MarkActivity" />
-
         <activity android:name=".testActivities.Test" />
-
         <activity android:name=".activities.DetailProjectActivity" />
-
         <activity android:name=".activities.SettingsActivity" />
-
         <activity android:name=".activities.RateStudentActivity" />
-
         <activity android:name=".activities.DislayPosterActivity" />
-
         <activity android:name=".activities.TakeNotesProjectActivity" />
-
-        <activity android:name=".activities.DetailJuryActivity"/>
+        <activity android:name=".activities.DetailJuryActivity" />
+        <activity android:name=".activities.MarkStudentsFromProjectActivity"></activity>
     </application>
 
 </manifest>

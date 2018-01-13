@@ -42,11 +42,12 @@
 
             </LinearLayout>
 
+
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/displayPoster"
@@ -55,9 +56,19 @@
                     android:layout_margin="2dp"
                     android:background="@drawable/border_rounded_red_eseo"
                     android:padding="2dp"
+                    android:layout_weight="1"
                     android:text="@string/afficher_le_poster" />
-            </LinearLayout>
 
+                <Button
+                    android:id="@+id/buttonRateProject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/border_rounded_red_eseo"
+                    android:padding="2dp"
+                    android:layout_weight="1"
+                    android:text="@string/noter_le_projet" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
@@ -157,12 +168,12 @@
                     android:text="" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/buttonRateProjectValider"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.4"
-                    android:text="Valider"
                     android:background="@drawable/border_rounded_blackgrey_eseo"
+                    android:text="Valider"
                     tools:ignore="HardcodedText" />
 
             </LinearLayout>
@@ -229,4 +240,3 @@
     </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
-

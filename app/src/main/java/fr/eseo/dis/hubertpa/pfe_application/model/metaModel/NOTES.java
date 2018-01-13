@@ -3,6 +3,7 @@ package fr.eseo.dis.hubertpa.pfe_application.model.metaModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListNote;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.NotesNOTES;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIPRJ;
 import lombok.AllArgsConstructor;
@@ -18,11 +19,11 @@ import lombok.Setter;
 public class NOTES {
 
 	@Getter @Setter @NonNull
-	List<NotesNOTES> notesList;
+	ListNote notesList;
 
 
 
 	public NOTES() {
-		notesList = new ArrayList<NotesNOTES>();
+		notesList = new ListNote();
 	}
 }

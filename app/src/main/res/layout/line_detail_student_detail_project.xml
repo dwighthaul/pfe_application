@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
     android:background="@color/grey_eseo_3"
     tools:context="fr.eseo.dis.hubertpa.pfe_application.activities.DetailProjectActivity">
 
@@ -17,41 +16,18 @@
         android:textAppearance="?android:attr/textAppearanceListItemSmall">
 
         <TextView
-            android:id="@+id/studentIDTextView"
+            android:id="@+id/StudentName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="[StudentID]" />
-
-        <TextView
-            android:id="@+id/studentNameTextView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.80"
             android:text="[StudentName]" />
 
         <TextView
-            android:id="@+id/currentMarkTextView"
+            android:id="@+id/StudentID"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="[10]" />
-
-        <TextView
-            android:id="@+id/textViewNoter"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:text="Noter"
-            tools:ignore="HardcodedText" />
-
-        <ImageButton
-            android:id="@+id/rateStudentImageButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_content_paste_black_24dp" />
+            android:layout_weight="0.50"
+            android:text="[StudentID]" />
 
 
     </LinearLayout>

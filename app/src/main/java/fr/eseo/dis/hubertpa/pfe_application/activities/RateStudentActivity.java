@@ -41,6 +41,7 @@ public class RateStudentActivity extends AppCompatActivity {
 	EditText markeditText;
 
 	int idStudent;
+	int noteStudent;
 	int idProject;
 	String nameStudent;
 
@@ -53,87 +54,52 @@ public class RateStudentActivity extends AppCompatActivity {
 		studentIdTextView = findViewById(R.id.textViewStudentId);
 		buttonRate = findViewById(R.id.buttonRate);
 		markeditText = findViewById(R.id.markeditText);
+
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();
 
-
 		assert bundle != null;
 		idStudent = bundle.getInt("studentId");
+		noteStudent = bundle.getInt("studentNote");
 		idProject = bundle.getInt("projectId");
 		nameStudent = bundle.getString("studentName");
 
+		markeditText.setText(String.valueOf(noteStudent));
 		studentIdTextView.setText(String.valueOf(idStudent));
 		studentNameTextView.setText(nameStudent);
 
 		addListenerButton();
+
 	}
 
 	private void addListenerButton() {
 		buttonRate.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
 				try {
 					int note = Integer.parseInt(markeditText.getText().toString());
-					if (note > 20) {
-						Toast.makeText(RateStudentActivity.this, "Entrée non valide", Toast.LENGTH_LONG).show();
+					if (note <= 20) {
+						DetailProjectActivity.sendNoteStudentProject(note, idStudent, idProject, RateStudentActivity.this, getCallback());
 					} else {
-						sendNote(note, getCallback());
+						Toast.makeText(RateStudentActivity.this, "Entrée non valide", Toast.LENGTH_LONG).show();
 					}
-				} catch (NumberFormatException e){
+				} catch (NumberFormatException e) {
 					Toast.makeText(RateStudentActivity.this, "Entrée non valide", Toast.LENGTH_LONG).show();
 				}
 			}
 		});
-
 	}
-
-
-	private void sendNote(int note, final GlobalVolleyCallback callback) {
-		// Get the token from the saved data
-		final String _token = WebServiceConnexion.getToken(this);
-		final String _login = WebServiceConnexion.getLogin(this);
-
-		String url = WebServiceConnexion.getNEWNT(_login, _token, idProject, idStudent, note);
-
-		Log.d("TEST", url);
-		RequestQueue queue = Volley.newRequestQueue(this, new HurlStack(null, WebServiceConnexion.newSslSocketFactory(this)));
-
-		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-			@Override
-			public void onResponse(String response) {
-				try {
-					JSONObject jsonObject = new JSONObject(response);
-					String result = jsonObject.getString("result");
-
-					if (result.equals("OK")) { callback.onSuccess(); }
-					else { callback.onError(); }
-
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			}
-		}, new Response.ErrorListener() {
-
-			@Override
-			public void onErrorResponse(VolleyError error) {
-			}
-		});
-
-		queue.add(stringRequest);
-	}
-
 
 	private GlobalVolleyCallback getCallback() {
 		// L'action appelée si la connexion au site a été réalisée.
 		return new GlobalVolleyCallback() {
 			@Override
 			public void onSuccess() {
-				Toast.makeText(RateStudentActivity.this, "Note de l'étudiant mis a jour", Toast.LENGTH_LONG).show();
+				Toast.makeText(RateStudentActivity.this, "Note de l'étudiant " + nameStudent + " à été mise a jour", Toast.LENGTH_LONG).show();
 			}
 			@Override
-			public void onError() {
-				Toast.makeText(RateStudentActivity.this, "Erreur", Toast.LENGTH_LONG).show();
+			public void onError(String message) {
+				Toast.makeText(RateStudentActivity.this, message, Toast.LENGTH_LONG).show();
 			}
 		};
 	}
