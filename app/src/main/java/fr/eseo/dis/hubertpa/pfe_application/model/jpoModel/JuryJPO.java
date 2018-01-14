@@ -5,10 +5,6 @@ import org.w3c.dom.Text;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * Created by Morgan on 12/01/2018.
- */
-
 public class JuryJPO {
 
     @Getter @Setter

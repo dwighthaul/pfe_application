@@ -19,8 +19,6 @@ public class TakeNotesProjectActivity extends AppCompatActivity {
 	Button saveButton;
 	int idProject;
 
-	private MemoPosterDAO memoPosterDAO;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,7 +49,7 @@ public class TakeNotesProjectActivity extends AppCompatActivity {
 		Log.d("TakeNotes", "SaveData");
 		String memoData = contentEditText.getText().toString();
 
-		memoPosterDAO = new MemoPosterDAO(this);
+		MemoPosterDAO memoPosterDAO = new MemoPosterDAO(this);
 		memoPosterDAO.open();
 
 		MemoPosterJPO memoPosterJPO = new MemoPosterJPO();

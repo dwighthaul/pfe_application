@@ -25,7 +25,7 @@ public class SettingsActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
 
-		BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+		BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
 		BottomNavigationViewHelper.disableShiftMode(navigation);
 		navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 

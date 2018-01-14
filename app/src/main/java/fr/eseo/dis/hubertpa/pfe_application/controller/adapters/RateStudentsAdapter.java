@@ -6,31 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import fr.eseo.dis.hubertpa.pfe_application.R;
-import fr.eseo.dis.hubertpa.pfe_application.activities.JuryActivity;
 import fr.eseo.dis.hubertpa.pfe_application.activities.MarkStudentsFromProjectActivity;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListNote;
-import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListProject;
-import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListUser;
-import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Project;
-import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.User;
-import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.JuryLIJUR;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.NotesNOTES;
-import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIJUR;
 import lombok.Getter;
 import lombok.Setter;
-
-/**
- * Created by Morgan on 05/01/2018.
- */
 
 public class RateStudentsAdapter extends RecyclerView.Adapter<RateStudentsAdapter.RateStudentsViewHolder> {
 
@@ -95,7 +78,7 @@ public class RateStudentsAdapter extends RecyclerView.Adapter<RateStudentsAdapte
 				private final TextView currentMarkTextView;
 				private final ImageButton rateStudentImageButton;
 
-				public RateStudentsViewHolder(View view) {
+				RateStudentsViewHolder(View view) {
 					super(view);
 					Log.d("JuryViewHolder", "JuryViewHolder()");
 					this.view = view;

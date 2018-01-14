@@ -26,14 +26,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.controller.adapters.RateStudentsAdapter;
 import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.GlobalVolleyCallback;
 import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.VolleyCallbackNOTES;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.JsonParserAPI;
-import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.VolleyQueue;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListNote;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListUser;

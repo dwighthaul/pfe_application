@@ -13,10 +13,6 @@ import fr.eseo.dis.hubertpa.pfe_application.activities.MarkActivity;
 import fr.eseo.dis.hubertpa.pfe_application.activities.ProjectActivity;
 import fr.eseo.dis.hubertpa.pfe_application.activities.SettingsActivity;
 
-/**
- * Created by Morgan on 30/12/2017.
- */
-
 public class NavigationBottom implements BottomNavigationView.OnNavigationItemSelectedListener {
 
 	// Filter if the button clicked is not the same as the one already show

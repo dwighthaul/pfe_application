@@ -57,7 +57,7 @@ public abstract class WebServiceConnexion  {
 
 	private static final String URL_ESEO = "https://192.168.4.10/www/pfe/webservice.php?q=";
 
-	public static final String URL = URL_PERSO_PAUL;
+	public static final String URL = URL_PERSO_MORGAN;
 
 	//Initial validation of users credentials
 	private static final String LOGON = URL + "LOGON";

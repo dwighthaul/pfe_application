@@ -1,36 +1,23 @@
 package fr.eseo.dis.hubertpa.pfe_application.controller.adapters;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
-import fr.eseo.dis.hubertpa.pfe_application.activities.DetailProjectActivity;
 import fr.eseo.dis.hubertpa.pfe_application.activities.JuryActivity;
-import fr.eseo.dis.hubertpa.pfe_application.activities.ProjectActivity;
-
-/**
- * Created by paulhubert on 08/01/18.
- */
 
 public class AdaptorListProjectJury extends BaseAdapter {
 
 	private final ArrayList _listStudents;
 
-	JuryActivity _activity;
+	private JuryActivity _activity;
 
 	public AdaptorListProjectJury(JuryActivity activity, HashMap<Integer, String> listProjectsJury) {
 		_listStudents = new ArrayList();

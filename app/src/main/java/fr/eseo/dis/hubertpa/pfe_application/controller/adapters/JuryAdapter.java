@@ -5,32 +5,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.activities.JuryActivity;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListProject;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListUser;
-import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Project;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.User;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.JuryLIJUR;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIJUR;
 
-/**
- * Created by Morgan on 05/01/2018.
- */
-
 public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder> {
 
     private JuryActivity activity;
-
-    private ListProject listProjects;
-	private ListUser listMembers;
 
     public JuryAdapter(JuryActivity juryActivity) {
         this.activity = juryActivity;
@@ -50,7 +37,7 @@ public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder
         holder.juryId.setText(String.format("%d", juryLIJUR.getJury().getIdJury()));
         holder.juryDate.setText(juryLIJUR.getJury().getDate());
 
-        listProjects = juryLIJUR.getListProject();
+        ListProject listProjects = juryLIJUR.getListProject();
         StringBuilder stringBuilderProjects = new StringBuilder();
 
 	    for (ProjectLIJUR project : listProjects) {
@@ -60,7 +47,7 @@ public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder
 	    }
 	    holder.listProjectTextView.setText(stringBuilderProjects.toString());
 
-	    listMembers = juryLIJUR.getListMembers();
+        ListUser listMembers = juryLIJUR.getListMembers();
 	    StringBuilder stringBuilderMemeber = new StringBuilder();
 
 	    for (User member : listMembers) {
@@ -113,16 +100,16 @@ public class JuryAdapter extends RecyclerView.Adapter<JuryAdapter.JuryViewHolder
 		private final TextView listProjectTextView;
 	    private final TextView listMemberTextView;
 
-        public JuryViewHolder(View view) {
+        JuryViewHolder(View view) {
             super(view);
             Log.d("JuryViewHolder","JuryViewHolder()");
             this.view = view;
 
-            juryId = (TextView) view.findViewById(R.id.idtextView);
-            juryDate = (TextView) view.findViewById(R.id.datetextView);
+            juryId = view.findViewById(R.id.idtextView);
+            juryDate = view.findViewById(R.id.datetextView);
 
-	        listProjectTextView = (TextView) view.findViewById(R.id.listProjectTextView);
-	        listMemberTextView = (TextView) view.findViewById(R.id.listMemberTextView);
+	        listProjectTextView = view.findViewById(R.id.listProjectTextView);
+	        listMemberTextView = view.findViewById(R.id.listMemberTextView);
         }
     }
 

@@ -11,11 +11,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
-import android.widget.ListAdapter;
 import android.widget.SearchView;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -29,7 +26,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,12 +33,9 @@ import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.controller.adapters.ProjectAdapter;
 import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.VolleyCallbackListProject;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.JsonParserAPI;
-import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.VolleyCallbackLOGON;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
 import fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings;
-import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Project;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIPRJ;
-import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LOGON;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIPRJ;
 import fr.eseo.dis.hubertpa.pfe_application.partials.BottomNavigationViewHelper;
 import fr.eseo.dis.hubertpa.pfe_application.partials.NavigationBottom;

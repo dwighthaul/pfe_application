@@ -1,51 +1,18 @@
 package fr.eseo.dis.hubertpa.pfe_application.controller.adapters;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HurlStack;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.activities.ProjectActivity;
-import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.VolleyCallbackListProject;
-import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.VolleyCallbackPOSTR;
-import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.JsonParserAPI;
-import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.StyleProject;
-import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
-import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Project;
-import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIPRJ;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIPRJ;
-
-/**
- * Created by paulhubert on 03/01/18.
- */
 
 public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectViewHolder> {
 
@@ -140,7 +107,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
 		private final Button buttonDisplayPoster;
 		private final Button takeNoteButton;
 
-		public ProjectViewHolder(View view) {
+		ProjectViewHolder(View view) {
 			super(view);
 			Log.d("ProjectViewHolder","ProjetViewHolder()");
 			this.view = view;

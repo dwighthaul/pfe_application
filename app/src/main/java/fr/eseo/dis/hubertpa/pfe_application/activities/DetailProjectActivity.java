@@ -67,7 +67,7 @@ public class DetailProjectActivity extends AppCompatActivity {
 
 		Bundle data = getIntent().getExtras();
 		assert data != null;
-		projectLIPRJ = (ProjectLIPRJ) data.getParcelable("selected_project");
+		projectLIPRJ = data.getParcelable("selected_project");
 
 		idView = findViewById(R.id.textViewiD);
 		titleView = findViewById(R.id.textViewTitle);
@@ -79,7 +79,7 @@ public class DetailProjectActivity extends AppCompatActivity {
 
 		supeView = findViewById(R.id.textViewSupervisorValue);
 		globalMarkeditText = findViewById(R.id.globalMarkeditText);
-		buttonRateProjectValider = findViewById(R.id.buttonRateProjectValider);
+		buttonRateProjectValider = findViewById(R.id.buttonRateProjectValidation);
 		studListView  = findViewById(R.id.textViewStudentValue);
 		posterView = findViewById(R.id.TextViewPoster);
 		projectImageView = findViewById(R.id.projectImageView);

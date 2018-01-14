@@ -2,10 +2,6 @@ package fr.eseo.dis.hubertpa.pfe_application.model;
 
 import lombok.Getter;
 
-/**
- * Created by paulhubert on 06/01/18.
- */
-
 public abstract class BasicSettings {
 
 
@@ -25,8 +21,6 @@ public abstract class BasicSettings {
 			roleName = role;
 			roleId = i;
 		}
-
-
 	}
 
 
