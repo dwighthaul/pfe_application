@@ -206,12 +206,13 @@ public class JsonParserAPI {
 				Bitmap bitmap = null;
 				//new Bitmap();
 				//jsonObjectProject.get("poster");
-
 				ProjectPORTE projectPORTE = new ProjectPORTE(project, bitmap);
 				listProjectPORTE.add(projectPORTE);
 			}
 
+			porte.setListProject(listProjectPORTE);
 		} catch (JSONException e) {
+			Log.d("TEST", "" + e.toString());
 			e.printStackTrace();
 		}
 		return porte;

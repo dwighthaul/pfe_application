@@ -15,7 +15,7 @@ public class LIPRJ {
 	List<ProjectLIPRJ> projectList;
 
 	public LIPRJ () {
-		projectList = new ArrayList<ProjectLIPRJ>();
+		projectList = new ArrayList<>();
 	}
 
 }

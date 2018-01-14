@@ -9,6 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
+import android.util.Log;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -43,6 +46,7 @@ public class JuryActivity  extends AppCompatActivity {
 	@Getter @Setter
 	LIJUR lijur;
 
+	LIJUR  myLijur;
 	// The following list is use to be a buffer, the list to be display.
 	// This list can be modified if the user filter the result, ask to only display the favorits one
 	@Getter @Setter

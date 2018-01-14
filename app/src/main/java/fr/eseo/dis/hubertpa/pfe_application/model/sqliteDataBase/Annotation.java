@@ -1,6 +1,8 @@
 package fr.eseo.dis.hubertpa.pfe_application.model.sqliteDataBase;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 
@@ -8,15 +10,17 @@ import lombok.Setter;
  * Created by paulhubert on 14/01/18.
  */
 
+@AllArgsConstructor
+@NoArgsConstructor
 public class Annotation {
 
-	@Getter @Setter @NonNull
+	@Getter @Setter
 	private long id;
 
-	@Getter @Setter @NonNull
+	@Getter @Setter
 	private long idProject;
 
-	@Getter @Setter @NonNull
+	@Getter @Setter
 	private String annotation;
 
 	@Override

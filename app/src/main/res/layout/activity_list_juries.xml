@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="40dp"
         android:orientation="horizontal">
 
         <android.support.v7.widget.SwitchCompat
@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.9"
             android:checked="false"
-            tools:layout_editor_absoluteX="165dp" />
+            tools:layout_editor_absoluteX="40dp" />
 
         <TextView
             android:id="@+id/textViewMesProjectsLabel"
@@ -49,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="51dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

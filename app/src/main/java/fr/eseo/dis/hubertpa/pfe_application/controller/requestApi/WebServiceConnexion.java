@@ -57,7 +57,7 @@ public abstract class WebServiceConnexion  {
 
 	private static final String URL_ESEO = "https://192.168.4.10/www/pfe/webservice.php?q=";
 
-	public static final String URL = URL_PERSO_MORGAN;
+	public static final String URL = URL_ESEO;
 
 	//Initial validation of users credentials
 	private static final String LOGON = URL + "LOGON";
@@ -163,9 +163,6 @@ public abstract class WebServiceConnexion  {
 	}
 
 
-
-
-
 	public static void getConnected(final String login, final String password, AppCompatActivity activity, final VolleyCallbackLOGON callback) {
 
 		final AppCompatActivity _activity = activity;
@@ -187,16 +184,12 @@ public abstract class WebServiceConnexion  {
 					if (result.equals("OK")) {
 						LOGON logon = JsonParserAPI.parseLOGON(jsonObject);
 						String tokenValue =logon.getToken();
-
 						saveDataValue(_activity, _login, _password, tokenValue);
-
 						makeToster(_activity, "Connected");
-
 						callback.onSuccess();
 					} else {
 						makeToster(_activity, "Error to connect");
 						callback.onError();
-
 					}
 
 				} catch (JSONException e) {

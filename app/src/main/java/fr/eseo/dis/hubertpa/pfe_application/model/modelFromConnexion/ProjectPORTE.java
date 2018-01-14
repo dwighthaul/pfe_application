@@ -17,7 +17,7 @@ public class ProjectPORTE implements Parcelable {
 	@Getter @Setter @NonNull
 	Project project;
 
-	@Getter @Setter @NonNull
+	@Getter @Setter
 	Bitmap bitmap;
 
 
@@ -27,7 +27,6 @@ public class ProjectPORTE implements Parcelable {
 		this.project.setIdProject(in.readInt());
 		this.project.setTitle(in.readString());
 		this.project.setDescription(in.readString());
-		this.project.setConfidentiality(in.readInt());
 
 	}
 
@@ -53,7 +52,6 @@ public class ProjectPORTE implements Parcelable {
 		dest.writeInt(this.project.getIdProject());
 		dest.writeString(this.project.getTitle());
 		dest.writeString(this.project.getDescription());
-		dest.writeInt(this.project.getConfidentiality());
 
 	}
 

@@ -7,6 +7,11 @@
     <string name="jury_tab">Juries</string>
     <string name="marks_tab">Notes</string>
 
+    <!-- foo -->
+    <string name="jpo_project_tab">JPO Projets</string>
+    <string name="jpo_jury_tab">JPO Juries</string>
+    <string name="jpo_marks_tab">JPO Notes</string>
+
 
     <!-- Welcome page -->
     <string name="welcome_visitor">Visiteur </string>
@@ -41,7 +46,7 @@
     <string name="prompt_password">Mot de Passe</string>
     <string name="action_sign_in">Connexion</string>
     <string name="action_sign_in_short">Connexion</string>
-    <string name="error_invalid_email">Cet identifiant n'est pas valide, il doit faire au moins 8 caractères</string>
+    <string name="error_invalid_email">Cet identifiant n\'est pas valide, il doit faire au moins 8 caractères</string>
     <string name="error_invalid_password">Ce mot de passe est trop court</string>
     <string name="error_incorrect_password">Ce mot de passe est incorrect</string>
     <string name="error_field_required">Ce champs est requis</string>

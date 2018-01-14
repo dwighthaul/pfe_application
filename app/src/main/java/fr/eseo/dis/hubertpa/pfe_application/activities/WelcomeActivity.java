@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
+import fr.eseo.dis.hubertpa.pfe_application.activities.jpo_activities.JPOProjectActivity;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.VolleyCallbackLOGON;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
 import fr.eseo.dis.hubertpa.pfe_application.model.BasicSettings;
@@ -85,10 +86,16 @@ public class WelcomeActivity extends AppCompatActivity {
 		processResponseVisitor = new VolleyCallbackLOGON() {
 			@Override
 			public void onSuccess() {
+				SharedPreferences prefs = getSharedPreferences(BasicSettings.saveFilenameShared, MODE_PRIVATE);
+
+				String userLogin = prefs.getString(BasicSettings.sharedLogin, "default");
 				Intent intent = new Intent(WelcomeActivity.this, ProjectActivity.class);
-				// Use to set the default app as this new activity and clean the stack
+				if (userLogin.equals(WebServiceConnexion.DEFAULT_LOGIN)) {
+					intent = new Intent(WelcomeActivity.this, JPOProjectActivity.class);
+				}
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
 				WelcomeActivity.this.startActivity(intent);
 			}
 			@Override

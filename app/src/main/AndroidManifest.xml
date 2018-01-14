@@ -38,7 +38,10 @@
         <activity android:name=".activities.DislayPosterActivity" />
         <activity android:name=".activities.TakeNotesProjectActivity" />
         <activity android:name=".activities.DetailJuryActivity" />
-        <activity android:name=".activities.MarkStudentsFromProjectActivity"></activity>
+        <activity android:name=".activities.MarkStudentsFromProjectActivity" />
+        <activity android:name=".activities.jpo_activities.JPOProjectActivity" />
+        <activity android:name=".activities.jpo_activities.DetailProjectJPOActivity" />
+        <activity android:name=".activities.jpo_activities.JPOSettingActivity"></activity>
     </application>
 
 </manifest>

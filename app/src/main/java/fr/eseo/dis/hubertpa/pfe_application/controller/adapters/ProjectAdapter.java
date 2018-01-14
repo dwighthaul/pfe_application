@@ -38,7 +38,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
 		holder.projectId.setText(String.format("%d", projectLIPRJ.getProject().getIdProject()));
 		holder.projectTitre.setText(projectLIPRJ.getProject().getTitle());
 
-		String desc = "";
+		String desc = projectLIPRJ.getProject().getDescription();
 		int limit = 75;
 		if(projectLIPRJ.getProject().getDescription().length() > limit) {
 			desc = projectLIPRJ.getProject().getDescription().substring(0, limit) + " [ ... ]";
