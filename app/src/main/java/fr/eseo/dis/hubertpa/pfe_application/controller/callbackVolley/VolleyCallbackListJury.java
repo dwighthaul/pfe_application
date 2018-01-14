@@ -1,13 +1,13 @@
 package fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley;
 
-import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIJUR;
+import java.util.List;
 
-/**
- * Created by Morgan on 05/01/18.
- */
+import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIJUR;
+import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.JuryLIJUR;
+
 
 public interface VolleyCallbackListJury {
-	void onSuccess(LIJUR lijur);
+	void onSuccess(List<JuryLIJUR> juryLIJURList);
 
 	void onError(String errorMessage);
 

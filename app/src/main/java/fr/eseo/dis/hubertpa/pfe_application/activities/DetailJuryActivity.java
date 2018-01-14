@@ -70,7 +70,7 @@ public class DetailJuryActivity extends AppCompatActivity {
 			data.append(dataProject);
 			data.append("\n");
 
-			String dataSupervisor = project.getSupervisor().getForename() + " " + project.getSupervisor().getSurname();
+			String dataSupervisor = "Supervisor : " + project.getSupervisor().getFormatedString();
 			data.append(dataSupervisor);
 			data.append("\n");
 

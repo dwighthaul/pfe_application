@@ -250,7 +250,7 @@ public class ProjectActivity extends AppCompatActivity {
 					if (result.equals("OK")) {
 						LIPRJ liprj = JsonParserAPI.parseLIPRJ(jsonObject);
 						ProjectActivity.this.setLiproj(liprj);
-						Toast.makeText(ProjectActivity.this, "List of all the projects. \n Nombre de projets : " + liprj.getProjectList().size(), Toast.LENGTH_LONG).show();
+						Toast.makeText(ProjectActivity.this, "Liste de tous les projects. \n Nombre de projets : " + liprj.getProjectList().size(), Toast.LENGTH_LONG).show();
 
 						callback.onSuccess(liprj.getProjectList());
 					} else {
@@ -277,7 +277,7 @@ public class ProjectActivity extends AppCompatActivity {
 
 		// Get the good url with the good variables
 
-		String url = WebServiceConnexion.getMYPRJ(_login, _token);
+		String url = WebServiceConnexion.getMYJUR(_login, _token);
 
 		RequestQueue queue = Volley.newRequestQueue(this, new HurlStack(null, WebServiceConnexion.newSslSocketFactory(this)));
 

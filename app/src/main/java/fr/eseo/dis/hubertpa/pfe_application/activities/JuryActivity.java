@@ -9,6 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
+import android.util.Log;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -31,6 +34,7 @@ import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.VolleyCall
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.JsonParserAPI;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIJUR;
+import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIPRJ;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.JuryLIJUR;
 import fr.eseo.dis.hubertpa.pfe_application.partials.BottomNavigationViewHelper;
 import fr.eseo.dis.hubertpa.pfe_application.partials.NavigationBottom;
@@ -43,6 +47,8 @@ public class JuryActivity  extends AppCompatActivity {
 	@Getter @Setter
 	LIJUR lijur;
 
+	@Getter @Setter
+	LIJUR myLijur;
 	// The following list is use to be a buffer, the list to be display.
 	// This list can be modified if the user filter the result, ask to only display the favorits one
 	@Getter @Setter
@@ -62,6 +68,8 @@ public class JuryActivity  extends AppCompatActivity {
 
 	SwipeRefreshLayout mySwipeRefreshLayout;
 
+	SwitchCompat sButton;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +77,8 @@ public class JuryActivity  extends AppCompatActivity {
 		setContentView(R.layout.activity_list_juries);
 
 		mySwipeRefreshLayout = findViewById(R.id.swip_to_refresh);
+
+		sButton = findViewById(R.id.markSwitchMines);
 
 		BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
 		BottomNavigationViewHelper.disableShiftMode(navigation);
@@ -78,6 +88,8 @@ public class JuryActivity  extends AppCompatActivity {
 
 		lijur = new LIJUR();
 
+		myLijur = new LIJUR();
+
 		juryListBuffer = new ArrayList<JuryLIJUR>();
 
 		NEW_CARD_COUNTER = 0;
@@ -86,11 +98,40 @@ public class JuryActivity  extends AppCompatActivity {
 
 		setCallback();
 
+		setSwitchListeners();
+
 		setActionOnRefrech();
 
 		processGetJuries();
 	}
 
+	private void processGetJuries() {
+		sButton.setChecked(false);
+		processGetAllJuries();
+		processGetMyJuries();
+	}
+
+	public void setSwitchListeners() {
+
+		//Set a CheckedChange Listener for Switch Button
+		sButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+			@Override
+			public void onCheckedChanged(CompoundButton cb, boolean on){
+				if(on)
+				{
+					Toast.makeText(JuryActivity.this, "Mes juries. \n Nombre de juries : " +
+							myLijur.getListJuries().size(), Toast.LENGTH_LONG).show();
+					callback.onSuccess(myLijur.getListJuries());
+				}
+				else
+				{
+					Toast.makeText(JuryActivity.this, "Liste tous les juries. \n Nombre de juries : " +
+							lijur.getListJuries().size(), Toast.LENGTH_LONG).show();
+					callback.onSuccess(lijur.getListJuries());
+				}
+			}
+		});
+	}
 
 	private void processGetJuriesFake() {
 		String jsonObjectString = "{\"result\":\"OK\",\"api\":\"LIJUR\",\"juries\":[{\"idJury\":0,\"date\":\"2017-01-13\",\"info\":{\"members\":[{\"forename\":\"Olivier\",\"surname\":\"CAMP\"},{\"forename\":\"Fabien\",\"surname\":\"CHHEL\"}],\"projects\":[{\"projectId\":1,\"title\":\"Reconnaissancelanguedessignes\",\"confid\":0,\"poster\":true,\"supervisor\":{\"forename\":\"Patrick\",\"surname\":\"ALBERS\"}},{\"projectId\":3,\"title\":\"OPAL-Sécudesréseauxetdev.outilswin\",\"confid\":0,\"poster\":true,\"supervisor\":{\"forename\":\"Olivier\",\"surname\":\"BEAUDOUX\"}},{\"projectId\":5,\"title\":\"ServiceProBooking\",\"confid\":0,\"poster\":false,\"supervisor\":{\"forename\":\"Matthias\",\"surname\":\"BRUN\"}},{\"projectId\":27,\"title\":\"IndustrialisationLogicielle\",\"confid\":2,\"poster\":true,\"supervisor\":{\"forename\":\"Richard\",\"surname\":\"WOODWARD\"}}]}},{\"idJury\":1,\"date\":\"2017-01-13\",\"info\":{\"members\":[{\"forename\":\"Sebastien\",\"surname\":\"AUBIN\"},{\"forename\":\"Mickael\",\"surname\":\"CLAVREUL\"}],\"projects\":[{\"projectId\":8,\"title\":\"AWS\",\"confid\":0,\"poster\":false,\"supervisor\":{\"forename\":\"Jerome\",\"surname\":\"CHAVIN\"}},{\"projectId\":21,\"title\":\"DemonstratorforIoTinindustry\",\"confid\":0,\"poster\":true,\"supervisor\":{\"forename\":\"Jonathon\",\"surname\":\"ILIAS-PILLET\"}},{\"projectId\":25,\"title\":\"BtoBrowse-BusinessAnalyticsWebApp\",\"confid\":0,\"poster\":false,\"supervisor\":{\"forename\":\"Daniel\",\"surname\":\"SCHANG\"}},{\"projectId\":26,\"title\":\"BtoBrowse-MachineLearning\",\"confid\":0,\"poster\":true,\"supervisor\":{\"forename\":\"Daniel\",\"surname\":\"SCHANG\"}}]}},{\"idJury\":2,\"date\":\"2017-01-13\",\"info\":{\"members\":[{\"forename\":\"Jerome\",\"surname\":\"DELATOUR\"},{\"forename\":\"Daniel\",\"surname\":\"SCHANG\"}],\"projects\":[{\"projectId\":11,\"title\":\"Jeumultijoueuretmultiplatforme\",\"confid\":0,\"poster\":true,\"supervisor\":{\"forename\":\"Mickael\",\"surname\":\"CLAVREUL\"}},{\"projectId\":14,\"title\":\"Bancdetestdomotique\",\"confid\":0,\"poster\":false,\"supervisor\":{\"forename\":\"Jerome\",\"surname\":\"DELATOUR\"}},{\"projectId\":15,\"title\":\"Devd'unagentI/O\",\"confid\":0,\"poster\":false,\"supervisor\":{\"forename\":\"Jerome\",\"surname\":\"DELATOUR\"}},{\"projectId\":16,\"title\":\"ProjetRecifalX\",\"confid\":0,\"poster\":false,\"supervisor\":{\"forename\":\"Jerome\",\"surname\":\"DELATOUR\"}}]}},{\"idJury\":3,\"date\":\"2017-01-19\",\"info\":{\"members\":[{\"forename\":\"Nicolas\",\"surname\":\"GUTOWSKI\"},{\"forename\":\"Jonathon\",\"surname\":\"ILIAS-PILLET\"}],\"projects\":[{\"projectId\":4,\"title\":\"Gyropode\",\"confid\":0,\"poster\":true,\"supervisor\":{\"forename\":\"Matthias\",\"surname\":\"BRUN\"}},{\"projectId\":7,\"title\":\"Sécuritéparlapratique\",\"confid\":0,\"poster\":true,\"supervisor\":{\"forename\":\"Jerome\",\"surname\":\"CHAVIN\"}},{\"projectId\":10,\"title\":\"Plateformedefictioninteractive\",\"confid\":1,\"poster\":true,\"supervisor\":{\"forename\":\"Mickael\",\"surname\":\"CLAVREUL\"}},{\"projectId\":18,\"title\":\"UrbanBoard\",\"confid\":0,\"poster\":false,\"supervisor\":{\"forename\":\"Nicolas\",\"surname\":\"GUTOWSKI\"}}]}},{\"idJury\":4,\"date\":\"2017-01-20\",\"info\":{\"members\":[{\"forename\":\"Olivier\",\"surname\":\"BEAUDOUX\"},{\"forename\":\"Richard\",\"surname\":\"WOODWARD\"}],\"projects\":[{\"projectId\":0,\"title\":\"Gestionmain-libretabletteandroid\",\"confid\":0,\"poster\":true,\"supervisor\":{\"forename\":\"Patrick\",\"surname\":\"ALBERS\"}},{\"projectId\":6,\"title\":\"PlatformeTwitter\",\"confid\":0,\"poster\":true,\"supervisor\":{\"forename\":\"Olivier\",\"surname\":\"CAMP\"}},{\"projectId\":9,\"title\":\"ChatBot\",\"confid\":0,\"poster\":true,\"supervisor\":{\"forename\":\"Fabien\",\"surname\":\"CHHEL\"}},{\"projectId\":17,\"title\":\"AnalyseetVisualisationmobilitéurbaine\",\"confid\":0,\"poster\":true,\"supervisor\":{\"forename\":\"Nicolas\",\"surname\":\"GUTOWSKI\"}},{\"projectId\":24,\"title\":\"AppyFiz\",\"confid\":0,\"poster\":true,\"supervisor\":{\"forename\":\"Sophie\",\"surname\":\"ROUSSEAU\"}}]}},{\"idJury\":5,\"date\":\"2017-01-20\",\"info\":{\"members\":[{\"forename\":\"Jerome\",\"surname\":\"CHAVIN\"},{\"forename\":\"Samuel\",\"surname\":\"POIRAUD\"},{\"forename\":\"Sophie\",\"surname\":\"ROUSSEAU\"}],\"projects\":[{\"projectId\":2,\"title\":\"Greenygrass\",\"confid\":0,\"poster\":true,\"supervisor\":{\"forename\":\"Sebastien\",\"surname\":\"AUBIN\"}},{\"projectId\":20,\"title\":\"Fiabilisationetportagebootloader\",\"confid\":0,\"poster\":true,\"supervisor\":{\"forename\":\"Jonathon\",\"surname\":\"ILIAS-PILLET\"}},{\"projectId\":22,\"title\":\"BriqueslogiciellessurNucleoF103\",\"confid\":0,\"poster\":true,\"supervisor\":{\"forename\":\"Samuel\",\"surname\":\"POIRAUD\"}},{\"projectId\":23,\"title\":\"LunettesàRéalitéAugmentée\",\"confid\":0,\"poster\":false,\"supervisor\":{\"forename\":\"Sophie\",\"surname\":\"ROUSSEAU\"}}]}},{\"idJury\":6,\"date\":\"2017-02-02\",\"info\":{\"members\":[],\"projects\":[]}},{\"idJury\":7,\"date\":\"2017-02-03\",\"info\":{\"members\":[],\"projects\":[]}},{\"idJury\":8,\"date\":\"2017-02-02\",\"info\":{\"members\":[],\"projects\":[]}},{\"idJury\":9,\"date\":\"2017-02-03\",\"info\":{\"members\":[],\"projects\":[]}},{\"idJury\":10,\"date\":\"2017-02-02\",\"info\":{\"members\":[],\"projects\":[]}},{\"idJury\":11,\"date\":\"2017-02-02\",\"info\":{\"members\":[],\"projects\":[]}},{\"idJury\":12,\"date\":\"2017-01-20\",\"info\":{\"members\":[{\"forename\":\"Matthias\",\"surname\":\"BRUN\"},{\"forename\":\"Mickael\",\"surname\":\"CLAVREUL\"}],\"projects\":[{\"projectId\":12,\"title\":\"HMIMapperMachineLearningA\",\"confid\":2,\"poster\":false,\"supervisor\":{\"forename\":\"Camille\",\"surname\":\"CONSTANT\"}},{\"projectId\":13,\"title\":\"HMIMapperMachineLearningB\",\"confid\":2,\"poster\":false,\"supervisor\":{\"forename\":\"Camille\",\"surname\":\"CONSTANT\"}}]}}]}";
@@ -104,7 +145,7 @@ public class JuryActivity  extends AppCompatActivity {
 
 		LIJUR lijur = JsonParserAPI.parseLIJUR(jsonObject);
 
-		callback.onSuccess(lijur);
+		callback.onSuccess(lijur.getListJuries());
 	}
 
 	/**
@@ -125,18 +166,15 @@ public class JuryActivity  extends AppCompatActivity {
 	public void setCallback() {
 		this.callback =  new VolleyCallbackListJury() {
 			@Override
-			public void onSuccess(LIJUR lijur) {
+			public void onSuccess(List<JuryLIJUR> lijurList) {
 				//Log.d("JuryActivity", String.valueOf(lijur.getListJuries().size()));
 
 				// Set the list of juries
-				JuryActivity.this.setJuryListBuffer(lijur.getListJuries());
-				JuryActivity.this.setLijur(lijur);
+				JuryActivity.this.setJuryListBuffer(lijurList);
 
-				for(int i=0; i < lijur.getListJuries().size(); i++){
-					juryAdapter = new JuryAdapter(JuryActivity.this);
-
-					recycler.setAdapter(juryAdapter);
-				}
+				// send the list to the projectAdapter and set the project adapter to the recycler
+				juryAdapter = new JuryAdapter(JuryActivity.this);
+				recycler.setAdapter(juryAdapter);
 
 			}
 
@@ -148,15 +186,15 @@ public class JuryActivity  extends AppCompatActivity {
 		};
 	}
 
-	private void processGetJuries() {
+	private void processGetAllJuries() {
 		mySwipeRefreshLayout.setRefreshing(true);
+
+		stoppingBuffering = true;
+		stopBuffering();
 
 		// Get the token from the saved data
 		String token = WebServiceConnexion.getToken(this);
 		String login = WebServiceConnexion.getLogin(this);
-
-		stoppingBuffering = true;
-		stopBuffering();
 
 		// Get the good url with the good variables
 		String url = WebServiceConnexion.getLIJUR(login, token);
@@ -174,8 +212,9 @@ public class JuryActivity  extends AppCompatActivity {
 					if (result.equals("OK")) {
 
 						LIJUR lijur = JsonParserAPI.parseLIJUR(jsonObject);
+						JuryActivity.this.setLijur(JsonParserAPI.parseLIJUR(jsonObject));
 
-						callback.onSuccess(lijur);
+						callback.onSuccess(lijur.getListJuries());
 					} else {
 						String error = jsonObject.getString("error");
 						callback.onError(jsonObject.getString(error));
@@ -192,6 +231,41 @@ public class JuryActivity  extends AppCompatActivity {
 		});
 		queue.add(stringRequest);
 	}
+
+
+	private void processGetMyJuries() {
+		// Get the token from the saved data
+		final String _token = WebServiceConnexion.getToken(this);
+		final String _login = WebServiceConnexion.getLogin(this);
+
+		// Get the good url with the good variables
+
+		String url = WebServiceConnexion.getMYPRJ(_login, _token);
+
+		RequestQueue queue = Volley.newRequestQueue(this, new HurlStack(null, WebServiceConnexion.newSslSocketFactory(this)));
+
+		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+			@Override
+			public void onResponse(String response) {
+				try {
+					JSONObject jsonObject = new JSONObject(response);
+					String result = jsonObject.getString("result");
+					if (result.equals("OK")) {
+						JuryActivity.this.myLijur = JsonParserAPI.parseLIJUR(jsonObject);
+						Log.d("TEST", "" + JuryActivity.this.myLijur.getListJuries().size());
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+			}
+		});
+		queue.add(stringRequest);
+	}
+
 
 	// After 10 sec, the activity hind the annoying spining stuff and display an error
 	public void stopBuffering() {

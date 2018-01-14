@@ -18,12 +18,13 @@
             android:id="@+id/textViewLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Test" />
+            android:text="[login]" />
 
         <Button
             android:id="@+id/button_disconnect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/border_rounded_red_eseo"
             android:text="Disconnect" />
     </LinearLayout>
 
@@ -38,15 +39,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_navigation_items" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="371dp"
-        android:layout_marginTop="65dp"
-        android:text="Settings"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
