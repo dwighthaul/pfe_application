@@ -2,7 +2,6 @@ package fr.eseo.dis.hubertpa.pfe_application.model.basicModel;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,10 +14,6 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-
-/**
- * Created by paulhubert on 30/12/17.
- */
 
 @AllArgsConstructor
 @NoArgsConstructor

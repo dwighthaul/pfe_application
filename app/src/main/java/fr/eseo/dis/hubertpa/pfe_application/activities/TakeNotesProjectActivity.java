@@ -51,6 +51,7 @@ public class TakeNotesProjectActivity extends AppCompatActivity {
 		loadText();
 
 		saveButton.setOnClickListener(new View.OnClickListener() {
+
 			@Override
 			public void onClick(View view) {
 				saveData();

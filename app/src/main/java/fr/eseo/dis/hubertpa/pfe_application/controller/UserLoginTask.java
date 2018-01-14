@@ -1,15 +1,8 @@
 package fr.eseo.dis.hubertpa.pfe_application.controller;
 
-/**
- * Created by paulhubert on 03/01/18.
- */
-
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
-
-import fr.eseo.dis.hubertpa.pfe_application.activities.ProjectActivity;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.VolleyCallbackLOGON;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
 

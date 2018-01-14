@@ -9,9 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SwitchCompat;
-import android.util.Log;
-import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -34,7 +31,6 @@ import fr.eseo.dis.hubertpa.pfe_application.controller.callbackVolley.VolleyCall
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.JsonParserAPI;
 import fr.eseo.dis.hubertpa.pfe_application.controller.requestApi.WebServiceConnexion;
 import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIJUR;
-import fr.eseo.dis.hubertpa.pfe_application.model.metaModel.LIPRJ;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.JuryLIJUR;
 import fr.eseo.dis.hubertpa.pfe_application.partials.BottomNavigationViewHelper;
 import fr.eseo.dis.hubertpa.pfe_application.partials.NavigationBottom;
@@ -47,8 +43,6 @@ public class JuryActivity  extends AppCompatActivity {
 	@Getter @Setter
 	LIJUR lijur;
 
-	@Getter @Setter
-	LIJUR myLijur;
 	// The following list is use to be a buffer, the list to be display.
 	// This list can be modified if the user filter the result, ask to only display the favorits one
 	@Getter @Setter
@@ -195,6 +189,9 @@ public class JuryActivity  extends AppCompatActivity {
 		// Get the token from the saved data
 		String token = WebServiceConnexion.getToken(this);
 		String login = WebServiceConnexion.getLogin(this);
+
+		stoppingBuffering = true;
+		stopBuffering();
 
 		// Get the good url with the good variables
 		String url = WebServiceConnexion.getLIJUR(login, token);

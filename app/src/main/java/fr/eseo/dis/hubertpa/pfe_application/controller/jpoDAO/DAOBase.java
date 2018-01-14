@@ -5,16 +5,13 @@ import android.database.sqlite.SQLiteDatabase;
 
 import fr.eseo.dis.hubertpa.pfe_application.databases.DatabaseHandler;
 
-public class DAOBase {
+public class DAOBase{
 
-    /*protected final static int VERSION = 1;
-    protected final static String NOM = "database.db";
-
-    protected SQLiteDatabase mDb = null;
-    protected DatabaseHandler mHandler = null;
+    protected SQLiteDatabase mDb;
+    protected DatabaseHandler mHandler;
 
     public DAOBase(Context pContext) {
-        this.mHandler = new DatabaseHandler(pContext, NOM, null, VERSION);
+        this.mHandler = new DatabaseHandler(pContext, DatabaseHandler.DATABASE_NAME, null, DatabaseHandler.DATABASE_VERSION);
     }
 
     public SQLiteDatabase open() {
@@ -28,5 +25,5 @@ public class DAOBase {
 
     public SQLiteDatabase getDb() {
         return mDb;
-    }*/
+    }
 }

@@ -4,17 +4,11 @@ import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListUser;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Project;
-import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-
-/**
- * Created by paulhubert on 31/12/17.
- */
 
 @AllArgsConstructor
 public class ProjectPORTE implements Parcelable {
@@ -27,7 +21,7 @@ public class ProjectPORTE implements Parcelable {
 	Bitmap bitmap;
 
 
-	protected ProjectPORTE(Parcel in) {
+	private ProjectPORTE(Parcel in) {
 		this.project = new Project();
 
 		this.project.setIdProject(in.readInt());

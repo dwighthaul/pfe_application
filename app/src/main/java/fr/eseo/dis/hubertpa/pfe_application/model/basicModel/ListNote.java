@@ -4,21 +4,17 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.NotesNOTES;
 import lombok.NoArgsConstructor;
 
-/**
- * Created by paulhubert on 12/01/18.
- */
 
 @NoArgsConstructor
 public class ListNote extends ArrayList<NotesNOTES>  implements Parcelable {
 
 
 
-	protected ListNote(Parcel in) {
+	private ListNote(Parcel in) {
 	}
 
 	@Override

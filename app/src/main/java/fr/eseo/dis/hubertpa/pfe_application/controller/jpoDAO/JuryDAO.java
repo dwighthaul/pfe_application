@@ -6,7 +6,7 @@ import android.content.Context;
 import fr.eseo.dis.hubertpa.pfe_application.model.jpoModel.JuryJPO;
 
 public class JuryDAO extends DAOBase{
-    /*private static final String JURY_TABLE = "juriesjpo";
+    private static final String JURY_TABLE = "juriesjpo";
     private static final String IDJURY = "idJury";
     private static final String IDPROJECT = "idProject";
     private static final String DATE = "date";
@@ -30,5 +30,5 @@ public class JuryDAO extends DAOBase{
 
     public void edit(JuryDAO juryJPO) {
         // CODE
-    }*/
+    }
 }

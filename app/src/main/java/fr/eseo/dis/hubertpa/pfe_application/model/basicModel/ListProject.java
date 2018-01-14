@@ -8,14 +8,11 @@ import java.util.ArrayList;
 import fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion.ProjectLIJUR;
 import lombok.NoArgsConstructor;
 
-/**
- * Created by paulhubert on 11/01/18.
- */
 
 @NoArgsConstructor
 public class ListProject extends ArrayList<ProjectLIJUR> implements Parcelable {
 
-	public ListProject(Parcel in) {
+	private ListProject(Parcel in) {
 	}
 
 	@Override

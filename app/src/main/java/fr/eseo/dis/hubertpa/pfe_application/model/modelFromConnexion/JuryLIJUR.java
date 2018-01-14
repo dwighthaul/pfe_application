@@ -2,23 +2,14 @@ package fr.eseo.dis.hubertpa.pfe_application.model.modelFromConnexion;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Jury;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListProject;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.ListUser;
-import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.User;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-
-/**
- * Created by paulhubert on 31/12/17.
- */
 
 @RequiredArgsConstructor
 public class JuryLIJUR implements Parcelable {
@@ -37,7 +28,7 @@ public class JuryLIJUR implements Parcelable {
 		listMembers = new ListUser();
 	}
 
-	protected JuryLIJUR(Parcel in) {
+	private JuryLIJUR(Parcel in) {
 		this.jury = new Jury();
 
 		this.jury.setIdJury(in.readInt());

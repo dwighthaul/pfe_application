@@ -1,20 +1,13 @@
 package fr.eseo.dis.hubertpa.pfe_application.controller.adapters;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
@@ -26,7 +19,7 @@ public class LineStudentDetailProject extends BaseAdapter {
 
 	private final ArrayList _listStudents;
 
-	DetailProjectActivity _activity;
+	private DetailProjectActivity _activity;
 
 	public LineStudentDetailProject(DetailProjectActivity activity, HashMap<Integer, String> listStudents) {
 		_listStudents = new ArrayList();

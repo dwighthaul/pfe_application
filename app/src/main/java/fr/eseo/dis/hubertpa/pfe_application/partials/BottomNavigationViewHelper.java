@@ -8,10 +8,6 @@ import android.util.Log;
 
 import java.lang.reflect.Field;
 
-/**
- * Created by Morgan on 10/01/2018.
- */
-
 public class BottomNavigationViewHelper {
     @SuppressLint("RestrictedApi")
     public static void disableShiftMode(BottomNavigationView view) {

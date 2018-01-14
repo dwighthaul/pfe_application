@@ -7,9 +7,6 @@ import java.util.ArrayList;
 
 import lombok.NoArgsConstructor;
 
-/**
- * Created by paulhubert on 08/01/18.
- */
 
 @NoArgsConstructor
 public class ListUser extends ArrayList<User> implements Parcelable {

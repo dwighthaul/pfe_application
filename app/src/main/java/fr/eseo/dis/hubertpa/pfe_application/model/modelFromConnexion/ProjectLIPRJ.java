@@ -12,10 +12,6 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-/**
- * Created by paulhubert on 30/12/17.
- */
-
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class ProjectLIPRJ implements Parcelable {
@@ -32,16 +28,13 @@ public class ProjectLIPRJ implements Parcelable {
 	@Getter @Setter @NonNull
 	ListUser listStudents;
 
-//	@Getter @Setter
-//	List<String> listStudentsName;
-
 	ProjectLIPRJ () {
 		listStudents = new ListUser();
 //		listStudentsName = new ArrayList<String>();
 	}
 
 
-	protected ProjectLIPRJ(Parcel in) {
+	private ProjectLIPRJ(Parcel in) {
 		this.project = new Project();
 
 		this.project.setIdProject(in.readInt());
