@@ -91,12 +91,19 @@
 
     </ScrollView>
 
-    <TextView
+    <Button
         android:id="@+id/visitor_sign_in"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_width="294dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:gravity="center_vertical|center"
-        android:text="@string/visitor_sign_in" />
+        android:elevation="0dp"
+        android:background="@drawable/link_button_login"
+        android:text="@string/visitor_sign_in"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </LinearLayout>

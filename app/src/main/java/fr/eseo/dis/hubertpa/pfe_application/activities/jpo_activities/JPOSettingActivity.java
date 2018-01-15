@@ -10,6 +10,6 @@ public class JPOSettingActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_jposetting);
+		setContentView(R.layout.activity_jpo_setting);
 	}
 }

@@ -42,6 +42,7 @@
         <activity android:name=".activities.jpo_activities.JPOProjectActivity" />
         <activity android:name=".activities.jpo_activities.DetailProjectJPOActivity" />
         <activity android:name=".activities.jpo_activities.JPOSettingActivity"></activity>
+        <activity android:name=".activities.jpo_activities.JPOJuryActivity"></activity>
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@ import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.activities.JuryActivity;
 import fr.eseo.dis.hubertpa.pfe_application.activities.MarkActivity;
 import fr.eseo.dis.hubertpa.pfe_application.activities.SettingsActivity;
+import fr.eseo.dis.hubertpa.pfe_application.activities.jpo_activities.JPOJuryActivity;
 import fr.eseo.dis.hubertpa.pfe_application.activities.jpo_activities.JPOProjectActivity;
 
 public class NavigationBottomJPO implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -44,8 +45,8 @@ public class NavigationBottomJPO implements BottomNavigationView.OnNavigationIte
 				return true;
 			case R.id.action_jury_tab:
 				if(pageActivity != PAGES.JURIES_JPO) {
-//					Intent intent1 = new Intent(activity, JPOJuryActivity.class);
-//					activity.startActivity(intent1);
+					Intent intent1 = new Intent(activity, JPOJuryActivity.class);
+					activity.startActivity(intent1);
 				}
 				return true;
 			case R.id.action_mark_tab:

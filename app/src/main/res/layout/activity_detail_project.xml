@@ -14,7 +14,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
@@ -25,7 +25,7 @@
                 <TextView
                     android:id="@+id/textViewiD"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:text="[textViewiD]"
@@ -34,7 +34,7 @@
                 <TextView
                     android:id="@+id/textViewTitle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="[textViewTitle]"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -54,7 +54,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:background="@drawable/border_rounded_red_eseo"
+                    android:textColor="@color/grey_color_button"
+                    android:background="@drawable/grey_button"
                     android:padding="2dp"
                     android:layout_weight="1"
                     android:text="@string/afficher_le_poster" />
@@ -64,7 +65,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:background="@drawable/border_rounded_red_eseo"
+                    android:textColor="@color/grey_color_button"
+                    android:background="@drawable/grey_button"
                     android:padding="2dp"
                     android:layout_weight="1"
                     android:text="@string/noter_le_projet" />
@@ -73,7 +75,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/border_rounded_blue_eseo"
                 android:orientation="vertical">
 
                 <TextView
@@ -114,7 +115,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/border_rounded_grey_eseo"
                 android:orientation="horizontal">
 
                 <TextView
@@ -140,7 +140,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/border_rounded_grey_eseo"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:orientation="vertical"
@@ -172,7 +171,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.4"
-                    android:background="@drawable/border_rounded_blackgrey_eseo"
+                    android:textColor="@color/grey_color_button"
+                    android:background="@drawable/grey_button"
                     android:text="Valider"
                     tools:ignore="HardcodedText" />
 
@@ -182,7 +182,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/border_rounded_blackgrey_eseo"
                 android:orientation="vertical"
                 android:padding="7dp">
 
@@ -223,7 +222,6 @@
                 android:id="@+id/containerImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/border_rounded_grey_eseo"
                 android:padding="7dp">
 
                 <ImageView
