@@ -2,6 +2,7 @@ package fr.eseo.dis.hubertpa.pfe_application.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +53,8 @@ public class MarkStudentsFromProjectActivity extends AppCompatActivity {
 
 	private EditText globalMarkeditText;
 	private Button buttonRateAllStudents;
+	private LinearLayout rateLayout;
+	TextView rateLayoutTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +63,19 @@ public class MarkStudentsFromProjectActivity extends AppCompatActivity {
 
 		globalMarkeditText = findViewById(R.id.globalMarkeditText);
 		buttonRateAllStudents = findViewById(R.id.buttonRateAllStudent);
+		rateLayout = findViewById(R.id.rateLayout);
+		rateLayoutTextView = findViewById(R.id.rateLayoutTextView);
 		Bundle data = getIntent().getExtras();
+
 		assert data != null;
 		projectLIPRJ = data.getParcelable("selected_project");
+
+/*
+		} else {
+			ConstraintLayout constraintLayout = findViewById(R.id.containerImage);
+			constraintLayout.setVisibility(View.GONE);
+		}
+*/
 
 		setListener();
 
@@ -138,6 +152,8 @@ public class MarkStudentsFromProjectActivity extends AppCompatActivity {
 
 		// Get the URL to log into the server
 		final String url = WebServiceConnexion.getNOTES(_login, _token, idProject);
+		Log.d("TEST", "" + url);//notes.getNotesList().size());
+
 
 		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 			@Override
@@ -173,9 +189,9 @@ public class MarkStudentsFromProjectActivity extends AppCompatActivity {
 	private void setCallbackNotes() {
 		callback = new VolleyCallbackNOTES() {
 
-			@SuppressLint("SetTextI18n")
 			@Override
 			public void onSuccess(NOTES notes) {
+				rateLayoutTextView.setVisibility(View.GONE);
 
 				// Get the notes from the
 				ListNote listNotes = filterOnlyWantedStudent(notes.getNotesList());
@@ -195,21 +211,22 @@ public class MarkStudentsFromProjectActivity extends AppCompatActivity {
 					}
 				}
 
+
 				if(listStudentsToDisplay.get(0).isNoteSet()) {
 					globalMarkeditText.setText(String.valueOf(listStudentsToDisplay.get(0).getAvgnote()));
 				} else {
 					globalMarkeditText.setText("Non noté");
 				}
 
-
 				RateStudentsAdapter adapter = new RateStudentsAdapter(MarkStudentsFromProjectActivity.this, listStudentsToDisplay);
 				listViewStudentValue.setAdapter(adapter);
-
 			}
 
 			@Override
 			public void onError(String errorMessage) {
-
+				Toast.makeText(MarkStudentsFromProjectActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+				rateLayout.setVisibility(View.GONE);
+				rateLayoutTextView.setText(errorMessage);
 			}
 		};
 	}

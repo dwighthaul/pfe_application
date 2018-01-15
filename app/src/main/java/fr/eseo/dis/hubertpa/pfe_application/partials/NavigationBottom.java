@@ -39,24 +39,32 @@ public class NavigationBottom implements BottomNavigationView.OnNavigationItemSe
 			case R.id.action_project_tab:
 				if(pageActivity != PAGES.PROJECTS) {
 					Intent intent = new Intent(activity, ProjectActivity.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 					activity.startActivity(intent);
 				}
 				return true;
 			case R.id.action_jury_tab:
 				if(pageActivity != PAGES.JURIES) {
 					Intent intent1 = new Intent(activity, JuryActivity.class);
+					intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 					activity.startActivity(intent1);
 				}
 				return true;
 			case R.id.action_mark_tab:
 				if(pageActivity != PAGES.MARKS) {
 					Intent intent2 = new Intent(activity, MarkActivity.class);
+					intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 					activity.startActivity(intent2);
 				}
 				return true;
 			case R.id.action_settings_tab:
 				if(pageActivity != PAGES.SETTINGS) {
 					Intent intent3 = new Intent(activity, SettingsActivity.class);
+					intent3.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					intent3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 					activity.startActivity(intent3);
 				}
 				return true;

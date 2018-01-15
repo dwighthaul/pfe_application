@@ -270,8 +270,7 @@ public class ProjectActivity extends AppCompatActivity {
 
 		// Get the good url with the good variables
 
-		String url = WebServiceConnexion.getMYJUR(_login, _token);
-
+		String url = WebServiceConnexion.getMYPRJ(_login, _token);
 		RequestQueue queue = Volley.newRequestQueue(this, new HurlStack(null, WebServiceConnexion.newSslSocketFactory(this)));
 
 		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -281,7 +280,7 @@ public class ProjectActivity extends AppCompatActivity {
 					JSONObject jsonObject = new JSONObject(response);
 					String result = jsonObject.getString("result");
 					if (result.equals("OK")) {
-						myLiproj = JsonParserAPI.parseLIPRJ(jsonObject);
+						myLiproj = JsonParserAPI.parseMYPRJ(jsonObject);
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();

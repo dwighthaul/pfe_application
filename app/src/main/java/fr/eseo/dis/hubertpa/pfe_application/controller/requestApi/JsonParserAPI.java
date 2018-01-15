@@ -165,7 +165,6 @@ public class JsonParserAPI {
 		NOTES notes = new NOTES();
 		try {
 			JSONArray listNotesJson = jsonObject.getJSONArray("notes");
-			List<JuryLIJUR> listJury = new ArrayList<>();
 
 			for (int i = 0; i < listNotesJson.length(); i++) {
 

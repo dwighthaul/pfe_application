@@ -30,61 +30,75 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/rateLayoutTextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/border_rounded_grey_eseo"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:orientation="vertical"
-            android:padding="7dp">
-
-            <TextView
-                android:id="@+id/textViewNoteGlobale"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:text="Note globale"
-                android:textColor="@color/red_eseo_2"
-                tools:ignore="HardcodedText,RtlHardcoded" />
-
-            <EditText
-                android:id="@+id/globalMarkeditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                android:nextFocusLeft="@id/globalMarkeditText"
-                android:nextFocusUp="@id/globalMarkeditText"
-                android:text="" />
-
-            <Button
-                android:id="@+id/buttonRateAllStudent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.4"
-                android:background="@drawable/border_rounded_blackgrey_eseo"
-                android:text="Valider"
-                tools:ignore="HardcodedText" />
-        </LinearLayout>
+            android:text=""/>
 
         <LinearLayout
+            android:id="@+id/rateLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:padding="2dp"
             android:background="@drawable/border_rounded_blackgrey_eseo"
-            >
+            android:orientation="vertical"
+            android:padding="2dp">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/ListViewStudentValue"
-                android:padding="2dp"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/border_rounded_grey_eseo"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:padding="7dp">
 
+                <TextView
+                    android:id="@+id/textViewNoteGlobale"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="Note globale"
+                    android:textColor="@color/red_eseo_2"
+                    tools:ignore="HardcodedText,RtlHardcoded" />
+
+                <EditText
+                    android:id="@+id/globalMarkeditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    android:nextFocusLeft="@id/globalMarkeditText"
+                    android:nextFocusUp="@id/globalMarkeditText"
+                    android:text="" />
+
+                <Button
+                    android:id="@+id/buttonRateAllStudent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4"
+                    android:background="@drawable/border_rounded_blackgrey_eseo"
+                    android:text="Valider"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/border_rounded_blackgrey_eseo"
+                android:padding="2dp">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/ListViewStudentValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp" />
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

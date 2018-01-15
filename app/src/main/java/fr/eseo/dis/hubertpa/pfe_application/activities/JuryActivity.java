@@ -241,7 +241,7 @@ public class JuryActivity  extends AppCompatActivity {
 
 		// Get the good url with the good variables
 
-		String url = WebServiceConnexion.getMYPRJ(_login, _token);
+		String url = WebServiceConnexion.getMYJUR(_login, _token);
 
 		RequestQueue queue = Volley.newRequestQueue(this, new HurlStack(null, WebServiceConnexion.newSslSocketFactory(this)));
 

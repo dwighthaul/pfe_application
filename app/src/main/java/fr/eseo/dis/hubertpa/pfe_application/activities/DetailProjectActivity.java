@@ -132,7 +132,8 @@ public class DetailProjectActivity extends AppCompatActivity {
 
 			@Override
 			public void onError(String errorMessage) {
-
+				Toast.makeText(DetailProjectActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+				globalMarkeditText.setText(errorMessage);
 			}
 		};
 	}
