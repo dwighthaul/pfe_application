@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -27,6 +29,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_margin="2dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:text="[textViewiD]"
                     tools:ignore="HardcodedText" />
@@ -55,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:textColor="@color/grey_color_button"
-                    android:background="@drawable/grey_button"
+                    android:background="@drawable/border_rounded_red_eseo"
                     android:padding="2dp"
                     android:layout_weight="1"
                     android:text="@string/afficher_le_poster" />
@@ -66,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:textColor="@color/grey_color_button"
-                    android:background="@drawable/grey_button"
+                    android:background="@drawable/border_rounded_red_eseo"
                     android:padding="2dp"
                     android:layout_weight="1"
                     android:text="@string/noter_le_projet" />
@@ -75,6 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginBottom="5dp"
+                android:background="@drawable/border_rounded_blue_eseo"
                 android:orientation="vertical">
 
                 <TextView
@@ -115,6 +119,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
+                android:background="@drawable/border_rounded_grey_eseo"
                 android:orientation="horizontal">
 
                 <TextView
@@ -142,6 +147,7 @@
                 android:layout_marginBottom="5dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
+                android:background="@drawable/border_rounded_blue_eseo"
                 android:orientation="vertical"
                 android:padding="7dp">
 
@@ -152,7 +158,6 @@
                     android:layout_weight="1"
                     android:gravity="right"
                     android:text="Note globale"
-                    android:textColor="@color/red_eseo_2"
                     tools:ignore="HardcodedText,RtlHardcoded" />
 
                 <EditText
@@ -162,6 +167,8 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="numberDecimal"
+                    android:background="@drawable/border_bottom_red_eseo"
+                    android:layout_margin="2dp"
                     android:nextFocusLeft="@id/globalMarkeditText"
                     android:nextFocusUp="@id/globalMarkeditText"
                     android:text="" />
@@ -172,7 +179,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.4"
                     android:textColor="@color/grey_color_button"
-                    android:background="@drawable/grey_button"
+                    android:background="@drawable/border_rounded_red_eseo"
+                    android:layout_margin="2dp"
                     android:text="Valider"
                     tools:ignore="HardcodedText" />
 
@@ -195,6 +203,7 @@
                 <ListView
                     android:id="@+id/textViewStudentValue"
                     android:layout_width="match_parent"
+                    android:background="@drawable/border_rounded_blackgrey_eseo"
                     android:layout_height="wrap_content"
                     tools:ignore="NestedScrolling" />
 
@@ -222,6 +231,7 @@
                 android:id="@+id/containerImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/border_rounded_grey_eseo"
                 android:padding="7dp">
 
                 <ImageView
