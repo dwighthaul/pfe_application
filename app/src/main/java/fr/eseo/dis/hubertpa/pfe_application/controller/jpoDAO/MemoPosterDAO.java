@@ -14,7 +14,7 @@ public class MemoPosterDAO extends DAOBase{
     //private String[] allColumns = { MemoPosterJPOdb.COLUMN_NAME_ID_MEMO,
            // MemoPosterJPOdb.COLUMN_NAME_ID_PROJECT, MemoPosterJPOdb.COLUMN_NAME_TEXT };
 
-    public MemoPosterDAO(Context pContext) {
+    /*public MemoPosterDAO(Context pContext) {
         super(pContext);
     }
 
@@ -28,7 +28,7 @@ public class MemoPosterDAO extends DAOBase{
 
     public void edit(JuryDAO juryJPO) {
         // CODE
-    }
+    }*/
 
     /*public List<MemoPosterJPO> getAllMemos() {
         List<MemoPosterJPO> memos = new ArrayList<MemoPosterJPO>();

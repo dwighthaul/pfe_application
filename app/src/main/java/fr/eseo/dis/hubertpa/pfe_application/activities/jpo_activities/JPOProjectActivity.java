@@ -83,11 +83,12 @@ public class JPOProjectActivity extends AppCompatActivity {
 
 		mySwipeRefreshLayout = findViewById(R.id.swip_to_refresh);
 		findProjectSearchView = findViewById(R.id.findProjectSearchView);
+
 		BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
 		BottomNavigationViewHelper.disableShiftMode(navigation);
 		navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-//	    navigation.getMenu().getItem(0).setChecked(true);
+	    navigation.getMenu().getItem(0).setChecked(true);
 
 		porte = new PORTE();
 

@@ -85,6 +85,13 @@
 
     <!--JPOJuryActivity-->
     <string name="add_jpo_jury">Ajouter un jurie</string>
+    <string name="add_jpo_jury_button_validation">Valider</string>
+    <string name="jpo_jury_forename">Prénom</string>
+    <string name="jpo_jury_surname">Nom</string>
+    <string name="jpo_jury_1">Jurie 1</string>
+    <string name="jpo_jury_2">Jurie 2</string>
+    <string name="surnametextViewLabel">Nom</string>
+    <string name="forenametextViewLabel">Prénom</string>
 
 
 </resources>

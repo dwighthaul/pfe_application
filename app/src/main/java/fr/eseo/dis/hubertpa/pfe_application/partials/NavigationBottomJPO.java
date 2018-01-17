@@ -12,7 +12,9 @@ import fr.eseo.dis.hubertpa.pfe_application.activities.JuryActivity;
 import fr.eseo.dis.hubertpa.pfe_application.activities.MarkActivity;
 import fr.eseo.dis.hubertpa.pfe_application.activities.SettingsActivity;
 import fr.eseo.dis.hubertpa.pfe_application.activities.jpo_activities.JPOJuryActivity;
+import fr.eseo.dis.hubertpa.pfe_application.activities.jpo_activities.JPOMarkActivity;
 import fr.eseo.dis.hubertpa.pfe_application.activities.jpo_activities.JPOProjectActivity;
+import fr.eseo.dis.hubertpa.pfe_application.activities.jpo_activities.JPOSettingActivity;
 
 public class NavigationBottomJPO implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -61,7 +63,7 @@ public class NavigationBottomJPO implements BottomNavigationView.OnNavigationIte
 //				return true;
 			case R.id.action_settings_tab:
 				if(pageActivity != PAGES.SETTINGS) {
-					Intent intent3 = new Intent(activity, SettingsActivity.class);
+					Intent intent3 = new Intent(activity, JPOSettingActivity.class);
 					activity.startActivity(intent3);
 				}
 				return true;

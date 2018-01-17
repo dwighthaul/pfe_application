@@ -7,7 +7,7 @@ import fr.eseo.dis.hubertpa.pfe_application.databases.DatabaseHandler;
 
 public class DAOBase{
 
-    protected SQLiteDatabase mDb;
+    /*protected SQLiteDatabase mDb;
     protected DatabaseHandler mHandler;
 
     public DAOBase(Context pContext) {
@@ -25,5 +25,5 @@ public class DAOBase{
 
     public SQLiteDatabase getDb() {
         return mDb;
-    }
+    }*/
 }
