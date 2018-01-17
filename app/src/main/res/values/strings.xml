@@ -6,6 +6,7 @@
     <string name="project_tab">Projets</string>
     <string name="jury_tab">Juries</string>
     <string name="marks_tab">Notes</string>
+    <string name="settings_tab">Paramètres</string>
 
     <!-- foo -->
     <string name="jpo_project_tab">JPO Projets</string>
@@ -63,7 +64,6 @@
     <!-- Projects Cards -->
     <string name="project_cards_supervisor_label">Superviseur :</string>
     <string name="confidentialitytextViewLabel">Confidentialité : </string>
-    <string name="settings_tab">Settings</string>
     <string name="title_activity_rate_student">RateStudentActivity</string>
     <string name="title_activity_dislay_poster">DislayPosterActivity</string>
     <string name="title_activity_take_notes_project">TakeNotesProjectActivity</string>
@@ -76,14 +76,15 @@
     <string name="supervisor">Supervisor :</string>
     <string name="textviewsupervisorvalue">[textViewSupervisorValue]</string>
     <string name="liste_d_etudiants">Liste d\'étudiants :</string>
-    <string name="jury_le">Jury le :</string>
+    <string name="jury_le">Jury du :</string>
     <string name="ajouter_une_alarme_pour_ce_jury">Ajouter une alarme pour ce jury</string>
     <string name="liste_des_juries">Liste des juries :</string>
     <string name="liste_des_projects">Liste des projects :</string>
     <string name="noter_le_project">Noter le project</string>
     <string name="noter_le_projet">Noter le projet</string>
 
-    <!--activity_detail_project_from_jury-->
+    <!--JPOJuryActivity-->
+    <string name="add_jpo_jury">Ajouter un jurie</string>
 
 
 </resources>

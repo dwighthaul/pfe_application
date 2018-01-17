@@ -11,6 +11,7 @@ import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.activities.JuryActivity;
 import fr.eseo.dis.hubertpa.pfe_application.activities.MarkActivity;
 import fr.eseo.dis.hubertpa.pfe_application.activities.SettingsActivity;
+import fr.eseo.dis.hubertpa.pfe_application.activities.jpo_activities.JPOJuryActivity;
 import fr.eseo.dis.hubertpa.pfe_application.activities.jpo_activities.JPOProjectActivity;
 
 public class NavigationBottomJPO implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -46,17 +47,15 @@ public class NavigationBottomJPO implements BottomNavigationView.OnNavigationIte
 				return true;
 			case R.id.action_jury_tab:
 				if(pageActivity != PAGES.JURIES_JPO) {
-//					Intent intent1 = new Intent(activity, JPOJuryActivity.class);
-//					intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//					intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//					activity.startActivity(intent1);
+					Intent intent1 = new Intent(activity, JPOJuryActivity.class);
+					intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+					activity.startActivity(intent1);
 				}
 				return true;
 			case R.id.action_mark_tab:
 				if(pageActivity != PAGES.MARKS_JPO) {
 //					Intent intent2 = new Intent(activity, JPOMarkActivity.class);
-//					intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//					intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //					activity.startActivity(intent2);
 				}
 				return true;

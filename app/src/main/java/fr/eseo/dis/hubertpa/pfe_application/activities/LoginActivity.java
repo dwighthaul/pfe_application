@@ -45,6 +45,8 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
+	VolleyCallbackLOGON processResponseVisitor;
+
 	/**
 	 * Id to identity READ_CONTACTS permission request.
 	 */
@@ -116,7 +118,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 		};
 
 		//Sign in as a visitor
-		//visiteur = findViewById(R.id.visitor_sign_in);
+		visiteur = findViewById(R.id.visitor_sign_in);
+
+		visiteur.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				Log.d("Welcome", "Visiteur");
+				connectUser(WebServiceConnexion.DEFAULT_LOGIN, WebServiceConnexion.DEFAULT_PASSWORD);
+			}
+		});
+	}
+
+	public void connectUser(String userLogin, String userPassword) {
+		WebServiceConnexion.getConnected(userLogin, userPassword, this, processResponseVisitor);
 	}
 
 	private void populateAutoComplete() {

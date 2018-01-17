@@ -235,6 +235,7 @@ public class JPOProjectActivity extends AppCompatActivity {
 
 					if (result.equals("OK")) {
 						PORTE porte = JsonParserAPI.parsePORTE(jsonObject);
+						//Log.d("Check porte problem", porte);
 						JPOProjectActivity.this.setPorte(porte);
 
 						Toast.makeText(JPOProjectActivity.this, "JPO Liste de tous les projects. \n Nombre de projets : " + porte.getListProject().size(), Toast.LENGTH_LONG).show();

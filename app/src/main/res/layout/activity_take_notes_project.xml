@@ -39,7 +39,7 @@
                 android:layout_weight="1"
                 android:layout_margin="20dp"
                 android:text="Sauvegarder"
-                android:background="@drawable/border_rounded_blue_eseo"
+                android:background="@drawable/grey_button"
                 tools:layout_editor_absoluteY="723dp" />
         </android.support.constraint.ConstraintLayout>
 
