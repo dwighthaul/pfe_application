@@ -39,7 +39,7 @@ public class TakeNotesProjectActivity extends AppCompatActivity {
 		contentEditText = findViewById(R.id.contentEditText);
 		saveButton = findViewById(R.id.saveButton);
 
-		annotationDAO = new AnnotationDAO(this, false);
+		annotationDAO = new AnnotationDAO(this, true);
 
 		Bundle data = getIntent().getExtras();
 		assert data != null;

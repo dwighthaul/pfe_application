@@ -39,7 +39,7 @@ public class JPOProjectAdapter extends RecyclerView.Adapter<JPOProjectAdapter.Pr
 		holder.nameProjectTextView.setText(projectPORTE.getProject().getTitle());
 
 		String desc = projectPORTE.getProject().getDescription();
-		int limit = 75;
+		int limit = 150;
 		if(projectPORTE.getProject().getDescription().length() > limit) {
 			desc = projectPORTE.getProject().getDescription().substring(0, limit) + " [ ... ]";
 		}
