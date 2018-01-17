@@ -13,6 +13,7 @@ import android.util.Log;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -179,7 +180,6 @@ public class JPOProjectActivity extends AppCompatActivity {
 
 				// Set the list of projects used to create the view
 				JPOProjectActivity.this.setProjectListBuffer(liprpo);
-
 				// send the list to the projectAdapter and set the project adapter to the recycler
 				projectAdapter = new JPOProjectAdapter(JPOProjectActivity.this);
 				recycler.setAdapter(projectAdapter);
@@ -255,10 +255,15 @@ public class JPOProjectActivity extends AppCompatActivity {
 				callback.onError(error.getMessage());
 			}
 		});
+
+		stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+				50000,
+				DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 		queue.add(stringRequest);
 	}
 
-	// After 10 sec, the activity hind the annoying spining stuff and display an error
+	// After 40 sec, the activity hind the annoying spining stuff and display an error
 	public void stopBuffering() {
 		final Handler handler = new Handler();
 		handler.postDelayed(new Runnable() {
@@ -269,7 +274,7 @@ public class JPOProjectActivity extends AppCompatActivity {
 					mySwipeRefreshLayout.setRefreshing(false);
 				}
 			}
-		}, 10000);
+		}, 40000);
 
 	}
 
@@ -286,11 +291,9 @@ public class JPOProjectActivity extends AppCompatActivity {
 		// TODO : Create and Implement this page
 		Log.d("JPOProjectActivity", projectPORTE.getProject().getTitle());
 
-//		Intent intent = new Intent(this, TakeNotesProjectActivity.class);
-//		intent.putExtra("nameProject", projectPORTE.getProject().getTitle());
-//		intent.putExtra("idProject", projectPORTE.getProject().getIdProject());
-//		intent.putExtra("selected_project", projectPORTE);
-//		startActivity(intent);
+		Intent intent = new Intent(this, JPODisplayImageActivity.class);
+		intent.putExtra("stringImageProject", projectPORTE.getBase64Image());
+		startActivity(intent);
 	}
 
 	public void seePoster(ProjectPORTE projectPORTE) {

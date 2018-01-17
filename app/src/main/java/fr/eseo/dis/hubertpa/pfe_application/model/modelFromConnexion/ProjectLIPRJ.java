@@ -8,6 +8,7 @@ import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.Project;
 import fr.eseo.dis.hubertpa.pfe_application.model.basicModel.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -28,9 +29,8 @@ public class ProjectLIPRJ implements Parcelable {
 	@Getter @Setter @NonNull
 	ListUser listStudents;
 
-	ProjectLIPRJ () {
+	public ProjectLIPRJ () {
 		listStudents = new ListUser();
-//		listStudentsName = new ArrayList<String>();
 	}
 
 

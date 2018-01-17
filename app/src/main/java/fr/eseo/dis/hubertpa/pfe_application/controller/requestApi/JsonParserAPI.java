@@ -1,6 +1,7 @@
 package fr.eseo.dis.hubertpa.pfe_application.controller.requestApi;
 
 import android.graphics.Bitmap;
+import android.util.Base64;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -198,13 +199,13 @@ public class JsonParserAPI {
 			for (int i = 0; i < listNotesJson.length(); i++) {
 
 				JSONObject jsonObjectProject = listNotesJson.getJSONObject(i);
+				jsonObjectProject.put("projectId", jsonObjectProject.getString("idProject"));
 				jsonObjectProject.put("descrip", jsonObjectProject.getString("description"));
 
 				Project project = Project.fromJson(jsonObjectProject);
 
-				Bitmap bitmap = null;
-				//new Bitmap();
-				//jsonObjectProject.get("poster");
+				String bitmap = jsonObjectProject.getString("poster");
+
 				ProjectPORTE projectPORTE = new ProjectPORTE(project, bitmap);
 				listProjectPORTE.add(projectPORTE);
 			}

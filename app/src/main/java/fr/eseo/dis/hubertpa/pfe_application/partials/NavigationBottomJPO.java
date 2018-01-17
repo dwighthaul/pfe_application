@@ -39,18 +39,24 @@ public class NavigationBottomJPO implements BottomNavigationView.OnNavigationIte
 			case R.id.action_project_tab:
 				if(pageActivity != PAGES.PROJECTS_JPO) {
 					Intent intent = new Intent(activity, JPOProjectActivity.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 					activity.startActivity(intent);
 				}
 				return true;
 			case R.id.action_jury_tab:
 				if(pageActivity != PAGES.JURIES_JPO) {
 //					Intent intent1 = new Intent(activity, JPOJuryActivity.class);
+//					intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//					intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //					activity.startActivity(intent1);
 				}
 				return true;
 			case R.id.action_mark_tab:
 				if(pageActivity != PAGES.MARKS_JPO) {
 //					Intent intent2 = new Intent(activity, JPOMarkActivity.class);
+//					intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//					intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //					activity.startActivity(intent2);
 				}
 				return true;

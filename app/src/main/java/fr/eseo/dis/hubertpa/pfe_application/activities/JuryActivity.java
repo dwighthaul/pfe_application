@@ -46,6 +46,7 @@ public class JuryActivity  extends AppCompatActivity {
 	@Getter @Setter
 	LIJUR lijur;
 
+	@Getter @Setter
 	LIJUR  myLijur;
 	// The following list is use to be a buffer, the list to be display.
 	// This list can be modified if the user filter the result, ask to only display the favorits one

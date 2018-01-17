@@ -56,6 +56,16 @@
                 android:background="@drawable/border_rounded_red_eseo"
                 android:padding="2dp"
                 android:text="@string/ajouter_une_alarme_pour_ce_jury" />
+
+            <Button
+                android:id="@+id/buttonDisplayDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:background="@drawable/border_rounded_red_eseo"
+                android:padding="2dp"
+                android:text="Détail du projet" />
+
         </LinearLayout>
 
 
@@ -83,6 +93,8 @@
 
 
         </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -103,7 +115,7 @@
             <ListView
                 android:id="@+id/textViewListProjectsValue"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
 
 
         </LinearLayout>

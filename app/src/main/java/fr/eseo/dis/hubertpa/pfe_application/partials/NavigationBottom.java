@@ -63,8 +63,6 @@ public class NavigationBottom implements BottomNavigationView.OnNavigationItemSe
 			case R.id.action_settings_tab:
 				if(pageActivity != PAGES.SETTINGS) {
 					Intent intent3 = new Intent(activity, SettingsActivity.class);
-					intent3.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					intent3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 					activity.startActivity(intent3);
 				}
 				return true;
