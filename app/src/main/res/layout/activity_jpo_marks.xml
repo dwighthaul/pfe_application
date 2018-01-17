@@ -23,17 +23,13 @@
             app:menu="@menu/bottom_navigation_items_jpo" />
     </android.support.constraint.ConstraintLayout>
 
-    <Button
-        android:id="@+id/add_jpo_jury_button"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:background="@drawable/grey_button"
-        android:gravity="center"
-        android:text="@string/add_jpo_jury"
-        android:textColor="@color/grey_color_button"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="17dp" />
+        android:text="List Marks"
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="78dp"
+        tools:ignore="MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>

@@ -16,7 +16,7 @@ public class JuryDAO extends DAOBase{
 
     //public static final String TABLE_DROP =  "DROP TABLE IF EXISTS " + JURY_TABLE + ";";
 
-    public JuryDAO(Context pContext) {
+    /*public JuryDAO(Context pContext) {
         super(pContext);
     }
 
@@ -30,5 +30,5 @@ public class JuryDAO extends DAOBase{
 
     public void edit(JuryDAO juryJPO) {
         // CODE
-    }
+    }*/
 }
