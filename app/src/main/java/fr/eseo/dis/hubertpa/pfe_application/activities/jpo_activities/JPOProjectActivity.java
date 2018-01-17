@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -230,8 +232,16 @@ public class JPOProjectActivity extends AppCompatActivity {
 		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 
 			@Override
-			public void onResponse(String response) {
+			public void onResponse(String res) {
 				stoppingBuffering = false;
+				String response = "", str = "";
+				try {
+					str = new String(res.getBytes("ISO-8859-1"), "UTF-8");
+				} catch (UnsupportedEncodingException e) {
+
+					e.printStackTrace();
+				}
+				response = Html.fromHtml(str).toString();
 				try {
 					JSONObject jsonObject = new JSONObject(response);
 					String result = jsonObject.getString("result");
@@ -274,11 +284,11 @@ public class JPOProjectActivity extends AppCompatActivity {
 			@Override
 			public void run() {
 				if (stoppingBuffering) {
-					Toast.makeText(JPOProjectActivity.this, "Connexion error", Toast.LENGTH_SHORT).show();
+//					Toast.makeText(JPOProjectActivity.this, "Connexion error", Toast.LENGTH_SHORT).show();
 					mySwipeRefreshLayout.setRefreshing(false);
 				}
 			}
-		}, 40000);
+		}, 20000);
 
 	}
 
@@ -286,9 +296,9 @@ public class JPOProjectActivity extends AppCompatActivity {
 		// TODO : Create and Implement this page
 		Log.d("JPOProjectActivity", projectPORTE.getProject().getTitle());
 
-		//Intent intent = new Intent(this, DetailProjectJPOActivity.class);
-		//		intent.putExtra("selected_project", projectPORTE);
-		//startActivity(intent);
+		Intent intent = new Intent(this, DetailProjectJPOActivity.class);
+		intent.putExtra("selected_project", projectPORTE);
+		startActivity(intent);
 	}
 
 	public void setNote(ProjectPORTE projectPORTE) {

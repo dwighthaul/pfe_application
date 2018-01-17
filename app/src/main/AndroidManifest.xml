@@ -27,24 +27,56 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ProjectActivity" />
-        <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.JuryActivity" />
-        <activity android:name=".activities.MarkActivity" />
-        <activity android:name=".testActivities.Test" />
-        <activity android:name=".activities.DetailProjectActivity" />
-        <activity android:name=".activities.SettingsActivity" />
-        <activity android:name=".activities.RateStudentActivity" />
-        <activity android:name=".activities.DislayPosterActivity" />
-        <activity android:name=".activities.TakeNotesProjectActivity" />
-        <activity android:name=".activities.DetailJuryActivity" />
-        <activity android:name=".activities.MarkStudentsFromProjectActivity" />
-        <activity android:name=".activities.jpo_activities.JPOProjectActivity" />
-        <activity android:name=".activities.jpo_activities.DetailProjectJPOActivity" />
-        <activity android:name=".activities.jpo_activities.JPOSettingActivity" />
-        <activity android:name=".activities.jpo_activities.JPODisplayImageActivity"></activity>
-        <activity android:name=".activities.jpo_activities.JPOSettingActivity"></activity>
-        <activity android:name=".activities.jpo_activities.JPOJuryActivity"></activity>
+        <activity android:name=".activities.ProjectActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.JuryActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.MarkActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".testActivities.Test"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.DetailProjectActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.SettingsActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.RateStudentActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.DislayPosterActivity"
+            />
+        <activity android:name=".activities.TakeNotesProjectActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.DetailJuryActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.MarkStudentsFromProjectActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.jpo_activities.JPOProjectActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.jpo_activities.DetailProjectJPOActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.jpo_activities.JPOSettingActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.jpo_activities.JPODisplayImageActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.jpo_activities.JPOJuryActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>

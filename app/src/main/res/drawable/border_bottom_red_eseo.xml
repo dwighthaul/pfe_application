@@ -16,7 +16,7 @@
         <shape android:shape="line">
             <solid android:color="#ffffff"/>
             <stroke android:width="2dp" android:color="@color/red_eseo_1" />
-            <size android:width="350dp" android:height="40dp"/>
+            <size android:width="350dp" android:height="60dp"/>
         </shape>
     </item>
 </selector>

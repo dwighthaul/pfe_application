@@ -27,7 +27,7 @@ public class ProjectPORTE implements Parcelable {
 		this.project.setIdProject(in.readInt());
 		this.project.setTitle(in.readString());
 		this.project.setDescription(in.readString());
-		this.setBase64Image(in.readString());
+//		this.setBase64Image(in.readString());
 
 	}
 
@@ -53,7 +53,7 @@ public class ProjectPORTE implements Parcelable {
 		dest.writeInt(this.project.getIdProject());
 		dest.writeString(this.project.getTitle());
 		dest.writeString(this.project.getDescription());
-		dest.writeString(this.base64Image);
+//		dest.writeString(this.base64Image);
 
 	}
 
