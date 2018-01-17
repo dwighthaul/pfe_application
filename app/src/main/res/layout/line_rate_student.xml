@@ -8,7 +8,13 @@
     android:background="@color/grey_eseo_3"
     tools:context="fr.eseo.dis.hubertpa.pfe_application.activities.DetailProjectActivity">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -30,12 +36,6 @@
             android:layout_weight="0.80"
             android:text="[StudentName]" />
 
-        <TextView
-            android:id="@+id/currentMarkTextView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="[10]" />
 
         <TextView
             android:id="@+id/textViewNoter"
@@ -54,6 +54,41 @@
             app:srcCompat="@drawable/ic_content_paste_black_24dp" />
 
 
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/currentMarkTextViewLabel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Ma note" />
+
+            <TextView
+                android:id="@+id/currentMarkTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="[10]" />
+
+            <TextView
+                android:id="@+id/averageMarkTextViewLabel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Moyenne" />
+
+            <TextView
+                android:id="@+id/averageMarkTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="[10]" />
+
+        </LinearLayout>
     </LinearLayout>
 
 

@@ -55,13 +55,13 @@
                 <Button
                     android:id="@+id/displayPoster"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_margin="2dp"
-                    android:textColor="@color/grey_color_button"
+                    android:layout_weight="1"
                     android:background="@drawable/border_rounded_red_eseo"
                     android:padding="2dp"
-                    android:layout_weight="1"
-                    android:text="@string/afficher_le_poster" />
+                    android:text="@string/afficher_le_poster"
+                    android:textColor="@color/grey_color_button" />
 
                 <Button
                     android:id="@+id/buttonRateProject"
@@ -167,7 +167,6 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="numberDecimal"
-                    android:background="@drawable/border_bottom_red_eseo"
                     android:layout_margin="2dp"
                     android:nextFocusLeft="@id/globalMarkeditText"
                     android:nextFocusUp="@id/globalMarkeditText"
@@ -189,6 +188,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/border_rounded_blackgrey_eseo"
                 android:layout_marginBottom="5dp"
                 android:orientation="vertical"
                 android:padding="7dp">

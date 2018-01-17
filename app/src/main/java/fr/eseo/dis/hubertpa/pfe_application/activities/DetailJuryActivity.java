@@ -73,14 +73,13 @@ public class DetailJuryActivity extends AppCompatActivity {
 				int month = Integer.valueOf(parts[1]);
 				int date = Integer.valueOf(parts[2]) + 1;
 
-				Date dateCal = new Date(2018 - 1970, 02, 02);
-
-				intent.putExtra("beginTime", dateCal.getTime());
+				intent.putExtra("beginTime", cal.getTimeInMillis());
 				intent.putExtra("allDay", true);
 				intent.putExtra("rrule", "FREQ=YEARLY");
 				intent.putExtra("endTime", cal.getTimeInMillis()+60*60*1000);
 				intent.putExtra("title", "Jury ESEO");
-				startActivity(intent);			}
+				startActivity(intent);
+			}
 
 		});
 

@@ -52,14 +52,14 @@ public class NavigationBottom implements BottomNavigationView.OnNavigationItemSe
 					activity.startActivity(intent1);
 				}
 				return true;
-			case R.id.action_mark_tab:
-				if(pageActivity != PAGES.MARKS) {
-					Intent intent2 = new Intent(activity, MarkActivity.class);
-					intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-					activity.startActivity(intent2);
-				}
-				return true;
+//			case R.id.action_mark_tab:
+//				if(pageActivity != PAGES.MARKS) {
+//					Intent intent2 = new Intent(activity, MarkActivity.class);
+//					intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//					intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//					activity.startActivity(intent2);
+//				}
+//				return true;
 			case R.id.action_settings_tab:
 				if(pageActivity != PAGES.SETTINGS) {
 					Intent intent3 = new Intent(activity, SettingsActivity.class);

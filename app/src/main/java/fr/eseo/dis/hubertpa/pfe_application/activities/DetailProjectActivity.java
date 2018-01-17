@@ -292,6 +292,10 @@ public class DetailProjectActivity extends AppCompatActivity {
 		if (noteValue <= 20) {
 			String url = WebServiceConnexion.getNEWNT(_login, _token, idProject, idStudent, noteValue);
 
+			url = "https://192.168.4.10/www/pfe/webservice.php?q=NEWNT&user=aubinseb&proj=8&student=48&note=2&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1MTYxOTAyODIsImp0aSI6IlFvYnhtYXBVT1dFaWNlWmNld09lc2dqTmp2aEtxNnI3M3JudlB5ZlVyKzA9IiwianNzIjoiMTkyLjE2OC40LjEwIiwibmJmIjoxNTE2MTkwMjgyLCJleHAiOjE1MTYxOTM4ODIsImRhdGEiOnsiaWQiOjEsImtleSI6InJ1WDBvcldoTFNRU3hzVXBBa0I4RlE9PSJ9fQ.mz9CsmM0Jt1wWRrcSAeto8ZTjiAFwKPrB7Tijz5WQLPkbDH0qTZlRlDBeTFKn6NdWeUp19b7hgjKrFIXXAex8w";
+//			url = https://192.168.4.10/www/pfe/webservice.php?q=NEWNT&proj=<project id>&student=<student id>&note=<note>&token=<token data>
+			Log.d("TEST", url);
+
 			StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 				@Override
 				public void onResponse(String response) {

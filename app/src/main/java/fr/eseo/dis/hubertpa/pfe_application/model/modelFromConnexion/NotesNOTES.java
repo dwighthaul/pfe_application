@@ -20,7 +20,7 @@ public class NotesNOTES {
 	int mynote;
 
 	@Getter @Setter
-	int avgnote;
+	int avgnote = -1;
 
 	@Getter @Setter
 	boolean noteSet;

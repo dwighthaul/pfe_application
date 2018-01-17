@@ -40,7 +40,6 @@
             android:id="@+id/rateLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_rounded_blackgrey_eseo"
             android:orientation="vertical"
             android:padding="2dp">
 

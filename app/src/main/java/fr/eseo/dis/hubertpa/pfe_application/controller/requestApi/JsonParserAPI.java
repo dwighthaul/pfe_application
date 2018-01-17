@@ -174,7 +174,7 @@ public class JsonParserAPI {
 				User student = User.fromJson(noteJSON);
 
 				int mynote = noteJSON.getInt("mynote");
-				int avgnote = noteJSON.getInt("avgnote");
+				int avgnote = noteJSON.getInt("avgNote");
 
 				NotesNOTES notesNOTES = new NotesNOTES(student);
 				notesNOTES.setMynote(mynote);

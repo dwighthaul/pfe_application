@@ -10,10 +10,10 @@
         android:icon="@drawable/ic_people_black_24dp"
         android:title="@string/jury_tab" />
 
-    <item
-        android:id="@+id/action_mark_tab"
-        android:icon="@drawable/ic_content_paste_black_24dp"
-        android:title="@string/marks_tab" />
+    <!--<item-->
+        <!--android:id="@+id/action_mark_tab"-->
+        <!--android:icon="@drawable/ic_content_paste_black_24dp"-->
+        <!--android:title="@string/marks_tab" />-->
     <item
         android:id="@+id/action_settings_tab"
         android:icon="@drawable/ic_settings_black_24dp"

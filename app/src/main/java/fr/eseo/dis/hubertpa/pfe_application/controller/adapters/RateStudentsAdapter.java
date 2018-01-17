@@ -43,19 +43,23 @@ public class RateStudentsAdapter extends RecyclerView.Adapter<RateStudentsAdapte
 		String studentName = notesNOTES.getStudent().getForename() + " " + notesNOTES.getStudent().getSurname();
 		holder.studentNameTextView.setText(studentName);
 
+
 		if(notesNOTES.isNoteSet()) {
 			holder.currentMarkTextView.setText(String.format("%d", notesNOTES.getMynote()));
 		} else {
 			holder.currentMarkTextView.setText("Non noté");
 		}
 
+		if(notesNOTES.getAvgnote() == -1) {
+			holder.averageMarkTextView.setText("Non noté");
+		} else {
+			holder.averageMarkTextView.setText(String.format("%d", notesNOTES.getAvgnote()));
+		}
 
 
 		holder.rateStudentImageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.d("TEST", "" + notesNOTES.getAvgnote());
-
 				activity.goToRateStudentPage(notesNOTES);
 			}
 		});
@@ -76,6 +80,7 @@ public class RateStudentsAdapter extends RecyclerView.Adapter<RateStudentsAdapte
 				//		private final TextView markIsSetTextView;
 				private final TextView studentNameTextView;
 				private final TextView currentMarkTextView;
+				private final TextView averageMarkTextView;
 				private final ImageButton rateStudentImageButton;
 
 				RateStudentsViewHolder(View view) {
@@ -85,7 +90,7 @@ public class RateStudentsAdapter extends RecyclerView.Adapter<RateStudentsAdapte
 
 					studentIDTextView = view.findViewById(R.id.studentIDTextView);
 					studentNameTextView = view.findViewById(R.id.studentNameTextView);
-
+					averageMarkTextView = view.findViewById(R.id.averageMarkTextView);
 					currentMarkTextView = view.findViewById(R.id.currentMarkTextView);
 					rateStudentImageButton = view.findViewById(R.id.rateStudentImageButton);
 				}

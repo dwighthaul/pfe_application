@@ -29,7 +29,7 @@ public class SettingsActivity extends AppCompatActivity {
 		BottomNavigationViewHelper.disableShiftMode(navigation);
 		navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-		navigation.getMenu().getItem(3).setChecked(true);
+		navigation.getMenu().getItem(2).setChecked(true);
 
 		TextView loginTextView = findViewById(R.id.textViewLogin);
 

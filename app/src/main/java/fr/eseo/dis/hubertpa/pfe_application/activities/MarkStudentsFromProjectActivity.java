@@ -152,8 +152,6 @@ public class MarkStudentsFromProjectActivity extends AppCompatActivity {
 
 		// Get the URL to log into the server
 		final String url = WebServiceConnexion.getNOTES(_login, _token, idProject);
-		Log.d("TEST", "" + url);//notes.getNotesList().size());
-
 
 		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 			@Override
@@ -161,9 +159,9 @@ public class MarkStudentsFromProjectActivity extends AppCompatActivity {
 				try {
 					JSONObject jsonObject = new JSONObject(response);
 					String result = jsonObject.getString("result");
-					Log.d("Connect", "" + result);
 
 					if (result.equals("OK")) {
+						//Log.d("TEST", response);
 						NOTES notes = JsonParserAPI.parseNOTES(jsonObject);
 						callback.onSuccess(notes);
 					} else {
@@ -192,6 +190,7 @@ public class MarkStudentsFromProjectActivity extends AppCompatActivity {
 			@Override
 			public void onSuccess(NOTES notes) {
 				rateLayoutTextView.setVisibility(View.GONE);
+				Log.d("TEST", "NOTES" + notes.getNotesList().size());
 
 				// Get the notes from the
 				ListNote listNotes = filterOnlyWantedStudent(notes.getNotesList());

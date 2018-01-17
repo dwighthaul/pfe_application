@@ -53,12 +53,12 @@ public class NavigationBottomJPO implements BottomNavigationView.OnNavigationIte
 					activity.startActivity(intent1);
 				}
 				return true;
-			case R.id.action_mark_tab:
-				if(pageActivity != PAGES.MARKS_JPO) {
-//					Intent intent2 = new Intent(activity, JPOMarkActivity.class);
-//					activity.startActivity(intent2);
-				}
-				return true;
+//			case R.id.action_mark_tab:
+//				if(pageActivity != PAGES.MARKS_JPO) {
+////					Intent intent2 = new Intent(activity, JPOMarkActivity.class);
+////					activity.startActivity(intent2);
+//				}
+//				return true;
 			case R.id.action_settings_tab:
 				if(pageActivity != PAGES.SETTINGS) {
 					Intent intent3 = new Intent(activity, SettingsActivity.class);
