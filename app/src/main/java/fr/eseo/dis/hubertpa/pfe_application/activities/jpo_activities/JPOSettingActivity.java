@@ -20,8 +20,6 @@ import fr.eseo.dis.hubertpa.pfe_application.partials.NavigationBottomJPO;
 
 public class JPOSettingActivity extends AppCompatActivity {
 
-	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new NavigationBottomJPO(this, NavigationBottomJPO.PAGES.SETTINGS);
-
 	Button disconnect;
 
 	RecyclerView recycler;
@@ -39,7 +37,7 @@ public class JPOSettingActivity extends AppCompatActivity {
 		BottomNavigationViewHelper.disableShiftMode(navigation);
 		navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-		navigation.getMenu().getItem(3).setChecked(true);
+		navigation.getMenu().getItem(2).setChecked(true);
 
 		disconnect = findViewById(R.id.button_disconnect);
 
