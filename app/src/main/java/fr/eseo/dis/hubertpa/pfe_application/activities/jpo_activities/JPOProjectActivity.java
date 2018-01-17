@@ -205,6 +205,8 @@ public class JPOProjectActivity extends AppCompatActivity {
 		getListProjects();
 	}
 
+
+
 	private void getListProjects() {
 		mySwipeRefreshLayout.setRefreshing(true);
 
@@ -288,7 +290,7 @@ public class JPOProjectActivity extends AppCompatActivity {
 		//startActivity(intent);
 	}
 
-	public void takeNotes(ProjectPORTE projectPORTE) {
+	public void setNote(ProjectPORTE projectPORTE) {
 		// TODO : Create and Implement this page
 		Log.d("JPOProjectActivity", projectPORTE.getProject().getTitle());
 
@@ -297,13 +299,12 @@ public class JPOProjectActivity extends AppCompatActivity {
 		startActivity(intent);
 	}
 
-	public void seePoster(ProjectPORTE projectPORTE) {
+	public void seePoster(String stringPoster) {
 		// TODO : Create and Implement this page
-		Log.d("JPOProjectActivity", projectPORTE.getProject().getTitle());
 
-//		Intent intent = new Intent(this, DislayPosterActivity.class);
-//		intent.putExtra("selected_project", projectPORTE);
-//		startActivity(intent);
+		Intent intent = new Intent(this, JPODisplayImageActivity.class);
+//		intent.putExtra("string_poster", stringPoster);
+		startActivity(intent);
 	}
 
 }

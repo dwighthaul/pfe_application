@@ -67,7 +67,7 @@
                 android:text="Afficher le poster" />
 
             <Button
-                android:id="@+id/takeNoteButton"
+                android:id="@+id/setNoteButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

@@ -1,13 +1,19 @@
 package fr.eseo.dis.hubertpa.pfe_application.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
@@ -27,6 +33,7 @@ public class DetailJuryActivity extends AppCompatActivity {
 	TextView textViewDateValue;
 	ListView textViewListMembersValue;
 	ListView textViewListProjectsValue;
+	Button setAlarm;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,7 @@ public class DetailJuryActivity extends AppCompatActivity {
 		textViewDateValue = findViewById(R.id.textViewDateValue);
 		textViewListMembersValue = findViewById(R.id.textViewListMembersValue);
 		textViewListProjectsValue = findViewById(R.id.textViewListProjectsValue);
+		setAlarm = findViewById(R.id.setAlarm);
 
 		Bundle data = getIntent().getExtras();
 		assert data != null;
@@ -45,6 +53,38 @@ public class DetailJuryActivity extends AppCompatActivity {
 		loadElements();
 
 		setAdapteur();
+
+		setListener();
+
+	}
+
+	private void setListener() {
+		setAlarm.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+
+				Calendar cal = Calendar.getInstance();
+				Intent intent = new Intent(Intent.ACTION_EDIT);
+				intent.setType("vnd.android.cursor.item/event");
+				String[] parts = juryLIJUR.getJury().getDate().split("-");
+
+				int year = Integer.valueOf(parts[0]);
+				int month = Integer.valueOf(parts[1]);
+				int date = Integer.valueOf(parts[2]) + 1;
+
+				Date dateCal = new Date(2018 - 1970, 02, 02);
+
+				intent.putExtra("beginTime", dateCal.getTime());
+				intent.putExtra("allDay", true);
+				intent.putExtra("rrule", "FREQ=YEARLY");
+				intent.putExtra("endTime", cal.getTimeInMillis()+60*60*1000);
+				intent.putExtra("title", "Jury ESEO");
+				startActivity(intent);			}
+
+		});
+
+
 
 	}
 
@@ -87,6 +127,7 @@ public class DetailJuryActivity extends AppCompatActivity {
 
 
 	}
+
 
 
 	public void setAdapteur() {

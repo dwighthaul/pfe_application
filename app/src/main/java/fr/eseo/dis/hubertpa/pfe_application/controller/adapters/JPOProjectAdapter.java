@@ -60,15 +60,15 @@ public class JPOProjectAdapter extends RecyclerView.Adapter<JPOProjectAdapter.Pr
 			@Override
 			public void onClick(View v) {
 				Log.d("ProjectAdapter","Item 'clicked'");
-				activity.seePoster(projectPORTE);
+				activity.seePoster(projectPORTE.getBase64Image());
 			}
 		});
 
-		holder.takeNoteButton.setOnClickListener(new View.OnClickListener() {
+		holder.setNoteButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Log.d("ProjectAdapter","Item 'clicked'");
-				activity.takeNotes(projectPORTE);
+				activity.setNote(projectPORTE);
 			}
 		});
 
@@ -90,7 +90,7 @@ public class JPOProjectAdapter extends RecyclerView.Adapter<JPOProjectAdapter.Pr
 		private final TextView nameProjectTextView;
 		private final TextView descriptionProjectTextView;
 		private final Button buttonDisplayPoster;
-		private final Button takeNoteButton;
+		private final Button setNoteButton;
 
 		ProjectViewHolder(View view) {
 			super(view);
@@ -102,7 +102,7 @@ public class JPOProjectAdapter extends RecyclerView.Adapter<JPOProjectAdapter.Pr
 			descriptionProjectTextView = view.findViewById(R.id.descriptionProjectTextView);
 
 			buttonDisplayPoster = view.findViewById(R.id.buttonDisplayPoster);
-			takeNoteButton = view.findViewById(R.id.takeNoteButton);
+			setNoteButton = view.findViewById(R.id.setNoteButton);
 		}
 	}
 
