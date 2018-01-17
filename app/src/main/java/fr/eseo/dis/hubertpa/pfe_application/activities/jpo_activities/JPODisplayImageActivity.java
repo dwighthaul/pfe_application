@@ -18,7 +18,7 @@ public class JPODisplayImageActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_jpodisplay_image);
 
 		Intent intent = getIntent();
-		String string_poster = intent.getStringExtra("string_poster");
+		String string_poster = intent.getStringExtra("idProject");
 
 		ImageView imageView = findViewById(R.id.imageView);
 

@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import fr.eseo.dis.hubertpa.pfe_application.R;
 import fr.eseo.dis.hubertpa.pfe_application.activities.SettingsActivity;
@@ -50,7 +51,14 @@ public class JPOSettingActivity extends AppCompatActivity {
 			}
 		});
 
-		setRecycler();
+		TextView loginTextView = findViewById(R.id.textViewLogin);
+
+		String login = WebServiceConnexion.getLogin(this);
+
+		loginTextView.setText(login);
+
+
+//		setRecycler();
 	}
 
 	public void disconnectFromTheApp() {
@@ -62,7 +70,6 @@ public class JPOSettingActivity extends AppCompatActivity {
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		JPOSettingActivity.this.startActivity(intent);
-
 	}
 
 	/**

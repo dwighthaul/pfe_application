@@ -56,21 +56,14 @@ public class JPOProjectAdapter extends RecyclerView.Adapter<JPOProjectAdapter.Pr
 			}
 		});
 
-		holder.buttonDisplayPoster.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Log.d("ProjectAdapter","Item 'clicked'");
-				activity.seePoster(projectPORTE.getBase64Image());
-			}
-		});
+//		holder.buttonDisplayPoster.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				Log.d("ProjectAdapter","Item 'clicked'");
+//				activity.seePoster(projectPORTE.getProject().getIdProject());
+//			}
+//		});
 
-		holder.setNoteButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Log.d("ProjectAdapter","Item 'clicked'");
-				activity.setNote(projectPORTE);
-			}
-		});
 
 
 	}
@@ -89,8 +82,6 @@ public class JPOProjectAdapter extends RecyclerView.Adapter<JPOProjectAdapter.Pr
 		private final TextView idProjectTextView;
 		private final TextView nameProjectTextView;
 		private final TextView descriptionProjectTextView;
-		private final Button buttonDisplayPoster;
-		private final Button setNoteButton;
 
 		ProjectViewHolder(View view) {
 			super(view);
@@ -101,8 +92,6 @@ public class JPOProjectAdapter extends RecyclerView.Adapter<JPOProjectAdapter.Pr
 			nameProjectTextView = view.findViewById(R.id.nameProjectTextView);
 			descriptionProjectTextView = view.findViewById(R.id.descriptionProjectTextView);
 
-			buttonDisplayPoster = view.findViewById(R.id.buttonDisplayPoster);
-			setNoteButton = view.findViewById(R.id.setNoteButton);
 		}
 	}
 

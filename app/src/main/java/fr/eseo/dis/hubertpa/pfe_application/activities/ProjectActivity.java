@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
+import android.text.Html;
 import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.SearchView;
@@ -25,7 +26,10 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.util.StringUtils;
 
+import java.io.UnsupportedEncodingException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -234,8 +238,16 @@ public class ProjectActivity extends AppCompatActivity {
 		StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 
 			@Override
-			public void onResponse(String response) {
+			public void onResponse(String res) {
 				stoppingBuffering = false;
+				String response = "", str = "";
+				try {
+					str = new String(res.getBytes("ISO-8859-1"), "UTF-8");
+				} catch (UnsupportedEncodingException e) {
+
+					e.printStackTrace();
+				}
+				response = Html.fromHtml(str).toString();
 				try {
 					JSONObject jsonObject = new JSONObject(response);
 					String result = jsonObject.getString("result");
@@ -357,7 +369,6 @@ public class ProjectActivity extends AppCompatActivity {
 
 	public void takeNotes(ProjectLIPRJ projectLIPRJ) {
 		Intent intent = new Intent(this, TakeNotesProjectActivity.class);
-		Log.d("TEST", projectLIPRJ.getProject().getTitle());
 		intent.putExtra("nameProject", projectLIPRJ.getProject().getTitle());
 		intent.putExtra("idProject", projectLIPRJ.getProject().getIdProject());
 		intent.putExtra("selected_project", projectLIPRJ);

@@ -300,11 +300,11 @@ public class JPOProjectActivity extends AppCompatActivity {
 		startActivity(intent);
 	}
 
-	public void seePoster(String stringPoster) {
+	public void seePoster(int idProject) {
 		// TODO : Create and Implement this page
 
 		Intent intent = new Intent(this, JPODisplayImageActivity.class);
-//		intent.putExtra("string_poster", stringPoster);
+		intent.putExtra("idProject", idProject);
 		startActivity(intent);
 	}
 

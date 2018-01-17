@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 	private View mLoginFormView;
 	View focusView = null;
 
-	Button visiteur;
+	Button visitor_sign_in;
 
 	VolleyCallbackLOGON response;
 	@SuppressLint("WrongViewCast")
@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 		// Set up the activity_login form.
 
 		mLoginView = findViewById(R.id.login);
+
 		populateAutoComplete();
 
 		mPasswordView = findViewById(R.id.password);
@@ -96,6 +97,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 		mLoginFormView = findViewById(R.id.login_form);
 		mProgressView = findViewById(R.id.login_progress);
 
+		setVolleyCallBack();
+
+	}
+
+	public void setVolleyCallBack() {
+
 		response = new VolleyCallbackLOGON() {
 			@Override
 			public void onSuccess() {
@@ -116,19 +123,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 			}
 		};
-
-		//Sign in as a visitor
-		visiteur = findViewById(R.id.visitor_sign_in);
-
-		visiteur.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View view) {
-				Log.d("Welcome", "Visiteur");
-				connectUser(WebServiceConnexion.DEFAULT_LOGIN, WebServiceConnexion.DEFAULT_PASSWORD);
-			}
-		});
 	}
+
 
 	public void connectUser(String userLogin, String userPassword) {
 		WebServiceConnexion.getConnected(userLogin, userPassword, this, processResponseVisitor);
